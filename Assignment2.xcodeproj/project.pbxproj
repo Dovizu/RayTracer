@@ -10,6 +10,8 @@
 		F11AB4C818BAB0F600D8FED4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F11AB4C918BAB1C400D8FED4 /* specs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = specs.pdf; sourceTree = "<group>"; };
 		F11AB4CA18BAB21600D8FED4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		F11AB4CB18BAB87900D8FED4 /* raytracer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = raytracer.cpp; path = src/raytracer.cpp; sourceTree = "<group>"; };
+		F11AB4CC18BAB87900D8FED4 /* raytracer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = raytracer.h; path = src/raytracer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -17,6 +19,8 @@
 			isa = PBXGroup;
 			children = (
 				F11AB4C818BAB0F600D8FED4 /* Makefile */,
+				F11AB4CB18BAB87900D8FED4 /* raytracer.cpp */,
+				F11AB4CC18BAB87900D8FED4 /* raytracer.h */,
 				F11AB4CA18BAB21600D8FED4 /* README */,
 				F11AB4C918BAB1C400D8FED4 /* specs.pdf */,
 			);
