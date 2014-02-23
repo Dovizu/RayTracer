@@ -19,13 +19,29 @@
 		F11AB4BD18BAB0D800D8FED4 = {
 			isa = PBXGroup;
 			children = (
-				F11AB4C818BAB0F600D8FED4 /* Makefile */,
+				F11AB4CF18BABD8700D8FED4 /* Support */,
+				F11AB4CE18BABD7C00D8FED4 /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		F11AB4CE18BABD7C00D8FED4 /* Source */ = {
+			isa = PBXGroup;
+			children = (
 				F11AB4CB18BAB87900D8FED4 /* raytracer.cpp */,
 				F11AB4CC18BAB87900D8FED4 /* raytracer.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		F11AB4CF18BABD8700D8FED4 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				F11AB4C818BAB0F600D8FED4 /* Makefile */,
 				F11AB4CA18BAB21600D8FED4 /* README.md */,
 				F11AB4CD18BABC7500D8FED4 /* markdown_syntax.png */,
 				F11AB4C918BAB1C400D8FED4 /* specs.pdf */,
 			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

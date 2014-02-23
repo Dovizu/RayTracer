@@ -5,18 +5,30 @@ Project Identity
 - Donny Reynolds
 
 ###Platform
-OS X
+`OS X`
 
 ###Location
-./
+`./`
 
 ###Submitted by
 First Last
 
-Project Documentation
+Support Documentation
 =====================
 
 Makefile
 --------
 Makefile compiles things source into target "main", main is in root directory.
 
+Xcode
+--------
+    Xcode Command   Cmd Line Equivalent
+    Product->Build  make
+    Product->Clean  make clean
+    Source Control  git
+    Scheme          arguments
+
+
+Project Documentation
+=====================
+Lol
