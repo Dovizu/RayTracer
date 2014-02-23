@@ -6,10 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		F11AB4C818BAB0F600D8FED4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		F11AB4BD18BAB0D800D8FED4 = {
 			isa = PBXGroup;
 			children = (
+				F11AB4C818BAB0F600D8FED4 /* Makefile */,
 			);
 			sourceTree = "<group>";
 		};
