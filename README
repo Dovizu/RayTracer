@@ -14,4 +14,5 @@ Project Documentation
 
 Makefile
 --------
-Makefile compiles things source into target "main", main is in root directory. 
+Makefile compiles things source into target "main", main is in root directory.
+
