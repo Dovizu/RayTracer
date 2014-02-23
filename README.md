@@ -1,13 +1,14 @@
 Project Identity
 ================
-
-Leo Colobong
-Donny Reynolds
-
+###Names
+- Leo Colobong
+- Donny Reynolds
+###Platform
 OS X
-Location of Source Code: current directory
-
-Submitted by: First Last
+###Location
+./
+###Submitted by
+First Last
 
 Project Documentation
 =====================
