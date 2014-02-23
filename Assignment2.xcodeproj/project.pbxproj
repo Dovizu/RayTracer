@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		F11AB4C818BAB0F600D8FED4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		F11AB4C918BAB1C400D8FED4 /* specs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = specs.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -15,6 +16,7 @@
 			isa = PBXGroup;
 			children = (
 				F11AB4C818BAB0F600D8FED4 /* Makefile */,
+				F11AB4C918BAB1C400D8FED4 /* specs.pdf */,
 			);
 			sourceTree = "<group>";
 		};
