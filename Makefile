@@ -1,19 +1,29 @@
 CC = g++
-ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
-	CFLAGS = -g -std=c++11 -DGL_GLEXT_PROTOTYPES -I./include/ -I/usr/X11/include -DOSX -Wno-deprecated
-	LDFLAGS = -framework GLUT -framework OpenGL \
-    	-L"/System/Library/Frameworks/OpenGL.framework/Libraries" \
-    	-lGL -lGLU -lm -lstdc++
-else
-	CFLAGS = -g -std=c++0x -DGL_GLEXT_PROTOTYPES -Iglut-3.7.6-bin
-	LDFLAGS = -lglut -lGLU
-endif
-	
 RM = /bin/rm -f 
-all: main 
-main: src/raytracer.o
-	$(CC) $(CFLAGS) -o main src/raytracer.o $(LDFLAGS)
-raytracer.o: src/raytracer.cpp
-	$(CC) $(CFLAGS) -c src/raytracer.cpp -o src/raytracer.o
+BUILD = build
+SRC = source
+LIB = libraries
+CIMG = -I$(LIB)/CImg/ -lm -lpthread -I/opt/X11/include -L/opt/X11/lib -lm -lpthread -lX11
+
+
+ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
+	CFLAGS = -g -std=c++11 -c -Wall -Wno-deprecated $(CIMG)
+	LFLAGS = -std=c++11 -Wall $(CIMG)
+
+else
+	CFLAGS = -g -std=c++0x -c -Wall
+	LFLAGS = -std=c++0x -Wall
+endif
+
+OBJS = $(BUILD)/raytracer.o
+
+raytracer: raytracer.o
+	$(CC) $(LFLAGS) $(OBJS) -o raytracer
+
+raytracer.o: $(SRC)/raytracer.cpp $(SRC)/raytracer.h
+	$(CC) $(CFLAGS) $(SRC)/raytracer.cpp -o $(BUILD)/raytracer.o
+
+raytracer.h: $(LIB)/CImg/CImg.h
+
 clean:
 	$(RM) *.o raytracer
