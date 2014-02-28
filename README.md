@@ -37,11 +37,15 @@ X11 is required by CImg. If your OS X is 10.8+, you need to install [X11](http:/
 X11 is installed on instructional Linux & Mac machines. (Tested)
 
 ###CImg
+(Requires ImageMagick, X11)
+
 [Documentation](http://cimg.sourceforge.net/reference/modules.html)
 
 CImg is header-only, can be used directly from `libraries/CImg`.
 
 ###FreeImage
+(Recompile for Linux)
+
 [Documentation](https://inst.eecs.berkeley.edu/~cs184/fa09/resources/sec_UsingFreeImage.pdf)
 
 FreeImage requires compilation on each platform, Mac OS X 10.9 platform requires some modification for FreeImage to work (because FreeImage's OS X support is outdated), including inserting `#include <cstring>` in `Source/OpenEXR/IlmImf/ImfAutoArray.h` and a brand new Makefile. [(Reference)](http://stackoverflow.com/questions/19080303/how-to-compile-freeimage-on-mac-os-x-10-8). Compiled `libfreeimage.a` library archive plus `FreeImage.h` are used in main code.
@@ -66,8 +70,13 @@ These machines support ImageMagick, but then we need to install ImageMagick on o
 
 Because we're not sure whether to stick with Linux or Mac, I'm keeping both FreeImage and CImg. 
 
-##GFlags and GLog
-I was unsuccessful installing these. They present cryptic errors like `[install-libLTLIBRARIES] Error 64`. So fuck it for now. 
+##gflags
+(Recompile for Linux)
+
+[Documentation](https://gflags.googlecode.com/svn/trunk/doc/gflags.html)
+
+gflags is installed.
+
 
 Project Documentation
 =====================
