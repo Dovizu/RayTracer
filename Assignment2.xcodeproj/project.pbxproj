@@ -495,12 +495,14 @@
 		F1E39DAF18C0384E005BC8FE /* compile_win_visualcpp.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = compile_win_visualcpp.bat; sourceTree = "<group>"; };
 		F1E39DB118C05278005BC8FE /* FreeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeImage.h; sourceTree = "<group>"; };
 		F1E39DB218C05278005BC8FE /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreeimage.a; sourceTree = "<group>"; };
+		F1E3A39918C056A6005BC8FE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		F11AB4BD18BAB0D800D8FED4 = {
 			isa = PBXGroup;
 			children = (
+				F1E3A39918C056A6005BC8FE /* .gitignore */,
 				F11AB4CF18BABD8700D8FED4 /* Support */,
 				F11AB4CE18BABD7C00D8FED4 /* Source */,
 				F1E39BC618C037ED005BC8FE /* Libraries */,
