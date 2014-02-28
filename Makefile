@@ -7,6 +7,7 @@ LIB = libraries
 CIMG = -I$(LIB)/CImg/ -lm -lpthread -I/opt/X11/include -L/opt/X11/lib -lm -lpthread -lX11
 FIMG = -I$(LIB)/FreeImage/ -L$(LIB)/FreeImage/ -lfreeimage
 EIGEN = -I$(LIB)/Eigen/
+GF = 
 
 ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
 	CFLAGS = -g -std=c++11 -c -Wall -Wno-deprecated $(EIGEN)
@@ -20,10 +21,10 @@ endif
 OBJS = $(BUILD)/raytracer.o
 
 raytracer: raytracer.o
-	$(CC) $(LFLAGS) $(OBJS) $(FIMG) $(CIMG) -o raytracer
+	$(CC) $(LFLAGS) $(OBJS) $(FIMG) $(CIMG) $(GF) -o raytracer
 
 raytracer.o: $(SRC)/raytracer.cpp $(SRC)/raytracer.h
-	$(CC) $(CFLAGS) $(FIMG) $(CIMG) $(SRC)/raytracer.cpp -o $(BUILD)/raytracer.o
+	$(CC) $(CFLAGS) $(FIMG) $(CIMG) $(GF) $(SRC)/raytracer.cpp -o $(BUILD)/raytracer.o
 
 raytracer.h: $(LIB)/CImg/CImg.h, $(LIB)/FreeImage/FreeImage.h
 

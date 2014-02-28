@@ -53,10 +53,11 @@ Because FreeImage source + object files are 50MB+, they are not included in the 
 ###Eigen
 [Documentation](http://eigen.tuxfamily.org/dox/index.html)
 
-Eigen is installed and headers-only, can be used directly from `libraries/Eigen`. Eigen needs to be included before CImg because both define `Success` macro and Eigen will complain if CImg defines it before Eigen. 
+Eigen is installed and headers-only, can be used directly from `libraries/Eigen`. Eigen needs to be included before CImg because both define `Success` macro and Eigen will complain if CImg defines it before Eigen.
 
 ###PS: Mac vs Linux?
-ImageMagick is apparently installed on instructional Linux machines, too. In fact, CImg supports PNG & JPG file saving as long as ImageMagick is installed. Therefore, technically we don't need FreeImage at all. But Mac instructional machines don't have ImageMagick. Therefore, we have two options
+ImageMagick is apparently installed on instructional Linux machines, too. In fact, CImg supports PNG & JPG file saving as long as ImageMagick is installed. Therefore, technically we don't need FreeImage at all. But Mac instructional machines don't have ImageMagick. Therefore, we have two options:
+
 1. Submit as Mac platform (fuji.eecs)
 The only instructional Macs I know (fuji.eecs) don't have ImageMagick and don't support C++11. We need to talk to TA's to see if there is any instructional Macs that support C++11 (g++ version 4.3 or newer).
 
@@ -64,6 +65,9 @@ The only instructional Macs I know (fuji.eecs) don't have ImageMagick and don't 
 These machines support ImageMagick, but then we need to install ImageMagick on our Macs and our dev platform is Mac not Linux. So preferrably we want to develop and submit on Mac platform. 
 
 Because we're not sure whether to stick with Linux or Mac, I'm keeping both FreeImage and CImg. 
+
+##GFlags and GLog
+I was unsuccessful installing these. They present cryptic errors like `[install-libLTLIBRARIES] Error 64`. So fuck it for now. 
 
 Project Documentation
 =====================
