@@ -6,9 +6,10 @@ LIB = libraries
 
 CIMG = -I$(LIB)/CImg/ -lm -lpthread -I/opt/X11/include -L/opt/X11/lib -lm -lpthread -lX11
 FIMG = -I$(LIB)/FreeImage/ -L$(LIB)/FreeImage/ -lfreeimage
+EIGEN = -I$(LIB)/Eigen/
 
 ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
-	CFLAGS = -g -std=c++11 -c -Wall -Wno-deprecated
+	CFLAGS = -g -std=c++11 -c -Wall -Wno-deprecated $(EIGEN)
 	LFLAGS = -std=c++11 -Wall
 
 else

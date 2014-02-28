@@ -37,20 +37,38 @@ X11 is required by CImg. If your OS X is 10.8+, you need to install [X11](http:/
 X11 is installed on instructional Linux & Mac machines. (Tested)
 
 ###CImg
+[Documentation](http://cimg.sourceforge.net/reference/modules.html)
+
 CImg is header-only, can be used directly from `libraries/CImg`.
 
 ###FreeImage
+[Documentation](https://inst.eecs.berkeley.edu/~cs184/fa09/resources/sec_UsingFreeImage.pdf)
+
 FreeImage requires compilation on each platform, Mac OS X 10.9 platform requires some modification for FreeImage to work (because FreeImage's OS X support is outdated), including inserting `#include <cstring>` in `Source/OpenEXR/IlmImf/ImfAutoArray.h` and a brand new Makefile. [(Reference)](http://stackoverflow.com/questions/19080303/how-to-compile-freeimage-on-mac-os-x-10-8). Compiled `libfreeimage.a` library archive plus `FreeImage.h` are used in main code.
 
 When submitting the project, if we choose Linux platform, FreeImage needs to be compiled on Linux. Simply replacing Mac-compiled .a and .h files in our `libraries/FreeImage` with corresponding Linux version will work (Tested). FreeImage on Linux does not need further modifications.
 
 Because FreeImage source + object files are 50MB+, they are not included in the repository. The included .a and .h files should work on all Intel Macs. I uploaded and compiled Linux copies of .a & .h to my account.
 
-###PS: Notes
-ImageMagick is apparently installed on instructional machines, too. I'm not sure whether we should use ImageMagick to output JPG though. Although ImageMagick requires no extra work in compilation and linking (FreeImage Mac vs Linux, argh) since it's already on instructional machines, but its [usage](http://www.imagemagick.org/Magick++/Image.html) seems fairly complex.
+###Eigen
+[Documentation](http://eigen.tuxfamily.org/dox/index.html)
+
+Eigen is installed and headers-only, can be used directly from `libraries/Eigen`. Eigen needs to be included before CImg because both define `Success` macro and Eigen will complain if CImg defines it before Eigen. 
+
+###PS: Mac vs Linux?
+ImageMagick is apparently installed on instructional Linux machines, too. In fact, CImg supports PNG & JPG file saving as long as ImageMagick is installed. Therefore, technically we don't need FreeImage at all. But Mac instructional machines don't have ImageMagick. Therefore, we have two options
+1. Submit as Mac platform (fuji.eecs)
+The only instructional Macs I know (fuji.eecs) don't have ImageMagick and don't support C++11. We need to talk to TA's to see if there is any instructional Macs that support C++11 (g++ version 4.3 or newer).
+
+2. Submit as Linux platform (hive.eecs)
+These machines support ImageMagick, but then we need to install ImageMagick on our Macs and our dev platform is Mac not Linux. So preferrably we want to develop and submit on Mac platform. 
+
+Because we're not sure whether to stick with Linux or Mac, I'm keeping both FreeImage and CImg. 
 
 Project Documentation
 =====================
+
+Currently running `raytracer` will automatically test CImg and FreeImage, and output FITest.png & test.bmp.
 
 To-Do
 ------
