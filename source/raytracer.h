@@ -3,5 +3,6 @@
 
 #include <iostream>
 #include <CImg.h>
+#include <FreeImage.h>
 
 #endif /* defined(__Assignment2__main__) */
