@@ -14,6 +14,23 @@ int main(int argc, char *argv[]) {
     FreeImage_Initialise();
     cout << "FreeImage " << FreeImage_GetVersion() << endl;
     cout << FreeImage_GetCopyrightMessage() << "\n\n";
+    
+    //Test FreeImage file saving function
+    FIBITMAP *bitmap = FreeImage_Allocate(800, 600, 24);
+    RGBQUAD color;
+    if (!bitmap)
+        exit(1);
+    for (int i=0; i<800; i++) {
+        for (int j=0; j<600; j++) {
+            color.rgbRed = 0;
+            color.rgbGreen = (double) i/800 * 255.0;
+            color.rgbBlue = (double) j/600 * 255.0;
+            FreeImage_SetPixelColor(bitmap, i, j, &color);
+        }
+    }
+    if (FreeImage_Save(FIF_PNG, bitmap, "FITest.png", 0))
+        cout << "Image Successfully Saved!" << endl;
+    
     FreeImage_DeInitialise();
     
     return 0;
