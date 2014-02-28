@@ -11,5 +11,7 @@ int main(int argc, char *argv[]) {
 //    img.display("My first CImg code");           // Display the image in a display window.
     img.save("TestImage.bmp");
     
+    
+    
     return 0;
 }

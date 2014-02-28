@@ -1,5 +1,8 @@
 precompile/
 *.o
+*.bmp
+*.jpg
+*.jpeg
 /raytracer
 
 .DS_Store
