@@ -27,4 +27,4 @@ raytracer.o: $(SRC)/raytracer.cpp $(SRC)/raytracer.h
 raytracer.h: $(LIB)/CImg/CImg.h, $(LIB)/FreeImage/FreeImage.h
 
 clean:
-	$(RM) *.o raytracer
+	$(RM) *.o raytracer build/raytracer.o
