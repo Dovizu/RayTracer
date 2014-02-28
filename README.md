@@ -31,4 +31,7 @@ Xcode
 
 Project Documentation
 =====================
-Lol
+
+To-Do
+------
+Integrate Eigen
