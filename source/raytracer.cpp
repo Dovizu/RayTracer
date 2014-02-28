@@ -1,5 +1,4 @@
 #include "raytracer.h"
-using namespace cimg_library;
 
 int main(int argc, char *argv[]) {
 
@@ -11,7 +10,11 @@ int main(int argc, char *argv[]) {
 //    img.display("My first CImg code");           // Display the image in a display window.
     img.save("TestImage.bmp");
     
-    
+    //Test FreeImage library
+    FreeImage_Initialise();
+    cout << "FreeImage " << FreeImage_GetVersion() << endl;
+    cout << FreeImage_GetCopyrightMessage() << "\n\n";
+    FreeImage_DeInitialise();
     
     return 0;
 }

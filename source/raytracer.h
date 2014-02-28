@@ -5,4 +5,7 @@
 #include <CImg.h>
 #include <FreeImage.h>
 
+using namespace std;
+using namespace cimg_library;
+
 #endif /* defined(__Assignment2__main__) */
