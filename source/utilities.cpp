@@ -1,15 +1,14 @@
 #ifndef DVZUtil_H
 #define DVZUtil_H
-
 #include "preHeader.h"
-
 #define RCh 0
 #define GCh 1
 #define BCh 2
 
 
 #pragma mark - Math
-GLfloat sqr(GLfloat x) { return x*x;}
+float sqr(float x) { return x*x;}
+
 #pragma mark - Data Structures
 typedef enum {
     LightSourceDirectional,
@@ -18,52 +17,19 @@ typedef enum {
 typedef struct {
     int w, h;
 } Viewport;
-
 typedef struct {
-    string optName;
+    string oBRDFptName;
     int numOfArgs;
     vector<string> *args;
 } CmdLineOptResult;
 
-class Color {
-public:
-    GLfloat r, g, b;
-    Color(GLfloat red, GLfloat green, GLfloat blue){r=red;g=green;b=blue;}
-    Color(){r=0.0; g=0.0; b=0.0;}
-    //Point wise multiplication
-    Color ptWiseMul(Color &other) {
-        return Color(r*other.r, g*other.g, b*other.b);
-    }
-    //Scalar Multiplication
-    Color& operator*=(const GLfloat &rhs) {
-        r *= rhs; g *= rhs; b *= rhs;
-        return *this;
-    }
-    const Color operator*(const GLfloat &other) const {
-        return Color(*this) *= other;
-    }
-    //Summation
-    Color& operator+=(const Color &rhs) {
-        r += rhs.r; g += rhs.g; b += rhs.b;
-        return *this;
-    }
-    const Color operator+(const Color &other) const {
-        return Color(*this) += other;
-    }
-    //Map from 1.0 scale to 255 scale
-    
-    //Make sure values are between 0 and 1 inclusive
-    void standardize() {
-        r = fmin(fmax(r, 0.0), 1.0);
-        g = fmin(fmax(g, 0.0), 1.0);
-        b = fmin(fmax(b, 0.0), 1.0);
-    }
-};
+typedef Array3f Color;
+
 
 class Vector {
 public:
-    GLfloat x, y, z;
-    Vector(GLfloat xa, GLfloat ya, GLfloat za){x=xa;y=ya;z=za;}
+    float x, y, z;
+    Vector(float xa, float ya, float za){x=xa;y=ya;z=za;}
     Vector(){x=0.0;y=0.0;z=0.0;}
     //Summation
     Vector& operator+=(const Vector &rhs) {
@@ -86,24 +52,24 @@ public:
         return Vector(*this) -= other;
     }
     //Dot Product
-    GLfloat operator*(const Vector &other) const {
+    float operator*(const Vector &other) const {
         return other.x*x + other.y*y + other.z*z;
     }
     //Scalar Multiplication
-    Vector& operator*=(const GLfloat &rhs) {
+    Vector& operator*=(const float &rhs) {
         x *= rhs; y *= rhs; z *= rhs;
         return *this;
     }
-    const Vector operator*(const GLfloat &other) const {
+    const Vector operator*(const float &other) const {
         return Vector(*this) *= other;
     }
     //Magnitude/length
-    GLfloat magnitude() {
-        return (GLfloat)sqrt(sqr(x)+sqr(y)+sqr(z));
+    float magnitude() {
+        return (float)sqrt(sqr(x)+sqr(y)+sqr(z));
     }
     //Normalize
     void normalize() {
-        GLfloat mag = magnitude();
+        float mag = magnitude();
         if (mag != 0.0) {
             x /= mag;
             y /= mag;
@@ -117,7 +83,7 @@ public:
         return normalizedVec;
     }
     //Angel between two vectors
-    GLfloat angleBetween(Vector &other) {
+    float angleBetween(Vector &other) {
         return acos(other.normalized() * normalized());
     }
     
@@ -125,14 +91,14 @@ public:
 
 class Coordiate {
 public:
-    GLfloat x, y, z;
-    Coordiate(GLfloat xa, GLfloat ya, GLfloat za){x=xa;y=ya;z=za;}
+    float x, y, z;
+    Coordiate(float xa, float ya, float za){x=xa;y=ya;z=za;}
     Coordiate() {x=0.0;y=0.0;z=0.0;}
     //Point minus Point to form vector
     const Vector operator-(const Coordiate &other) const {
         return Vector(x-other.x, y-other.y, z-other.z);
     }
-    Coordiate scaledBy(GLfloat factor) {
+    Coordiate scaledBy(float factor) {
         return Coordiate(x*factor, y*factor, z*factor);
     }
 };
@@ -205,9 +171,9 @@ void getCmdLineOptions(int argc, char *argv[], string options, vector<CmdLineOpt
 }
 
 #pragma mark - Conversion
-GLfloat GLfloatFromString(string str)
+float floatFromString(string str)
 {
-    return (GLfloat)atof(str.c_str());
+    return (float)atof(str.c_str());
 }
 GLint GLintFromString(string str)
 {
