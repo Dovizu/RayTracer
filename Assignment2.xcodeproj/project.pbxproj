@@ -24,6 +24,7 @@
 		F102F27F18C13E26009A9505 /* libgflags.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libgflags.pc; sourceTree = "<group>"; };
 		F102F28018C13E26009A9505 /* libgflags_nothreads.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libgflags_nothreads.pc; sourceTree = "<group>"; };
 		F102F28318C140AC009A9505 /* preHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = preHeader.h; path = source/preHeader.h; sourceTree = "<group>"; };
+		F102F28418C153F0009A9505 /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utilities.cpp; path = source/utilities.cpp; sourceTree = "<group>"; };
 		F11AB4C818BAB0F600D8FED4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F11AB4C918BAB1C400D8FED4 /* specs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = specs.pdf; sourceTree = "<group>"; };
 		F11AB4CA18BAB21600D8FED4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -925,6 +926,7 @@
 		F11AB4CE18BABD7C00D8FED4 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F102F28418C153F0009A9505 /* utilities.cpp */,
 				F11AB4CB18BAB87900D8FED4 /* raytracer.cpp */,
 				F11AB4CC18BAB87900D8FED4 /* raytracer.h */,
 				F102F28318C140AC009A9505 /* preHeader.h */,
