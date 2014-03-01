@@ -83,6 +83,50 @@ Project Documentation
 
 Currently running `raytracer` will automatically test CImg and FreeImage, and output FITest.png & test.bmp.
 
-To-Do
-------
+Data Structures
+---------------
 
+Vector (Eigen::Vector)
+
+Point (Eigen::Array)
+
+Ray
+
+Matrix (Eigen::Matrix)
+
+Transformation
+
+Ray Tracer Classes
+----------------
+
+BRDF
+
+Color
+
+Sample
+
+LocalGeo
+
+Shape
+
+Primitive
+
+Intersection
+
+GeometricPrimitive
+
+AggregatePrimitive
+
+Material
+
+Sampler
+
+Camera
+
+RayTracer
+
+Light
+
+Film
+
+Scene
