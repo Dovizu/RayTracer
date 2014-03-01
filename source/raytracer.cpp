@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     img.fill(0);                                 // Set pixel values to 0 (color : black)
     unsigned char purple[] = { 255,0,255 };      // Define a purple color
     img.draw_text(100,100,"Hello World",purple); // Draw a purple "Hello world" at coordinates (100,100).
-    //img.display("My first CImg code");           // Display the image in a display window.
+    img.display("My first CImg code");           // Display the image in a display window.
     img.save("TestImage.bmp");
     
     //Test FreeImage library

@@ -10,7 +10,7 @@
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
 #include <CImg.h>
 #include <FreeImage.h>
-#include "
+//#include "
 
 using namespace std;
 using namespace Eigen;

@@ -5,6 +5,7 @@ precompile/
 *.jpeg
 *.png
 /raytracer
+/libraries/gflags/
 
 .DS_Store
 .DS_Store?
