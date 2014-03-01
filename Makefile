@@ -18,15 +18,15 @@ else
 	LFLAGS = -std=c++0x -Wall $(GF)
 endif
 
-OBJS = $(BUILD)/raytracer.o
+OBJS = $(BUILD)/scene.o
 
-raytracer: raytracer.o
-	$(CC) $(LFLAGS) $(OBJS) $(FIMG) $(CIMG) $(GF) -o raytracer
+scene: scene.o
+	$(CC) $(LFLAGS) $(OBJS) $(FIMG) $(CIMG) $(GF) -o scene
 
-raytracer.o: $(SRC)/raytracer.cpp $(SRC)/raytracer.h
-	$(CC) $(CFLAGS) $(FIMG) $(CIMG) $(GF) $(SRC)/raytracer.cpp -o $(BUILD)/raytracer.o
+scene.o: $(SRC)/Scene.cpp $(SRC)/Scene.h
+	$(CC) $(CFLAGS) $(FIMG) $(CIMG) $(GF) $(SRC)/Scene.cpp -o $(BUILD)/scene.o
 
-raytracer.h: $(LIB)/CImg/CImg.h, $(LIB)/FreeImage/FreeImage.h
+Scene.h: $(LIB)/CImg/CImg.h, $(LIB)/FreeImage/FreeImage.h
 
 clean:
-	$(RM) *.o raytracer build/raytracer.o
+	$(RM) *.o scene test build/scene.o build/test.o

@@ -4,7 +4,7 @@ precompile/
 *.jpg
 *.jpeg
 *.png
-/raytracer
+/scene
 /libraries/gflags/
 
 .DS_Store

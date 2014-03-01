@@ -1,4 +1,5 @@
-#include "raytracer.h"
+#include "Scene.h"
+#include "test.cpp"
 
 int main(int argc, char *argv[]) {
 
@@ -40,6 +41,8 @@ int main(int argc, char *argv[]) {
     m(0,1) = -1;
     m(1,1) = m(1,0) + m(0,1);
     std::cout << m << std::endl;
+    
+    testTest();
     
     return 0;
 }
