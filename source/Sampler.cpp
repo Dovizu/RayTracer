@@ -9,7 +9,7 @@ class Sampler {
     
 public:
     Sampler(Point ul, Point ur, Point br, Point bl, int xPix, int yPix);
-    bool getSample(Sample s);
+    bool getSample(Sample* s);
 };
 
 Sampler::Sampler(Point ul, Point ur, Point br, Point bl, int xPix, int yPix)
@@ -28,21 +28,24 @@ Sampler::Sampler(Point ul, Point ur, Point br, Point bl, int xPix, int yPix)
     yUnit = imageHeight / yPixels;
 }
 
-bool Sampler::getSample(Sample s)
+bool Sampler::getSample(Sample* s)
 {
     if (xIndex >= xPixels && yIndex >= yPixels) {
         return FALSE;
     }
     if (xIndex < xPixels)
     {
-        s = Sample(xIndex * xUnit, yIndex*yUnit);
+        (*s)(0) = xIndex * xUnit;
+        (*s)(1) = yIndex*yUnit;
+        xIndex++;
         return TRUE;
     }
     if (xIndex >= xPixels) {
         xIndex = 0;
         yIndex++;
         if (yIndex < yPixels) {
-            s = Sample(xIndex * xUnit, yIndex*yUnit);
+            (*s)(0) = xIndex * xUnit;
+            (*s)(1) = yIndex*yUnit;
             return TRUE;
         }
         return FALSE;
