@@ -19,15 +19,16 @@ else
 	LFLAGS = -std=c++0x -Wall $(GF)
 endif
 
-OBJS = $(BUILD)/scene.o
+OBJS = $(BUILD)/scene.o $(BUILD)/objLoader.o
 
-scene: scene.o
+scene: scene.o objLoader.o
 	$(CC) $(LFLAGS) $(OBJS) $(FIMG) $(CIMG) $(GF) -o scene
 
 scene.o: $(SRC)/Scene.cpp $(SRC)/Scene.h
 	$(CC) $(CFLAGS) $(FIMG) $(CIMG) $(GF) $(OBJLOADER) $(SRC)/Scene.cpp -o $(BUILD)/scene.o
-
-Scene.h: $(LIB)/CImg/CImg.h, $(LIB)/FreeImage/FreeImage.h
+	
+objLoader.o: $(LIB)/TinyObjLoader/tiny_obj_loader.cpp $(LIB)/TinyObjLoader/tiny_obj_loader.h
+	$(CC) $(CFLAGS) $(LIB)/TinyObjLoader/tiny_obj_loader.cpp -o $(BUILD)/objLoader.o
 
 clean:
 	$(RM) *.o scene test build/scene.o build/test.o
