@@ -1,5 +1,7 @@
 #include "preHeader.h"
 
+#include "Sampler.cpp"
+
 void testCImg() {
     print("===Testing CImg===");
     CImg<unsigned char> img(640,400,1,3);        // Define a 640x400 color image with 8 bits per color component.
@@ -55,10 +57,20 @@ void testMakeVec() {
     cout << vec << endl;
 }
 
+void testSampler(){
+    Point UL  = Point(-1,  1, -1);
+	Point UR  = Point( 1,  1, -1);
+	Point LR  = Point( 1, -1, -1);
+	Point LL  = Point(-1, -1, -1);
+    Sampler sampler = Sampler(UL, UR, LR, LL, 50, 50);
+    int i = 0;
+}
+
 void testAll() {
     print("===Begin Comprehensive Testing===");
     testCImg();
     testFreeImage();
     testEigen();
     testMakeVec();
+    testSampler();
 }

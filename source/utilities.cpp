@@ -19,6 +19,93 @@ typedef struct {
     vector<string> *args;
 } CmdLineOptResult;
 
+<<<<<<< HEAD
+=======
+typedef Array3f Color;
+typedef Array3f Point;
+typedef Array2f Sample;
+
+
+class Vector {
+public:
+    float x, y, z;
+    Vector(float xa, float ya, float za){x=xa;y=ya;z=za;}
+    Vector(){x=0.0;y=0.0;z=0.0;}
+    //Summation
+    Vector& operator+=(const Vector &rhs) {
+        x += rhs.x; y += rhs.y; z += rhs.z;
+        return *this;
+    }
+    const Vector operator+(const Vector &other) const {
+        return Vector(*this) += other;
+    }
+    //Negation
+    Vector operator-() const {
+        return Vector(-x, -y, -z);
+    }
+    //Subtraction
+    Vector& operator-=(const Vector &rhs) {
+        x -= rhs.x; y -= rhs.y; z -= rhs.z;
+        return *this;
+    }
+    const Vector operator-(const Vector &other) const {
+        return Vector(*this) -= other;
+    }
+    //Dot Product
+    float operator*(const Vector &other) const {
+        return other.x*x + other.y*y + other.z*z;
+    }
+    //Scalar Multiplication
+    Vector& operator*=(const float &rhs) {
+        x *= rhs; y *= rhs; z *= rhs;
+        return *this;
+    }
+    const Vector operator*(const float &other) const {
+        return Vector(*this) *= other;
+    }
+    //Magnitude/length
+    float magnitude() {
+        return (float)sqrt(sqr(x)+sqr(y)+sqr(z));
+    }
+    //Normalize
+    void normalize() {
+        float mag = magnitude();
+        if (mag != 0.0) {
+            x /= mag;
+            y /= mag;
+            z /= mag;
+        }
+    }
+    //Normalized
+    Vector normalized() {
+        Vector normalizedVec = Vector(*this);
+        normalizedVec.normalize();
+        return normalizedVec;
+    }
+    //Angel between two vectors
+    float angleBetween(Vector &other) {
+        return acos(other.normalized() * normalized());
+    }
+    
+};
+
+class Coordiate {
+public:
+    float x, y, z;
+    Coordiate(float xa, float ya, float za){x=xa;y=ya;z=za;}
+    Coordiate() {x=0.0;y=0.0;z=0.0;}
+    //Point minus Point to form vector
+    const Vector operator-(const Coordiate &other) const {
+        return Vector(x-other.x, y-other.y, z-other.z);
+    }
+    Coordiate scaledBy(float factor) {
+        return Coordiate(x*factor, y*factor, z*factor);
+    }
+};
+typedef Coordiate Location;
+typedef Coordiate Point;
+
+>>>>>>> sampler
 typedef struct {
     Color color;
     Vector vector;
