@@ -1,48 +1,41 @@
 
 
 class Sampler {
-    Point UL, UR, BR, BL;
     int xPixels, yPixels;
     int xIndex, yIndex;
-    float imageHeight, imageWidth;
-    float xUnit, yUnit;
     
 public:
-    Sampler(Point ul, Point ur, Point br, Point bl, int xPix, int yPix);
-    bool getSample(Sample s);
+    Sampler(int xPix, int yPix);
+    bool getSample(Sample* s);
 };
 
-Sampler::Sampler(Point ul, Point ur, Point br, Point bl, int xPix, int yPix)
+Sampler::Sampler(int xPix, int yPix)
 {
-    UL = ul;
-    UR = ur;
-    BR = br;
-    BL = bl;
     xPixels = xPix;
     yPixels = yPix;
     xIndex = 0;
     yIndex = 0;
-    imageHeight = UL(0) - BL(0); //subtract xcoords
-    imageWidth = UL(1) - BL(1); //subtract y coords
-    xUnit = imageWidth / xPixels;
-    yUnit = imageHeight / yPixels;
 }
 
-bool Sampler::getSample(Sample s)
+bool Sampler::getSample(Sample* s)
 {
+    float offset = 0.5;
     if (xIndex >= xPixels && yIndex >= yPixels) {
         return FALSE;
     }
     if (xIndex < xPixels)
     {
-        s = Sample(xIndex * xUnit, yIndex*yUnit);
+        (*s)(0) = xIndex + offset;
+        (*s)(1) = yIndex + offset;
+        xIndex++;
         return TRUE;
     }
     if (xIndex >= xPixels) {
         xIndex = 0;
         yIndex++;
         if (yIndex < yPixels) {
-            s = Sample(xIndex * xUnit, yIndex*yUnit);
+            (*s)(0) = xIndex + offset;
+            (*s)(1) = yIndex + offset;
             return TRUE;
         }
         return FALSE;

@@ -58,12 +58,14 @@ void testMakeVec() {
 }
 
 void testSampler(){
-    Point UL  = Point(-1,  1, -1);
-	Point UR  = Point( 1,  1, -1);
-	Point LR  = Point( 1, -1, -1);
-	Point LL  = Point(-1, -1, -1);
-    Sampler sampler = Sampler(UL, UR, LR, LL, 50, 50);
-    int i = 0;
+    printf("===Testing Sampler===\n \n");
+    Sampler sampler = Sampler(4, 4);
+    //int i = 0;
+    Sample s = Sample(0,0);
+    while(sampler.getSample(&s))
+    {
+        printf("%f, %f \n", s(0), s(1));
+    }
 }
 
 void testAll() {
