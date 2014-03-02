@@ -40,8 +40,14 @@
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <PathRunnable
-         FilePath = "/Users/Donny/Dropbox/CS 184/assignments/Assignment2/raytracer">
+         FilePath = "/Users/Donny/Dropbox/CS 184/assignments/Assignment2/scene">
       </PathRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-t"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

@@ -10,11 +10,12 @@
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
 #include <CImg.h>
 #include <FreeImage.h>
-//#include "
 
 using namespace std;
 using namespace Eigen;
 using namespace cimg_library;
+
+#include "utilities.cpp"
 
 #ifndef DNDEBUG
 #   define ASSERT(condition, message) \
@@ -29,4 +30,8 @@ exit(EXIT_FAILURE); \
 #   define ASSERT(condition, message) do { } while (false)
 #endif
 
+
+bool flag_testing = false;
+
 #endif
+

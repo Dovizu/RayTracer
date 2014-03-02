@@ -5,7 +5,6 @@
 #define GCh 1
 #define BCh 2
 
-
 #pragma mark - Math
 float sqr(float x) { return x*x;}
 
@@ -14,96 +13,15 @@ typedef enum {
     LightSourceDirectional,
     LightSourcePoint
 } LightSourceType;
+
 typedef struct {
-    int w, h;
-} Viewport;
-typedef struct {
-    string oBRDFptName;
+    string optName;
     int numOfArgs;
     vector<string> *args;
 } CmdLineOptResult;
 
 typedef Array3f Color;
-
-
-class Vector {
-public:
-    float x, y, z;
-    Vector(float xa, float ya, float za){x=xa;y=ya;z=za;}
-    Vector(){x=0.0;y=0.0;z=0.0;}
-    //Summation
-    Vector& operator+=(const Vector &rhs) {
-        x += rhs.x; y += rhs.y; z += rhs.z;
-        return *this;
-    }
-    const Vector operator+(const Vector &other) const {
-        return Vector(*this) += other;
-    }
-    //Negation
-    Vector operator-() const {
-        return Vector(-x, -y, -z);
-    }
-    //Subtraction
-    Vector& operator-=(const Vector &rhs) {
-        x -= rhs.x; y -= rhs.y; z -= rhs.z;
-        return *this;
-    }
-    const Vector operator-(const Vector &other) const {
-        return Vector(*this) -= other;
-    }
-    //Dot Product
-    float operator*(const Vector &other) const {
-        return other.x*x + other.y*y + other.z*z;
-    }
-    //Scalar Multiplication
-    Vector& operator*=(const float &rhs) {
-        x *= rhs; y *= rhs; z *= rhs;
-        return *this;
-    }
-    const Vector operator*(const float &other) const {
-        return Vector(*this) *= other;
-    }
-    //Magnitude/length
-    float magnitude() {
-        return (float)sqrt(sqr(x)+sqr(y)+sqr(z));
-    }
-    //Normalize
-    void normalize() {
-        float mag = magnitude();
-        if (mag != 0.0) {
-            x /= mag;
-            y /= mag;
-            z /= mag;
-        }
-    }
-    //Normalized
-    Vector normalized() {
-        Vector normalizedVec = Vector(*this);
-        normalizedVec.normalize();
-        return normalizedVec;
-    }
-    //Angel between two vectors
-    float angleBetween(Vector &other) {
-        return acos(other.normalized() * normalized());
-    }
-    
-};
-
-class Coordiate {
-public:
-    float x, y, z;
-    Coordiate(float xa, float ya, float za){x=xa;y=ya;z=za;}
-    Coordiate() {x=0.0;y=0.0;z=0.0;}
-    //Point minus Point to form vector
-    const Vector operator-(const Coordiate &other) const {
-        return Vector(x-other.x, y-other.y, z-other.z);
-    }
-    Coordiate scaledBy(float factor) {
-        return Coordiate(x*factor, y*factor, z*factor);
-    }
-};
-typedef Coordiate Location;
-typedef Coordiate Point;
+typedef Array3f Point;
 
 typedef struct {
     Color color;
@@ -113,6 +31,17 @@ typedef struct {
 } LightSource;
 
 #pragma mark - Utilities
+
+
+/**
+ *  Prints one string using std::cout
+ *
+ *  @param str string to be printed
+ *  @discussion does not support multiple strings concatenation
+ */
+void print(string str){
+    cout << str << endl;
+}
 
 /**
  *  Parses command line options specified in "options"
@@ -175,9 +104,9 @@ float floatFromString(string str)
 {
     return (float)atof(str.c_str());
 }
-GLint GLintFromString(string str)
+int intFromString(string str)
 {
-    return (GLint)atoi(str.c_str());
+    return (int)atoi(str.c_str());
 }
 
 #endif

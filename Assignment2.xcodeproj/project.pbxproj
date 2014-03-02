@@ -31,7 +31,6 @@
 		F102F28D18C1A7B0009A9505 /* AggregatePrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AggregatePrimitive.cpp; path = source/AggregatePrimitive.cpp; sourceTree = "<group>"; };
 		F102F28E18C1A7B0009A9505 /* BRDF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BRDF.cpp; path = source/BRDF.cpp; sourceTree = "<group>"; };
 		F102F28F18C1A7B0009A9505 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = source/Camera.cpp; sourceTree = "<group>"; };
-		F102F29018C1A7B0009A9505 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Color.cpp; path = source/Color.cpp; sourceTree = "<group>"; };
 		F102F29118C1A7B0009A9505 /* Film.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Film.cpp; path = source/Film.cpp; sourceTree = "<group>"; };
 		F102F29218C1A7B0009A9505 /* GeometricPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometricPrimitive.cpp; path = source/GeometricPrimitive.cpp; sourceTree = "<group>"; };
 		F102F29318C1A7B0009A9505 /* Intersection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Intersection.cpp; path = source/Intersection.cpp; sourceTree = "<group>"; };
@@ -941,7 +940,6 @@
 				F102F29618C1A7B0009A9505 /* Material.cpp */,
 				F102F29418C1A7B0009A9505 /* Light.cpp */,
 				F102F29518C1A7B0009A9505 /* LocalGeo.cpp */,
-				F102F29018C1A7B0009A9505 /* Color.cpp */,
 				F102F29918C1A7B0009A9505 /* Sample.cpp */,
 			);
 			name = "Data Structures";
