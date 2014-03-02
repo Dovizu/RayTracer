@@ -11,11 +11,9 @@ int main(int argc, char *argv[]) {
             flag_testing = true;
         }
     }
-
     if (flag_testing) {
         testAll();
         flag_testing = false;
     }
-
     return 0;
 }

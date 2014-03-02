@@ -39,7 +39,6 @@
 		F102F29618C1A7B0009A9505 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = source/Material.cpp; sourceTree = "<group>"; };
 		F102F29718C1A7B0009A9505 /* Primitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Primitive.cpp; path = source/Primitive.cpp; sourceTree = "<group>"; };
 		F102F29818C1A7B0009A9505 /* RayTracer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RayTracer.cpp; path = source/RayTracer.cpp; sourceTree = "<group>"; };
-		F102F29918C1A7B0009A9505 /* Sample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sample.cpp; path = source/Sample.cpp; sourceTree = "<group>"; };
 		F102F29A18C1A7B0009A9505 /* Sampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sampler.cpp; path = source/Sampler.cpp; sourceTree = "<group>"; };
 		F102F29B18C1A7B0009A9505 /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shape.cpp; path = source/Shape.cpp; sourceTree = "<group>"; };
 		F102F29F18C1A8B2009A9505 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = source/Scene.cpp; sourceTree = "<group>"; };
@@ -940,7 +939,6 @@
 				F102F29618C1A7B0009A9505 /* Material.cpp */,
 				F102F29418C1A7B0009A9505 /* Light.cpp */,
 				F102F29518C1A7B0009A9505 /* LocalGeo.cpp */,
-				F102F29918C1A7B0009A9505 /* Sample.cpp */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";

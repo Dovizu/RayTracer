@@ -1,9 +1,6 @@
 #ifndef DVZUtil_H
 #define DVZUtil_H
 #include "preHeader.h"
-#define RCh 0
-#define GCh 1
-#define BCh 2
 
 #pragma mark - Data Structures
 
@@ -35,6 +32,15 @@ float sqr(float x) { return x*x;}
 Vector makeVec(Point start, Point end) {
     return (start-end).matrix();
 }
+
+#pragma mark - Syntax Sugar
+
+float RCh(Color c) {return c(0);}
+float GCh(Color c) {return c(1);}
+float BCh(Color c) {return c(2);}
+float X(Array3f c) {return c(0);}
+float Y(Array3f c) {return c(1);}
+float Z(Array3f c) {return c(2);}
 
 #pragma mark - Utilities
 
