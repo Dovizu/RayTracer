@@ -24,6 +24,8 @@ typedef struct {
 } CmdLineOptResult;
 
 typedef Array3f Color;
+typedef Array3f Point;
+typedef Array2f Sample;
 
 
 class Vector {

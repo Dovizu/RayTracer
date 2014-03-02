@@ -16,6 +16,8 @@ using namespace std;
 using namespace Eigen;
 using namespace cimg_library;
 
+#include "utilities.cpp"
+
 #ifndef DNDEBUG
 #   define ASSERT(condition, message) \
 do { \
