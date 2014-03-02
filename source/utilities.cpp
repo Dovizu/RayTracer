@@ -5,10 +5,12 @@
 #define GCh 1
 #define BCh 2
 
-#pragma mark - Math
-float sqr(float x) { return x*x;}
-
 #pragma mark - Data Structures
+
+typedef Array3f Color;
+typedef Array3f Point;
+typedef Vector3f Vector;
+
 typedef enum {
     LightSourceDirectional,
     LightSourcePoint
@@ -20,18 +22,21 @@ typedef struct {
     vector<string> *args;
 } CmdLineOptResult;
 
-typedef Array3f Color;
-typedef Array3f Point;
-
 typedef struct {
     Color color;
     Vector vector;
-    Location location;
+    Point location;
     LightSourceType type;
 } LightSource;
 
-#pragma mark - Utilities
+#pragma mark - Math
+float sqr(float x) { return x*x;}
 
+Vector makeVec(Point start, Point end) {
+    return (start-end).matrix();
+}
+
+#pragma mark - Utilities
 
 /**
  *  Prints one string using std::cout

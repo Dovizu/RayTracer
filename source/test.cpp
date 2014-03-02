@@ -47,9 +47,18 @@ void testEigen() {
     std::cout << m << std::endl;
 }
 
+void testMakeVec() {
+    print("===Testing makeVec");
+    Point p1(3, 2, 1);
+    Point p2(1, 2, 3);
+    Vector vec = makeVec(p1, p2);
+    cout << vec << endl;
+}
+
 void testAll() {
     print("===Begin Comprehensive Testing===");
     testCImg();
     testFreeImage();
     testEigen();
+    testMakeVec();
 }
