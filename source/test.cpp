@@ -84,6 +84,7 @@ void testCamera(){
         c.generateRay(s, &r);
         printf("Direction: (%f, %f, %f)", r.direction[0], r.direction[1], r.direction[2]);
     }
+}
 
 bool _testLoadObj(const char* filename, const char* basepath = NULL) {
     cout << "Loading " << filename << endl;

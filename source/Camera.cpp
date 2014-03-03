@@ -40,7 +40,7 @@ void Camera::generateRay(Sample& s, Ray* ray)
     float xPix = s(0);
     float yPix = s(1);
     //(*ray) = LL + xUnit*xPix + yUnit*yPix;
-    ray->direction = LL+xUnit*xPix + yUnit*yPix
+    ray->direction = LL+xUnit*xPix + yUnit*yPix;
     ray->position = eye;
     
 }
