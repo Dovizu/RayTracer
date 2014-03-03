@@ -52,8 +52,10 @@ public:
             return false;
         }else{
             //passes thru two points
-            float t1 = (-d.dot(e-c)+sqrt(sqr(d.dot(e-c))-(d.dot(d))*((e-c).dot(e-c))-sqr(radius)))/(d.dot(d));
-            float t2 = (-d.dot(e-c)-sqrt(sqr(d.dot(e-c))-(d.dot(d))*((e-c).dot(e-c))-sqr(radius)))/(d.dot(d));
+//            float t1 = (-d.dot(e-c)+sqrt(sqr(d.dot(e-c))-(d.dot(d))*((e-c).dot(e-c))-sqr(radius)))/(d.dot(d));
+//            float t2 = (-d.dot(e-c)-sqrt(sqr(d.dot(e-c))-(d.dot(d))*((e-c).dot(e-c))-sqr(radius)))/(d.dot(d));
+            float t1 = (-B+sqrt(sqr(B)-4*A*C))/(2*A);
+            float t2 = (-B-sqrt(sqr(B)-4*A*C))/(2*A);
             *thit = (t1 < t2) ? t1 : t2; //smaller of two
             Point p;
             if (ray.valueAt(*thit, &p)) {

@@ -44,7 +44,7 @@
       </PathRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-t"
+            argument = "-tsintersect"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

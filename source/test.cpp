@@ -150,7 +150,7 @@ void testTinyObjLoader() {
 }
 
 void testSphereIntersection() {
-    Sphere ball = Sphere(1.0, 0.0, 0.0, -0.3);
+    Sphere ball = Sphere(1.0, 0.0, 0.0, -3.0);
     Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
     float thit;
     LocalGeo local;

@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]) {
     
     vector<CmdLineOptResult> *results;
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
         }
         if(result.optName.compare("-tcam") == 0){
             testCamera();
+        }
+        if (result.optName.compare("-tsintersect") == 0) {
+            testSphereIntersection();
         }
     }
     return 0;
