@@ -4,16 +4,18 @@
 int main(int argc, char *argv[]) {
     
     vector<CmdLineOptResult> *results;
-    string options = "-t(0)";
+    string options = "-t(0)-tobj(0)-tsampler(0)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
-            flag_testing = true;
+            testAll();
         }
-    }
-    if (flag_testing) {
-        testAll();
-        flag_testing = false;
+        if (result.optName.compare("-tobj") == 0) {
+            testTinyObjLoader();
+        }
+        if (result.optName.compare("-tsampler") == 0) {
+            testSampler();
+        }
     }
     return 0;
 }

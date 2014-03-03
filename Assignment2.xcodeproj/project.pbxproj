@@ -7,22 +7,6 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		F102F26C18C13E26009A9505 /* gflags_completions.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = gflags_completions.sh; sourceTree = "<group>"; };
-		F102F26F18C13E26009A9505 /* gflags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gflags.h; sourceTree = "<group>"; };
-		F102F27018C13E26009A9505 /* gflags_completions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gflags_completions.h; sourceTree = "<group>"; };
-		F102F27118C13E26009A9505 /* gflags_declare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gflags_declare.h; sourceTree = "<group>"; };
-		F102F27318C13E26009A9505 /* gflags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gflags.h; sourceTree = "<group>"; };
-		F102F27418C13E26009A9505 /* gflags_completions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gflags_completions.h; sourceTree = "<group>"; };
-		F102F27618C13E26009A9505 /* libgflags.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgflags.2.dylib; sourceTree = "<group>"; };
-		F102F27718C13E26009A9505 /* libgflags.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgflags.a; sourceTree = "<group>"; };
-		F102F27818C13E26009A9505 /* libgflags.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgflags.dylib; sourceTree = "<group>"; };
-		F102F27918C13E26009A9505 /* libgflags.la */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libgflags.la; sourceTree = "<group>"; };
-		F102F27A18C13E26009A9505 /* libgflags_nothreads.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgflags_nothreads.2.dylib; sourceTree = "<group>"; };
-		F102F27B18C13E26009A9505 /* libgflags_nothreads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgflags_nothreads.a; sourceTree = "<group>"; };
-		F102F27C18C13E26009A9505 /* libgflags_nothreads.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgflags_nothreads.dylib; sourceTree = "<group>"; };
-		F102F27D18C13E26009A9505 /* libgflags_nothreads.la */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libgflags_nothreads.la; sourceTree = "<group>"; };
-		F102F27F18C13E26009A9505 /* libgflags.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libgflags.pc; sourceTree = "<group>"; };
-		F102F28018C13E26009A9505 /* libgflags_nothreads.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libgflags_nothreads.pc; sourceTree = "<group>"; };
 		F102F28318C140AC009A9505 /* preHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = preHeader.h; path = source/preHeader.h; sourceTree = "<group>"; };
 		F102F28418C153F0009A9505 /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utilities.cpp; path = source/utilities.cpp; sourceTree = "<group>"; };
 		F102F28518C19F1B009A9505 /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = source/test.cpp; sourceTree = "<group>"; };
@@ -47,6 +31,9 @@
 		F11AB4C918BAB1C400D8FED4 /* specs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = specs.pdf; sourceTree = "<group>"; };
 		F11AB4CA18BAB21600D8FED4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		F11AB4CD18BABC7500D8FED4 /* markdown_syntax.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markdown_syntax.png; sourceTree = "<group>"; };
+		F161C8E818C3F4EC00959064 /* tiny_obj_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cpp; sourceTree = "<group>"; };
+		F161C8E918C3F4EC00959064 /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
+		F161C8EA18C3FEEB00959064 /* World.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = source/World.cpp; sourceTree = "<group>"; };
 		F1E39BC818C0384D005BC8FE /* CImg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CImg.h; sourceTree = "<group>"; };
 		F1E39BCA18C0384D005BC8FE /* captcha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = captcha.cpp; sourceTree = "<group>"; };
 		F1E39BCB18C0384D005BC8FE /* CImg_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CImg_demo.cpp; sourceTree = "<group>"; };
@@ -857,78 +844,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		F102F26A18C13E26009A9505 /* gflags */ = {
-			isa = PBXGroup;
-			children = (
-				F102F26B18C13E26009A9505 /* bin */,
-				F102F26D18C13E26009A9505 /* include */,
-				F102F27518C13E26009A9505 /* lib */,
-			);
-			name = gflags;
-			path = libraries/gflags;
-			sourceTree = "<group>";
-		};
-		F102F26B18C13E26009A9505 /* bin */ = {
-			isa = PBXGroup;
-			children = (
-				F102F26C18C13E26009A9505 /* gflags_completions.sh */,
-			);
-			path = bin;
-			sourceTree = "<group>";
-		};
-		F102F26D18C13E26009A9505 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				F102F26E18C13E26009A9505 /* gflags */,
-				F102F27218C13E26009A9505 /* google */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		F102F26E18C13E26009A9505 /* gflags */ = {
-			isa = PBXGroup;
-			children = (
-				F102F26F18C13E26009A9505 /* gflags.h */,
-				F102F27018C13E26009A9505 /* gflags_completions.h */,
-				F102F27118C13E26009A9505 /* gflags_declare.h */,
-			);
-			path = gflags;
-			sourceTree = "<group>";
-		};
-		F102F27218C13E26009A9505 /* google */ = {
-			isa = PBXGroup;
-			children = (
-				F102F27318C13E26009A9505 /* gflags.h */,
-				F102F27418C13E26009A9505 /* gflags_completions.h */,
-			);
-			path = google;
-			sourceTree = "<group>";
-		};
-		F102F27518C13E26009A9505 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				F102F27618C13E26009A9505 /* libgflags.2.dylib */,
-				F102F27718C13E26009A9505 /* libgflags.a */,
-				F102F27818C13E26009A9505 /* libgflags.dylib */,
-				F102F27918C13E26009A9505 /* libgflags.la */,
-				F102F27A18C13E26009A9505 /* libgflags_nothreads.2.dylib */,
-				F102F27B18C13E26009A9505 /* libgflags_nothreads.a */,
-				F102F27C18C13E26009A9505 /* libgflags_nothreads.dylib */,
-				F102F27D18C13E26009A9505 /* libgflags_nothreads.la */,
-				F102F27E18C13E26009A9505 /* pkgconfig */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		F102F27E18C13E26009A9505 /* pkgconfig */ = {
-			isa = PBXGroup;
-			children = (
-				F102F27F18C13E26009A9505 /* libgflags.pc */,
-				F102F28018C13E26009A9505 /* libgflags_nothreads.pc */,
-			);
-			path = pkgconfig;
-			sourceTree = "<group>";
-		};
 		F102F29C18C1A7B9009A9505 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
@@ -963,6 +878,7 @@
 				F102F29118C1A7B0009A9505 /* Film.cpp */,
 				F102F29818C1A7B0009A9505 /* RayTracer.cpp */,
 				F102F29A18C1A7B0009A9505 /* Sampler.cpp */,
+				F161C8EA18C3FEEB00959064 /* World.cpp */,
 			);
 			name = Scene;
 			sourceTree = "<group>";
@@ -1009,10 +925,20 @@
 			name = Support;
 			sourceTree = "<group>";
 		};
+		F161C8E718C3F4EC00959064 /* TinyObjLoader */ = {
+			isa = PBXGroup;
+			children = (
+				F161C8E818C3F4EC00959064 /* tiny_obj_loader.cpp */,
+				F161C8E918C3F4EC00959064 /* tiny_obj_loader.h */,
+			);
+			name = TinyObjLoader;
+			path = libraries/TinyObjLoader;
+			sourceTree = "<group>";
+		};
 		F1E39BC618C037ED005BC8FE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				F102F26A18C13E26009A9505 /* gflags */,
+				F161C8E718C3F4EC00959064 /* TinyObjLoader */,
 				F1E3A39A18C06F3D005BC8FE /* Eigen */,
 				F1E39DB018C05278005BC8FE /* FreeImage */,
 				F1E39BC718C0384D005BC8FE /* CImg */,

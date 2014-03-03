@@ -10,10 +10,12 @@
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
 #include <CImg.h>
 #include <FreeImage.h>
+#include <tiny_obj_loader.h>
 
 using namespace std;
 using namespace Eigen;
 using namespace cimg_library;
+using namespace tinyobj;
 
 #include "utilities.cpp"
 
