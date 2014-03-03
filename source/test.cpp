@@ -1,8 +1,15 @@
+#ifndef PRE_CPP
+#define PRE_CPP
+
 #include "preHeader.h"
 
 #include "Ray.cpp"
 #include "Sampler.cpp"
 #include "Camera.cpp"
+#include "Primitive.cpp"
+#include "GeometricPrimitive.cpp"
+#include "Shape.cpp"
+#include "Sphere.cpp"
 
 void testCImg() {
     print("===Testing CImg===");
@@ -142,6 +149,16 @@ void testTinyObjLoader() {
     _testLoadObj("test/cube.obj", "test/");
 }
 
+void testSphereIntersection() {
+    Sphere ball = Sphere(1.0, 0.0, 0.0, -0.3);
+    Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
+    float thit;
+    LocalGeo local;
+    if (ball.intersect(ray, &thit, &local)) {
+        cout << "Intersected at: " << local.position << " with Surface Normal: " << local.surfaceNormal;
+    }
+}
+
 void testAll() {
     print("===Begin Comprehensive Testing===");
     testCImg();
@@ -150,3 +167,5 @@ void testAll() {
     testMakeVec();
     testSampler();
 }
+
+#endif

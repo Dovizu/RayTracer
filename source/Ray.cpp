@@ -22,6 +22,14 @@ public:
         t_min = min;
         t_max = max;
     }
+    
+    bool valueAt(float t, Point* point) {
+        if (t > t_min && t < t_max) {
+            *point = position + t*(direction.array());
+            return true;
+        }
+        return false;
+    }
 };
 
 #endif

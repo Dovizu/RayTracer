@@ -1,3 +1,6 @@
+#ifndef BRDF_CPP
+#define BRDF_CPP
+
 #include "preHeader.h"
 
 class BRDF {
@@ -11,3 +14,5 @@ public:
         kr = r;
     }
 };
+
+#endif
