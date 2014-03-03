@@ -71,12 +71,12 @@ void testSampler(){
 
 void testCamera(){
     printf("===Testing Camera====\n \n");
-    Point UL  = Point(-1,  1, -1);
-	Point UR  = Point( 1,  1, -1);
-	Point LR  = Point( 1, -1, -1);
+    Point UL  = Point(-1,  1, 0);
+	Point UR  = Point( 1,  1, -2);
+	Point LR  = Point( 1, -1, -2);
 	Point LL  = Point(-1, -1, -1);
-    Camera c = Camera(UL, UR, LR, LL, Point(0,0,0), 2, 2);
-    Sampler sampler = Sampler(2,2);
+    Camera c = Camera(UL, UR, LR, LL, Point(0,0,0), 4, 4);
+    Sampler sampler = Sampler(4,4);
     Sample s = Sample(0,0);
     while(sampler.getSample(&s))
     {
@@ -84,7 +84,7 @@ void testCamera(){
         c.generateRay(s, &r);
         printf("Direction: (%f, %f, %f) \n", r.direction[0], r.direction[1], r.direction[2]);
     }
-    printf("Width = %f, height = %f, xUnit = %f, yUnit = %f", c.planeWidth, c.planeHeight, c.xUnit, c.yUnit);
+    printf("Width = %f, height = %f, xUnit = %f, yUnit = %f, LL(%f, %f), u(%f, %f)", c.planeWidth, c.planeHeight, c.xUnit, c.yUnit, c.LL(0), c.LL(1), c.u(0), c.u(1));
     printf("===Done Testing Camera=== \n \n");
 }
 

@@ -30,6 +30,8 @@ Camera::Camera (Point ul, Point ur, Point lr, Point ll, Point eyeCoordinate, int
     yPixels = yPix;
     planeWidth = u.norm();
     planeHeight = v.norm();
+    //u.normalize();
+    //v.normalize();
     xUnit = planeWidth/xPixels;
     yUnit = planeHeight/yPixels;
 }
@@ -41,11 +43,14 @@ void Camera::generateRay(Sample& s, Ray* ray)
     float xPix = s(0);
     float yPix = s(1);
     //ray->direction = LL+xUnit*xPix*u + yUnit*yPix*v;
-    float a = xUnit*xPix;
-    float b = yUnit*yPix;
-    (ray->direction)(0) = eye(0) - (LL(0) + a*u(0) + b*v(0));
-    (ray->direction)(1) = eye(1) - (LL(1) + a*u(1) + b*v(1));
-    (ray->direction)(2) = eye(2) - (LL(2) + a*u(2) + b*v(2));
+//    float a = xUnit*xPix/xPixels;
+//    float b = yUnit*yPix/xPixels;
+    float a = xPix/xPixels;
+    float b = yPix/yPixels;
+    printf("a = %f, b = %f ", a, b);
+    (ray->direction)(0) = (LL(0) + a*u(0) + b*v(0)) - eye(0);
+    (ray->direction)(1) = (LL(1) + a*u(1) + b*v(1)) - eye(1);
+    (ray->direction)(2) = (LL(2) + a*u(2) + b*v(2)) - eye(2);
     ray->position = eye;
     
 }
