@@ -10,6 +10,7 @@
 #include "GeometricPrimitive.cpp"
 #include "Shape.cpp"
 #include "Sphere.cpp"
+#include "Triangle.cpp"
 
 void testCImg() {
     print("===Testing CImg===");
@@ -155,6 +156,16 @@ void testSphereIntersection() {
     float thit;
     LocalGeo local;
     if (ball.intersect(ray, &thit, &local)) {
+        cout << "Intersected at: " << local.position << " with Surface Normal: " << local.surfaceNormal;
+    }
+}
+
+void testTriangleIntersection() {
+    Triangle tri = Triangle(Point(-1.0,0.0,-3.2), Point(1,1,-3.2), Point(1,-1,-3.2));
+    Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
+    float thit;
+    LocalGeo local;
+    if (tri.intersect(ray, &thit, &local)) {
         cout << "Intersected at: " << local.position << " with Surface Normal: " << local.surfaceNormal;
     }
 }
