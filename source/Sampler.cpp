@@ -36,6 +36,7 @@ bool Sampler::getSample(Sample* s)
         if (yIndex < yPixels) {
             (*s)(0) = xIndex + offset;
             (*s)(1) = yIndex + offset;
+            xIndex++;
             return TRUE;
         }
         return FALSE;

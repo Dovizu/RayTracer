@@ -61,7 +61,7 @@ void testMakeVec() {
 
 void testSampler(){
     printf("===Testing Sampler===\n \n");
-    Sampler sampler = Sampler(4, 4);
+    Sampler sampler = Sampler(2, 2);
     Sample s = Sample(0,0);
     while(sampler.getSample(&s))
     {
@@ -75,15 +75,18 @@ void testCamera(){
 	Point UR  = Point( 1,  1, -1);
 	Point LR  = Point( 1, -1, -1);
 	Point LL  = Point(-1, -1, -1);
-    Camera c = Camera(UL, UR, LR, LL, Point(0,0,0), 4, 4);
-    Sampler sampler = Sampler(4,4);
+    Camera c = Camera(UL, UR, LR, LL, Point(0,0,0), 2, 2);
+    Sampler sampler = Sampler(2,2);
     Sample s = Sample(0,0);
     while(sampler.getSample(&s))
     {
         Ray r = Ray();
         c.generateRay(s, &r);
-        printf("Direction: (%f, %f, %f)", r.direction[0], r.direction[1], r.direction[2]);
+        printf("Direction: (%f, %f, %f) \n", r.direction[0], r.direction[1], r.direction[2]);
     }
+    printf("Width = %f, height = %f, xUnit = %f, yUnit = %f", c.planeWidth, c.planeHeight, c.xUnit, c.yUnit);
+    printf("===Done Testing Camera=== \n \n");
+}
 
 bool _testLoadObj(const char* filename, const char* basepath = NULL) {
     cout << "Loading " << filename << endl;
@@ -148,4 +151,5 @@ void testAll() {
     testEigen();
     testMakeVec();
     testSampler();
+    testCamera();
 }
