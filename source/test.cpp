@@ -1,6 +1,8 @@
 #include "preHeader.h"
 
+#include "Ray.cpp"
 #include "Sampler.cpp"
+#include "Camera.cpp"
 
 void testCImg() {
     print("===Testing CImg===");
@@ -60,11 +62,27 @@ void testMakeVec() {
 void testSampler(){
     printf("===Testing Sampler===\n \n");
     Sampler sampler = Sampler(4, 4);
-    //int i = 0;
     Sample s = Sample(0,0);
     while(sampler.getSample(&s))
     {
         printf("%f, %f \n", s(0), s(1));
+    }
+}
+
+void testCamera(){
+    printf("===Testing Camera====\n \n");
+    Point UL  = Point(-1,  1, -1);
+	Point UR  = Point( 1,  1, -1);
+	Point LR  = Point( 1, -1, -1);
+	Point LL  = Point(-1, -1, -1);
+    Camera c = Camera(UL, UR, LR, LL, Point(0,0,0), 4, 4);
+    Sampler sampler = Sampler(4,4);
+    Sample s = Sample(0,0);
+    while(sampler.getSample(&s))
+    {
+        Ray r = Ray();
+        c.generateRay(s, &r);
+        printf("Direction: (%f, %f, %f)", r.direction[0], r.direction[1], r.direction[2]);
     }
 }
 

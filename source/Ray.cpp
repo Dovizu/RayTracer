@@ -1,3 +1,6 @@
+#ifndef RAY_H
+#define RAY_H
+
 #include "preHeader.h"
 
 class Ray {
@@ -13,11 +16,12 @@ public:
         t_max = 1.0;
     }
     
-    Ray(Point start, Vector direction, min, max) {
+    Ray(Point start, Vector direction, float min, float max) {
         position = start;
-        this.direction = direction;
+        this->direction = direction;
         t_min = min;
         t_max = max;
     }
 };
 
+#endif
