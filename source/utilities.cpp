@@ -32,7 +32,7 @@ typedef struct {
 float sqr(float x) { return x*x;}
 
 Vector makeVec(Point start, Point end) {
-    return (start-end).matrix();
+    return (end-start).matrix();
 }
 
 #pragma mark - Syntax Sugar

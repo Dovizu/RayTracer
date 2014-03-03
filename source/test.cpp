@@ -68,7 +68,7 @@ void testMakeVec() {
 
 void testSampler(){
     printf("===Testing Sampler===\n \n");
-    Sampler sampler = Sampler(4, 4);
+    Sampler sampler = Sampler(2, 2);
     Sample s = Sample(0,0);
     while(sampler.getSample(&s))
     {
@@ -78,9 +78,9 @@ void testSampler(){
 
 void testCamera(){
     printf("===Testing Camera====\n \n");
-    Point UL  = Point(-1,  1, -1);
-	Point UR  = Point( 1,  1, -1);
-	Point LR  = Point( 1, -1, -1);
+    Point UL  = Point(-1,  1, 0);
+	Point UR  = Point( 1,  1, -2);
+	Point LR  = Point( 1, -1, -2);
 	Point LL  = Point(-1, -1, -1);
     Camera c = Camera(UL, UR, LR, LL, Point(0,0,0), 4, 4);
     Sampler sampler = Sampler(4,4);
@@ -89,7 +89,7 @@ void testCamera(){
     {
         Ray r = Ray();
         c.generateRay(s, &r);
-        printf("Direction: (%f, %f, %f)", r.direction[0], r.direction[1], r.direction[2]);
+        printf("Direction: (%f, %f, %f) \n", r.direction[0], r.direction[1], r.direction[2]);
     }
 }
 
@@ -166,6 +166,7 @@ void testAll() {
     testEigen();
     testMakeVec();
     testSampler();
+    testCamera();
 }
 
 #endif

@@ -3,6 +3,7 @@
 #include "preheader.h"
 #include "Ray.cpp"
 class Camera{
+public:
     Point UL, UR, LR, LL, eye;
     Vector u,v,w, up;
     float l,r,t,b, planeWidth, planeHeight, xUnit, yUnit;
@@ -29,6 +30,8 @@ Camera::Camera (Point ul, Point ur, Point lr, Point ll, Point eyeCoordinate, int
     yPixels = yPix;
     planeWidth = u.norm();
     planeHeight = v.norm();
+    //u.normalize();
+    //v.normalize();
     xUnit = planeWidth/xPixels;
     yUnit = planeHeight/yPixels;
 }
