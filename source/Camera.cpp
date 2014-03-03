@@ -3,6 +3,7 @@
 #include "preheader.h"
 #include "Ray.cpp"
 class Camera{
+public:
     Point UL, UR, LR, LL, eye;
     Vector u,v,w, up;
     float l,r,t,b, planeWidth, planeHeight, xUnit, yUnit;
@@ -39,8 +40,12 @@ void Camera::generateRay(Sample& s, Ray* ray)
 {
     float xPix = s(0);
     float yPix = s(1);
-    //(*ray) = LL + xUnit*xPix + yUnit*yPix;
-    ray->direction = LL+xUnit*xPix + yUnit*yPix
+    //ray->direction = LL+xUnit*xPix*u + yUnit*yPix*v;
+    float a = xUnit*xPix;
+    float b = yUnit*yPix;
+    (ray->direction)(0) = eye(0) - (LL(0) + a*u(0) + b*v(0));
+    (ray->direction)(1) = eye(1) - (LL(1) + a*u(1) + b*v(1));
+    (ray->direction)(2) = eye(2) - (LL(2) + a*u(2) + b*v(2));
     ray->position = eye;
     
 }
