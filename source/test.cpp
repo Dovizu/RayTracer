@@ -3,6 +3,7 @@
 #include "Ray.cpp"
 #include "Sampler.cpp"
 #include "Camera.cpp"
+#include "Film.cpp"
 
 void testCImg() {
     print("===Testing CImg===");
@@ -86,6 +87,18 @@ void testCamera(){
     }
     printf("Width = %f, height = %f, xUnit = %f, yUnit = %f, LL(%f, %f), u(%f, %f)", c.planeWidth, c.planeHeight, c.xUnit, c.yUnit, c.LL(0), c.LL(1), c.u(0), c.u(1));
     printf("===Done Testing Camera=== \n \n");
+}
+
+void testFilm(){
+    printf("===Testing Film=== \n \n");
+    Film film = Film(50,50);
+     Sampler sampler = Sampler(50,50);
+    Sample s = Sample(0,0);
+    Color c = Color (0.8,0.6,0.4);
+    while (sampler.getSample(&s)) {
+        film.commit(s, c);
+    }
+    film.writeImage("FilmTest.png");
 }
 
 bool _testLoadObj(const char* filename, const char* basepath = NULL) {
