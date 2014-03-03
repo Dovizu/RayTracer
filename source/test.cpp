@@ -94,6 +94,18 @@ void testCamera(){
     }
 }
 
+void testFilm(){
+    printf("===Testing Film=== \n \n");
+    Film film = Film(50,50);
+     Sampler sampler = Sampler(50,50);
+    Sample s = Sample(0,0);
+    Color c = Color (0.8,0.6,0.4);
+    while (sampler.getSample(&s)) {
+        film.commit(s, c);
+    }
+    film.writeImage("FilmTest.png");
+}
+
 bool _testLoadObj(const char* filename, const char* basepath = NULL) {
     cout << "Loading " << filename << endl;
     
