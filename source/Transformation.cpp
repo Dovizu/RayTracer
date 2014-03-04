@@ -3,7 +3,7 @@
 
 class Transformation {
 public:
-    Matrix3f m, mInverceTranspose;
+    Transform m, mInverceTranspose;
     
     Transformation(){
         

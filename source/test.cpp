@@ -6,6 +6,7 @@
 #include "Ray.cpp"
 #include "Sampler.cpp"
 #include "Camera.cpp"
+#include "Film.cpp"
 #include "Primitive.cpp"
 #include "GeometricPrimitive.cpp"
 #include "Shape.cpp"
