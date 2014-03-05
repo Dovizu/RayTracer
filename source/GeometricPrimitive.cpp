@@ -14,7 +14,6 @@ public:
     Shape* shape;
     Material* mat;
 
-    /*
     bool intersect(Ray& ray, float* thit, Intersection* in)  {
         Ray oray = worldToObj*ray;
         LocalGeo olocal;
@@ -32,7 +31,7 @@ public:
     void getBRDF(LocalGeo& local, BRDF* brdf) {
         mat->getBRDF(local, brdf);
     }
-     */
+
 };
 
 #endif
