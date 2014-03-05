@@ -10,6 +10,11 @@ typedef Vector3f Vector;
 typedef Array2f Sample;
 
 typedef enum {
+    TransformationAffine,
+    TransformationProjective
+} TransformationType;
+
+typedef enum {
     LightSourceDirectional,
     LightSourcePoint
 } LightSourceType;
