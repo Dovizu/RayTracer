@@ -1,3 +1,6 @@
+#ifndef FILM_CPP
+#define FILM_CPP
+
 #include "preheader.h"
 
 class Film
@@ -45,3 +48,5 @@ void Film::writeImage(const char* filename)
     image.save(filename);
     
 }
+
+#endif

@@ -1,4 +1,5 @@
-
+#ifndef SAMPLER_CPP
+#define SAMPLER_CPP
 
 class Sampler {
     int xPixels, yPixels;
@@ -46,3 +47,5 @@ bool Sampler::getSample(Sample* s)
         return false;
     }
 }
+
+#endif /* defined(SAMPLER_CPP) */
