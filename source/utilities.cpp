@@ -9,7 +9,7 @@ typedef Array3f Point;
 typedef Vector3f Vector;
 typedef Array2f Sample;
 typedef Translation<float, 3> Translation3f;
-typedef UniformScaling<float> Scaling;
+typedef UniformScaling<float> Scalingf;
 typedef Transform<float, 3, Affine> Transform3fAffine;
 typedef Transform<float, 3, Projective> Transform3fProjective;
 

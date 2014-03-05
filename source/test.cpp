@@ -202,7 +202,7 @@ void testTransformation() {
     ray = t*ray;
     cout << "Should be: x,y,0, where x~=y" << endl << "Got: " << ray.direction << endl;
     
-    cout << "Transformation: Translation" << endl;
+    println("Transformation: Translation");
     t = Transformation(Translation3f(1,2,3));
     Point p(0,0,0);
     println("Translate point(0,0,0) by (1,2,3)");
@@ -210,7 +210,14 @@ void testTransformation() {
     println("Should be: 1,2,3");
     cout << "Got: " << p << endl;
     
-    
+    println("Transformation: Scaling");
+    t = Transformation(Scalingf(3));
+    p = Point(2,3,4);
+    println("Scaling point(2,3,4) by factor 3");
+    p = t*p;
+    println("Should be: 6, 9, 12");
+    cout << "Got: " << p << endl;
+
 }
 
 void testAll() {
