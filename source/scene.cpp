@@ -4,7 +4,16 @@
 int main(int argc, char *argv[]) {
     
     vector<CmdLineOptResult> *results;
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)";
+    /*
+     -t         comprehensive testing
+     -tobj      test tinyObjLoader
+     -tsampler  test Sampler
+     -tcam      test Camera
+     -tsintersect   test Sphere Intersection
+     -ttintersect   test Triangle Intersection
+     -ttrans    test Transformation
+     */
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
@@ -20,10 +29,13 @@ int main(int argc, char *argv[]) {
             testCamera();
         }
         if (result.optName.compare("-tsintersect") == 0) {
-            testSphereIntersection();
+        testSphereIntersection();
         }
         if (result.optName.compare("-ttintersect") == 0) {
             testTriangleIntersection();
+        }
+        if (result.optName.compare("-ttrans") == 0) {
+            testTransformation();
         }
     }
     return 0;

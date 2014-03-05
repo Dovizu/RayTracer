@@ -183,6 +183,25 @@ void testTriangleIntersection() {
     }
 }
 
+void testTransformation() {
+    cout << "Testing Transformation of all kinds" << endl;
+    cout << "Transformation: Rotation" << endl;
+    AngleAxisf rotation(0.5*M_PI, Vector::UnitX());
+    Ray ray(Point(0,0,0), Point(0,1,0), 0, 1);
+    cout << "Rotation of Ray->0,1,0 by 90 deg about x-axis" << endl;
+    Transformation t(rotation);
+    ray = t*ray;
+    cout << "Should be: 0,0,1" << endl << "Got: " << ray.direction << endl;
+    cout << "May have slight error margin" << endl;
+    
+    rotation = AngleAxisf(-0.25*M_PI, Vector::UnitZ());
+    ray = Ray(Point(0,0,0), Point(0,1,0), 0, 1);
+    cout << "Rotation of Ray->0,1,0 by -45 deg about z-axis" << endl;
+    t = Transformation(rotation);
+    ray = t*ray;
+    cout << "Should be: x,y,0, where x~=y" << endl << "Got: " << ray.direction << endl;
+}
+
 void testAll() {
     print("===Begin Comprehensive Testing===");
     testCImg();

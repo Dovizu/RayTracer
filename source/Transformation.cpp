@@ -4,6 +4,14 @@
 #include "Ray.cpp"
 #include "LocalGeo.cpp"
 
+typedef enum {
+    TransformationAffine,
+    TransformationProjective
+} TransformationType;
+
+/**
+ *  Transformation that uses Affine Transform & Projective Transform from Eigen
+ */
 class Transformation {
 public:
     TransformationType type;
