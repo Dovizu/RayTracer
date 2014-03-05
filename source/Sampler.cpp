@@ -21,14 +21,14 @@ bool Sampler::getSample(Sample* s)
 {
     float offset = 0.5;
     if (xIndex >= xPixels && yIndex >= yPixels) {
-        return FALSE;
+        return false;
     }
     if (xIndex < xPixels)
     {
         (*s)(0) = xIndex + offset;
         (*s)(1) = yIndex + offset;
         xIndex++;
-        return TRUE;
+        return true;
     }
     if (xIndex >= xPixels) {
         xIndex = 0;
@@ -37,12 +37,12 @@ bool Sampler::getSample(Sample* s)
             (*s)(0) = xIndex + offset;
             (*s)(1) = yIndex + offset;
             xIndex++;
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
     else
     {
-        return FALSE;
+        return false;
     }
 }

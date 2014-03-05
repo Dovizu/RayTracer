@@ -516,8 +516,6 @@
 		F1E39DAC18C0384E005BC8FE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		F1E39DAE18C0384E005BC8FE /* compile_win_icl.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = compile_win_icl.bat; sourceTree = "<group>"; };
 		F1E39DAF18C0384E005BC8FE /* compile_win_visualcpp.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = compile_win_visualcpp.bat; sourceTree = "<group>"; };
-		F1E39DB118C05278005BC8FE /* FreeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeImage.h; sourceTree = "<group>"; };
-		F1E39DB218C05278005BC8FE /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreeimage.a; sourceTree = "<group>"; };
 		F1E3A39918C056A6005BC8FE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F1E3A39B18C06F3D005BC8FE /* Array */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Array; sourceTree = "<group>"; };
 		F1E3A39C18C06F3D005BC8FE /* Cholesky */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cholesky; sourceTree = "<group>"; };
@@ -944,7 +942,6 @@
 			children = (
 				F161C8E718C3F4EC00959064 /* TinyObjLoader */,
 				F1E3A39A18C06F3D005BC8FE /* Eigen */,
-				F1E39DB018C05278005BC8FE /* FreeImage */,
 				F1E39BC718C0384D005BC8FE /* CImg */,
 			);
 			name = Libraries;
@@ -1500,16 +1497,6 @@
 				F1E39DAF18C0384E005BC8FE /* compile_win_visualcpp.bat */,
 			);
 			path = resources;
-			sourceTree = "<group>";
-		};
-		F1E39DB018C05278005BC8FE /* FreeImage */ = {
-			isa = PBXGroup;
-			children = (
-				F1E39DB118C05278005BC8FE /* FreeImage.h */,
-				F1E39DB218C05278005BC8FE /* libfreeimage.a */,
-			);
-			name = FreeImage;
-			path = libraries/FreeImage;
 			sourceTree = "<group>";
 		};
 		F1E3A39A18C06F3D005BC8FE /* Eigen */ = {

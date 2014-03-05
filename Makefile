@@ -5,7 +5,6 @@ SRC = source
 LIB = libraries
 
 CIMG = -I$(LIB)/CImg/ -lm -lpthread -I/opt/X11/include -L/opt/X11/lib -lm -lpthread -lX11
-FIMG = -I$(LIB)/FreeImage/ -L$(LIB)/FreeImage/ -lfreeimage
 EIGEN = -I$(LIB)/Eigen/
 OBJLOADER = -I$(LIB)/TinyObjLoader/
 
@@ -21,10 +20,10 @@ endif
 OBJS = $(BUILD)/scene.o $(BUILD)/objLoader.o
 
 scene: scene.o objLoader.o
-	$(CC) $(LFLAGS) $(OBJS) $(FIMG) $(CIMG) $(GF) -o scene
+	$(CC) $(LFLAGS) $(OBJS) $(CIMG) $(GF) -o scene
 
 scene.o: $(SRC)/Scene.cpp $(SRC)/Scene.h
-	$(CC) $(CFLAGS) $(FIMG) $(CIMG) $(GF) $(OBJLOADER) $(SRC)/Scene.cpp -o $(BUILD)/scene.o
+	$(CC) $(CFLAGS) $(CIMG) $(GF) $(OBJLOADER) $(SRC)/Scene.cpp -o $(BUILD)/scene.o
 	
 objLoader.o: $(LIB)/TinyObjLoader/tiny_obj_loader.cpp $(LIB)/TinyObjLoader/tiny_obj_loader.h
 	$(CC) $(CFLAGS) $(LIB)/TinyObjLoader/tiny_obj_loader.cpp -o $(BUILD)/objLoader.o

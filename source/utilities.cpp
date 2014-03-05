@@ -8,6 +8,10 @@ typedef Array3f Color;
 typedef Array3f Point;
 typedef Vector3f Vector;
 typedef Array2f Sample;
+typedef Translation<float, 3> Translation3f;
+typedef UniformScaling<float> Scaling;
+typedef Transform<float, 3, Affine> Transform3fAffine;
+typedef Transform<float, 3, Projective> Transform3fProjective;
 
 typedef enum {
     LightSourceDirectional,
@@ -52,7 +56,7 @@ float Z(Array3f c) {return c(2);}
  *  @param str string to be printed
  *  @discussion does not support multiple strings concatenation
  */
-void print(string str){
+void println(string str){
     cout << str << endl;
 }
 

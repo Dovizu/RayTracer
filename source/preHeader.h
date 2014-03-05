@@ -9,7 +9,6 @@
 
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
 #include <CImg.h>
-#include <FreeImage.h>
 #include <tiny_obj_loader.h>
 
 using namespace std;
@@ -34,6 +33,7 @@ exit(EXIT_FAILURE); \
 
 
 bool flag_testing = false;
+#define nl << endl
 
 #endif
 

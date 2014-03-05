@@ -14,7 +14,7 @@
 #include "Triangle.cpp"
 
 void testCImg() {
-    print("===Testing CImg===");
+    println("===Testing CImg===");
     CImg<unsigned char> img(640,400,1,3);        // Define a 640x400 color image with 8 bits per color component.
     img.fill(0);                                 // Set pixel values to 0 (color : black)
     unsigned char purple[] = { 255,0,255 };      // Define a purple color
@@ -24,34 +24,34 @@ void testCImg() {
 }
 
 void testFreeImage() {
-    print("===Testing FreeImage===");
-    //Test FreeImage library
-    FreeImage_Initialise();
-    cout << "FreeImage " << FreeImage_GetVersion() << endl;
-    cout << FreeImage_GetCopyrightMessage() << "\n\n";
-    
-    //Test FreeImage file saving function
-    FIBITMAP *bitmap = FreeImage_Allocate(800, 600, 24);
-    RGBQUAD color;
-    if (!bitmap)
-        exit(1);
-    for (int i=0; i<800; i++) {
-        for (int j=0; j<600; j++) {
-            color.rgbRed = 0;
-            color.rgbGreen = (double) i/800 * 255.0;
-            color.rgbBlue = (double) j/600 * 255.0;
-            FreeImage_SetPixelColor(bitmap, i, j, &color);
-        }
-    }
-    if (FreeImage_Save(FIF_PNG, bitmap, "FITest.png", 0))
-        cout << "Image Successfully Saved!" << endl;
-    
-    FreeImage_DeInitialise();
+//    println("===Testing FreeImage===");
+//    //Test FreeImage library
+//    FreeImage_Initialise();
+//    cout << "FreeImage " << FreeImage_GetVersion() << endl;
+//    cout << FreeImage_GetCopyrightMessage() << "\n\n";
+//    
+//    //Test FreeImage file saving function
+//    FIBITMAP *bitmap = FreeImage_Allocate(800, 600, 24);
+//    RGBQUAD color;
+//    if (!bitmap)
+//        exit(1);
+//    for (int i=0; i<800; i++) {
+//        for (int j=0; j<600; j++) {
+//            color.rgbRed = 0;
+//            color.rgbGreen = (double) i/800 * 255.0;
+//            color.rgbBlue = (double) j/600 * 255.0;
+//            FreeImage_SetPixelColor(bitmap, i, j, &color);
+//        }
+//    }
+//    if (FreeImage_Save(FIF_PNG, bitmap, "FITest.png", 0))
+//        cout << "Image Successfully Saved!" << endl;
+//    
+//    FreeImage_DeInitialise();
 }
 
 void testEigen() {
     //Test Eigen
-    print("===Testing Eigen===");
+    println("===Testing Eigen===");
     MatrixXd m(2,2);
     m(0,0) = 3;
     m(1,0) = 2.5;
@@ -61,7 +61,7 @@ void testEigen() {
 }
 
 void testMakeVec() {
-    print("===Testing makeVec");
+    println("===Testing makeVec");
     Point p1(3, 2, 1);
     Point p2(1, 2, 3);
     Vector vec = makeVec(p1, p2);
@@ -183,8 +183,10 @@ void testTriangleIntersection() {
     }
 }
 
+
 void testTransformation() {
     cout << "Testing Transformation of all kinds" << endl;
+    
     cout << "Transformation: Rotation" << endl;
     AngleAxisf rotation(0.5*M_PI, Vector::UnitX());
     Ray ray(Point(0,0,0), Point(0,1,0), 0, 1);
@@ -193,23 +195,33 @@ void testTransformation() {
     ray = t*ray;
     cout << "Should be: 0,0,1" << endl << "Got: " << ray.direction << endl;
     cout << "May have slight error margin" << endl;
-    
     rotation = AngleAxisf(-0.25*M_PI, Vector::UnitZ());
     ray = Ray(Point(0,0,0), Point(0,1,0), 0, 1);
     cout << "Rotation of Ray->0,1,0 by -45 deg about z-axis" << endl;
     t = Transformation(rotation);
     ray = t*ray;
     cout << "Should be: x,y,0, where x~=y" << endl << "Got: " << ray.direction << endl;
+    
+    cout << "Transformation: Translation" << endl;
+    t = Transformation(Translation3f(1,2,3));
+    Point p(0,0,0);
+    println("Translate point(0,0,0) by (1,2,3)");
+    p = t*p;
+    println("Should be: 1,2,3");
+    cout << "Got: " << p << endl;
+    
+    
 }
 
 void testAll() {
-    print("===Begin Comprehensive Testing===");
+    println("===Begin Comprehensive Testing===");
     testCImg();
     testFreeImage();
     testEigen();
     testMakeVec();
     testSampler();
     testCamera();
+    testTransformation();
 }
 
 #endif
