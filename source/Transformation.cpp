@@ -24,24 +24,28 @@ public:
     Transformation(){
     }
     //Rotation transformation
+    //Transformation rotation(AngleAxisf(radians, vector.normalized()));
     Transformation(AngleAxisf t) {
         m = t;
         mInverseTranspose = m.linear().inverse().transpose();
         type = TransformationAffine;
     }
     //Translation transformation
+    //Transformation translate(Translation3f(x,y,z));
     Transformation(Translation<float, 3> t) {
         m = t;
         mInverseTranspose = m.linear().inverse().transpose();
         type = TransformationAffine;
     }
     //Scaling transformation (fucking documentation)
+    //Transformation scale(Scalingf(factor));
     Transformation(UniformScaling<float> t) {
         m = t;
         mInverseTranspose = m.linear().inverse().transpose();
         type = TransformationAffine;
     }
     //General Affine transformation (assume <0,0,0,1> for last row)
+    //Transformation compose(M3*M2*M1);
     Transformation(Transform<float, 3, Affine> t) {
         m = t;
         mInverseTranspose = m.linear().inverse().transpose();
@@ -56,6 +60,7 @@ public:
     
     /**
      *  Overloads
+     *  Transform class goes left, vector/point goes right
      */
     //Transform Ray class
     Ray operator*(const Ray& other) const{
