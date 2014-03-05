@@ -9,7 +9,7 @@ EIGEN = -I$(LIB)/Eigen/
 OBJLOADER = -I$(LIB)/TinyObjLoader/
 
 ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
-	CFLAGS = -g -std=c++11 -c -Wall -O3 -Wno-deprecated $(EIGEN)
+	CFLAGS = -g -std=c++11 -c -Wall -Wno-deprecated $(EIGEN)
 	LFLAGS = -std=c++11 -Wall
 
 else

@@ -218,6 +218,16 @@ void testTransformation() {
     println("Should be: 6, 9, 12");
     cout << "Got: " << p << endl;
 
+    println("Transformation: Composed Transform");
+    t = AngleAxisf(0.25*M_PI, Vector::UnitZ())*Translation3f(1,2,3)*Scalingf(3);
+    p = Point(1,1,1);
+    println("Composed Transform: ScalingBy3->TranslateBy(1,2,3)->RotateBy(-pi/2,z-axis)");
+    p = t*p;
+    println("Should be: rotation*(4,5,6), which is some negative x, positive y, and z=6");
+    cout << "Got: " << p << endl;
+    
+    println("UNTESTED: Projective Transform");
+    //Test when we need it
 }
 
 void testAll() {
