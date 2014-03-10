@@ -15,6 +15,7 @@
 #include "Sphere.cpp"
 #include "Triangle.cpp"
 #include "Parser.cpp"
+#include "Light.cpp"
 
 void testCImg() {
     println("===Testing CImg===");
@@ -246,6 +247,19 @@ void testParser(string basePath) {
     AggregatePrimitive aggregate;
     parseObjectFiles(aggregate, basePath);
     vector<Primitive*> blah = aggregate.primList;
+}
+
+void testAggregatePrimitive(){
+    Sphere ball = Sphere(1.0, 0.0, 0.0, -3.0);
+    Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
+    float thit;
+    LocalGeo local;
+}
+
+void testDisplay()
+{
+    Sampler sampler = Sampler(100,100);
+    
 }
 
 void testAll() {

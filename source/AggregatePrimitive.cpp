@@ -1,5 +1,5 @@
-#ifndef AGGREGATE_PRIMITIVE_CPP
-#define AGGREGATE_PRIMITIVE_CPP
+#ifndef AGGREGATEPRIMITIVE
+#define AGGREGATEPRIMITIVE
 
 #include "preHeader.h"
 #include "Ray.cpp"
@@ -30,10 +30,6 @@ AggregatePrimitive::AggregatePrimitive()
 AggregatePrimitive::AggregatePrimitive(vector<Primitive*> list)
 {
     primList = list;
-}
-
-AggregatePrimitive::AggregatePrimitive()
-{
 }
 
 bool AggregatePrimitive::intersect(Ray& ray, float* thit, Intersection* in)
