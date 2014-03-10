@@ -34,6 +34,7 @@
 		F161C8EA18C3FEEB00959064 /* World.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = source/World.cpp; sourceTree = "<group>"; };
 		F161C8EC18C418EA00959064 /* Sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Sphere.cpp; path = source/Sphere.cpp; sourceTree = "<group>"; };
 		F161C8EE18C431A100959064 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Triangle.cpp; path = source/Triangle.cpp; sourceTree = "<group>"; };
+		F1DABDE918CDA68400563184 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = source/Scene.cpp; sourceTree = "<group>"; };
 		F1E39BC818C0384D005BC8FE /* CImg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CImg.h; sourceTree = "<group>"; };
 		F1E39BCA18C0384D005BC8FE /* captcha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = captcha.cpp; sourceTree = "<group>"; };
 		F1E39BCB18C0384D005BC8FE /* CImg_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CImg_demo.cpp; sourceTree = "<group>"; };
@@ -874,6 +875,7 @@
 		F102F29E18C1A7FC009A9505 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F1DABDE918CDA68400563184 /* Scene.cpp */,
 				F102F2A018C1A8B2009A9505 /* Scene.h */,
 				F102F28F18C1A7B0009A9505 /* Camera.cpp */,
 				F102F29118C1A7B0009A9505 /* Film.cpp */,
