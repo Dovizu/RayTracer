@@ -1,3 +1,6 @@
+#ifndef LIGHT
+#define LIGHT
+
 #include "preHeader.h"
 #include "LocalGeo.cpp"
 
@@ -30,12 +33,15 @@ void Light::generateLightRay(LocalGeo& local, Ray* lray, Color* lcolor)
         Vector lvec = makeVec(localpos, location);
         lray->position = location;
         lray->direction = lvec;
-        //Does t_max even matter?
+        lray->t_min = 0;
+        lray->t_max = 1;
     }
     if (lightType == LightSourceDirectional)
     {
         lray->position = local.position;
         lray->direction = vector;
+        lray->t_min = 0;
         lray->t_max = FLT_MAX; //why is this infinite?
     }
 }
+#endif

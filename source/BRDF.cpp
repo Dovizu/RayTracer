@@ -14,13 +14,6 @@ public:
         kr = r;
     }
     
-    BRDF()
-    {
-        kd = 0.0;
-        ks = 0.0;
-        ka = 0.0;
-        kr = 0.0;
-    }
+    BRDF(){};
 };
-
 #endif
