@@ -62,5 +62,4 @@ bool AggregatePrimitive::intersectP(Ray& ray)
         }
     }
     return false;
-}
-#endif
+#endif}

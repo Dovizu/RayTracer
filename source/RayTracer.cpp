@@ -19,7 +19,6 @@ public:
     void setToBlack(Color* c);
     Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
     Ray createReflectRay(LocalGeo &local, Ray &ray);
-};
 
 
 Raytracer::Raytracer(AggregatePrimitive list, vector<Light> lights, int maxDepth)
@@ -98,3 +97,4 @@ Ray Raytracer::createReflectRay(LocalGeo &local, Ray &ray)
 }
 
 
+};
