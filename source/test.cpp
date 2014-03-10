@@ -9,6 +9,7 @@
 #include "Film.cpp"
 #include "Primitive.cpp"
 #include "GeometricPrimitive.cpp"
+#include "AggregatePrimitive.cpp"
 #include "Shape.cpp"
 #include "Sphere.cpp"
 #include "Triangle.cpp"

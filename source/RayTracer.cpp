@@ -1,4 +1,4 @@
-#include "preheader.h"
+#include "preHeader.h"
 
 class Raytracer {
     AggregatePrimitive primitives;
