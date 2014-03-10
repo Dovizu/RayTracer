@@ -13,6 +13,7 @@
 #include "Shape.cpp"
 #include "Sphere.cpp"
 #include "Triangle.cpp"
+#include "Light.cpp"
 
 void testCImg() {
     println("===Testing CImg===");
