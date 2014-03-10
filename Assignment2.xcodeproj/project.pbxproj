@@ -25,7 +25,6 @@
 		F102F29818C1A7B0009A9505 /* RayTracer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RayTracer.cpp; path = source/RayTracer.cpp; sourceTree = "<group>"; };
 		F102F29A18C1A7B0009A9505 /* Sampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sampler.cpp; path = source/Sampler.cpp; sourceTree = "<group>"; };
 		F102F29B18C1A7B0009A9505 /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shape.cpp; path = source/Shape.cpp; sourceTree = "<group>"; };
-		F102F29F18C1A8B2009A9505 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = source/Scene.cpp; sourceTree = "<group>"; };
 		F102F2A018C1A8B2009A9505 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = source/Scene.h; sourceTree = "<group>"; };
 		F11AB4C818BAB0F600D8FED4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; usesTabs = 1; };
 		F11AB4C918BAB1C400D8FED4 /* specs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = specs.pdf; sourceTree = "<group>"; };
@@ -875,7 +874,6 @@
 		F102F29E18C1A7FC009A9505 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				F102F29F18C1A8B2009A9505 /* Scene.cpp */,
 				F102F2A018C1A8B2009A9505 /* Scene.h */,
 				F102F28F18C1A7B0009A9505 /* Camera.cpp */,
 				F102F29118C1A7B0009A9505 /* Film.cpp */,
