@@ -233,6 +233,19 @@ void testTransformation() {
     //Test when we need it
 }
 
+void testAggregatePrimitive(){
+    Sphere ball = Sphere(1.0, 0.0, 0.0, -3.0);
+    Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
+    float thit;
+    LocalGeo local;
+}
+
+void testDisplay()
+{
+    Sampler sampler = Sampler(100,100);
+    
+}
+
 void testAll() {
     println("===Begin Comprehensive Testing===");
     testCImg();
