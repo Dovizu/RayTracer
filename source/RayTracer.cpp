@@ -19,7 +19,7 @@ public:
     void setToBlack(Color* c);
     Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
     Ray createReflectRay(LocalGeo &local, Ray &ray);
-
+};
 
 Raytracer::Raytracer(AggregatePrimitive list, vector<Light> lights, int maxDepth)
 {
@@ -94,4 +94,4 @@ Ray Raytracer::createReflectRay(LocalGeo &local, Ray &ray)
     float NDotL = n.dot(l);
     //What is the best way to make sure reflect ray doesn't think it intersects at object? Adjust tmin?
     return Ray(local.position, -l + 2*NDotL*n, 0.01f, FLT_MAX);
-}};
+}

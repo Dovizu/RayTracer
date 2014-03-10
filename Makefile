@@ -22,7 +22,7 @@ OBJS = $(BUILD)/scene.o $(BUILD)/objLoader.o
 scene: scene.o objLoader.o
 	$(CC) $(LFLAGS) $(OBJS) $(CIMG) -o scene
 
-scene.o: $(SRC)/Scene.cpp $(SRC)/Scene.h
+scene.o: $(SRC)/Scene.cpp
 	$(CC) $(CFLAGS) $(CIMG) $(OBJLOADER) $(SRC)/Scene.cpp -o $(BUILD)/scene.o
 	
 objLoader.o: $(LIB)/TinyObjLoader/tiny_obj_loader.cpp $(LIB)/TinyObjLoader/tiny_obj_loader.h

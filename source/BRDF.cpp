@@ -16,7 +16,5 @@ public:
         kr = r;
         sp = p;
     }
-    
-    BRDF(){};
 };
 #endif
