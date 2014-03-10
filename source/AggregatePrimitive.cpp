@@ -2,6 +2,7 @@
 #include "Ray.cpp"
 #include "Intersection.cpp"
 #include "BRDF.cpp"
+#include "float.h"
 
 class AggregatePrimitive : Primitive{
 public:
@@ -26,25 +27,18 @@ AggregatePrimitive::AggregatePrimitive(vector<Primitive*> list)
 bool AggregatePrimitive::intersect(Ray& ray, float* thit, Intersection* in)
 {
     bool foundIntersect = false;
-    for (auto &primitive : primList)
+    *thit = FLT_MAX;
+    for (auto primitive : primList)
     {
         float newThit;
         Intersection newIn;
         if(primitive->intersect(ray, &newThit, &newIn))
         {
-            if(!foundIntersect)
+            foundIntersect = true;
+            if (newThit < *thit)
             {
-                foundIntersect = true;
                 *thit = newThit;
                 *in = newIn;
-            }
-            else
-            {
-                if (newThit < *thit)
-                {
-                    *thit = newThit;
-                    *in = newIn;
-                }
             }
         }
     }
