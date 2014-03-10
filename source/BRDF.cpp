@@ -6,12 +6,14 @@
 class BRDF {
 public:
     Color kd, ks, ka, kr;
+    int sp;
     
-    BRDF(Color d, Color s, Color a, Color r) {
+    BRDF(Color d, Color s, Color a, Color r, int p) {
         kd = d;
         ks = s;
         ka = a;
         kr = r;
+        sp = p;
     }
     
     BRDF(){};

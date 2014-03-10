@@ -3,6 +3,9 @@
 #include "Light.cpp"
 #include "Intersection.cpp"
 #include "BRDF.cpp"
+#include "LocalGeo.cpp"
+
+extern Point eye;
 
 class Raytracer {
     AggregatePrimitive primitives;
@@ -14,8 +17,8 @@ public:
     Raytracer(AggregatePrimitive list, vector<Light> lights, int maxDepth);
     void trace(Ray& ray, int depth, Color* color);
     void setToBlack(Color* c);
-    Color shading(LocalGeo local, BRDF brdf, Ray lray, Color lcolor);
-    Ray createReflectRay(LocalGeo local, Ray ray);
+    Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
+    Ray createReflectRay(LocalGeo &local, Ray &ray);
 };
 
 
@@ -70,14 +73,28 @@ void Raytracer::setToBlack(Color* c)
     (*c)(2) = 0;
 }
 
-Color Raytracer::shading(LocalGeo local, BRDF brdf, Ray lray, Color lcolor)
+Color Raytracer::shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor)
 {
     Color colorValue;
+    
+    Vector n = local.surfaceNormal;
+    Vector l = lray.direction.normalized();
+    float NDotL = n.dot(l);
+    Vector r = -l + 2*NDotL*n; //The reflection ray
+    Vector v = makeVec(lray.position,eye).normalized(); //The view vector
+    Color diffuse_comp = brdf.kd*lcolor*max<float>(NDotL, 0.0f);
+    Color spec_comp = brdf.ks*lcolor*pow(max<float>(r.dot(v),0.0),brdf.sp);
+    Color ambient_comp = brdf.ka*lcolor;
+    return diffuse_comp + spec_comp + ambient_comp;
 }
 
-Ray createReflectRay(LocalGeo local, Ray ray)
+Ray Raytracer::createReflectRay(LocalGeo &local, Ray &ray)
 {
-    
+    Vector n = local.surfaceNormal;
+    Vector l = ray.direction.normalized();
+    float NDotL = n.dot(l);
+    //What is the best way to make sure reflect ray doesn't think it intersects at object? Adjust tmin?
+    return Ray(local.position, -l + 2*NDotL*n, 0.01f, FLT_MAX);
 }
 
 
