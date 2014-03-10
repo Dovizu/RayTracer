@@ -1,6 +1,6 @@
 #ifndef CAMERA_CPP
 #define CAMERA_CPP
-#include "preheader.h"
+#include "preHeader.h"
 #include "Ray.cpp"
 class Camera{
 public:
