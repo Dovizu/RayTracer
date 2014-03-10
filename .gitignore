@@ -14,3 +14,7 @@ precompile/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
