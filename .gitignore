@@ -16,5 +16,6 @@ ehthumbs.db
 Thumbs.db
 
 *.xcuserstate
+.*xcuerstate
 project.xcworkspace/
 xcuserdata/
