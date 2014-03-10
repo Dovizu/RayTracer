@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
         }
         if (result.optName.compare("-tparser") == 0) {
             string basePath = result.args->at(0);
-            testParser(basePath); //yolo  djklfsfjdkslj
+            testParser(basePath); //yolo  djklfsfj
         }
     }
     return 0;
