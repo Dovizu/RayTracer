@@ -1,6 +1,8 @@
 #include "Scene.h"
 #include "test.cpp"
 
+Point eye;
+
 int main(int argc, char *argv[]) {
     
     vector<CmdLineOptResult> *results;

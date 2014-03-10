@@ -24,14 +24,6 @@ typedef struct {
     vector<string> *args;
 } CmdLineOptResult;
 
-
-typedef struct {
-    Color color;
-    Vector vector;
-    Point location;
-    LightSourceType type;
-} LightSource;
-
 #pragma mark - Math
 float sqr(float x) { return x*x;}
 

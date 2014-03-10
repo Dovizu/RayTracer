@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
+#include "float.h"
 
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
 #include <CImg.h>

@@ -45,7 +45,7 @@ public:
             Point p;
             if (ray.valueAt(*thit, &p)) {
                 Vector surfaceNormal = makeVec(center, p);
-                local->surfaceNormal = surfaceNormal;
+                local->surfaceNormal = surfaceNormal.normalized();
                 local->position = p;
                 return true;
             }
@@ -58,7 +58,7 @@ public:
             Point p;
             if (ray.valueAt(*thit, &p)) {
                 Vector surfaceNormal = makeVec(center, p);
-                local->surfaceNormal = surfaceNormal;
+                local->surfaceNormal = surfaceNormal.normalized();
                 local->position = p;
                 return true;
             }

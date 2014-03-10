@@ -6,7 +6,7 @@
 class Ray {
 public:
     Point position;
-    Vector direction;
+    Vector direction; //This is not normalized
     float t_min, t_max;
     
     Ray() {

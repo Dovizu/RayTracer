@@ -32,6 +32,10 @@ AggregatePrimitive::AggregatePrimitive(vector<Primitive*> list)
     primList = list;
 }
 
+AggregatePrimitive::AggregatePrimitive()
+{
+}
+
 bool AggregatePrimitive::intersect(Ray& ray, float* thit, Intersection* in)
 {
     bool foundIntersect = false;
