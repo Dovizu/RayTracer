@@ -3,7 +3,7 @@
 
 #include "preHeader.h"
 
-class Triangle : Shape {    
+class Triangle : public Shape {
 public:
     Point A, B, C;
     

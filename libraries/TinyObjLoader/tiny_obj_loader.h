@@ -55,7 +55,6 @@ std::string LoadObj(
     std::vector<shape_t>& shapes,   // [output]
     const char* filename,
     const char* mtl_basepath = NULL);
-
 };
 
 #endif  // _TINY_OBJ_LOADER_H

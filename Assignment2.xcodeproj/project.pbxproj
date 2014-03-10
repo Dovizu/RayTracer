@@ -840,6 +840,7 @@
 		F1E3A50118C06F3E005BC8FE /* SuperLUSupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SuperLUSupport; sourceTree = "<group>"; };
 		F1E3A50218C06F3E005BC8FE /* SVD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SVD; sourceTree = "<group>"; };
 		F1E3A50318C06F3E005BC8FE /* UmfPackSupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UmfPackSupport; sourceTree = "<group>"; };
+		F1E5EFF618CD5F0A00FB0E40 /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = source/Parser.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -853,6 +854,7 @@
 				F102F29618C1A7B0009A9505 /* Material.cpp */,
 				F102F29418C1A7B0009A9505 /* Light.cpp */,
 				F102F29518C1A7B0009A9505 /* LocalGeo.cpp */,
+				F1E5EFF618CD5F0A00FB0E40 /* Parser.cpp */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";

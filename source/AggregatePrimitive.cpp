@@ -1,14 +1,18 @@
+#ifndef AGGREGATE_PRIMITIVE_CPP
+#define AGGREGATE_PRIMITIVE_CPP
+
 #include "preHeader.h"
 #include "Ray.cpp"
 #include "Intersection.cpp"
 #include "BRDF.cpp"
 #include "float.h"
 
-class AggregatePrimitive : Primitive{
+class AggregatePrimitive : public Primitive{
 public:
     vector<Primitive*> primList;
     
 public:
+    AggregatePrimitive();
     AggregatePrimitive(vector<Primitive*> list);
     bool intersect(Ray& ray, float* thit, Intersection* in);
     bool intersectP(Ray& ray);
@@ -18,6 +22,10 @@ public:
         //will never be an aggregate primitive
     }
 };
+
+AggregatePrimitive::AggregatePrimitive()
+{
+}
 
 AggregatePrimitive::AggregatePrimitive(vector<Primitive*> list)
 {
@@ -55,3 +63,5 @@ bool AggregatePrimitive::intersectP(Ray& ray)
     }
     return false;
 }
+
+#endif

@@ -12,8 +12,9 @@ int main(int argc, char *argv[]) {
      -tsintersect   test Sphere Intersection
      -ttintersect   test Triangle Intersection
      -ttrans    test Transformation
+     -tparser basePath   test parser
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
@@ -36,6 +37,10 @@ int main(int argc, char *argv[]) {
         }
         if (result.optName.compare("-ttrans") == 0) {
             testTransformation();
+        }
+        if (result.optName.compare("-tparser") == 0) {
+            string basePath = result.args->at(0);
+            testParser(basePath);
         }
     }
     return 0;

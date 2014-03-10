@@ -10,6 +10,7 @@
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
 #include <CImg.h>
 #include <tiny_obj_loader.h>
+#include <dirent.h>
 
 using namespace std;
 using namespace Eigen;

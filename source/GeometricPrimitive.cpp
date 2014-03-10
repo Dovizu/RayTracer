@@ -8,7 +8,7 @@
 #include "LocalGeo.cpp"
 #include "BRDF.cpp"
 
-class GeometricPrimitive : Primitive {
+class GeometricPrimitive : public Primitive {
 public:
     Transformation objToWorld, worldToObj;
     Shape* shape;

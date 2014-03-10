@@ -13,6 +13,7 @@
 #include "Shape.cpp"
 #include "Sphere.cpp"
 #include "Triangle.cpp"
+#include "Parser.cpp"
 
 void testCImg() {
     println("===Testing CImg===");
@@ -229,6 +230,21 @@ void testTransformation() {
     
     println("UNTESTED: Projective Transform");
     //Test when we need it
+}
+
+void testParser(string basePath) {
+    vector<string> filenames;
+    getFileNamesOfDirectory(basePath, filenames);
+    for (auto & name : filenames) {
+        println(name);
+    }
+    string args = "0.5 1.0 0.9";
+    Color kr = getKr(args);
+    cout << kr;
+    
+    AggregatePrimitive aggregate;
+    parseObjectFiles(aggregate, basePath);
+    vector<Primitive*> blah = aggregate.primList;
 }
 
 void testAll() {
