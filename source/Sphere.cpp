@@ -77,10 +77,29 @@ public:
         Vector d = ray.direction;
         Vector e = ray.position.matrix();
         Vector c = center.matrix();
+        
+        //Computer quadratic elements
         float A = d.dot(d);
         float B = d.dot(e-c)*2;
         float C = (e-c).dot(e-c)-sqr(radius);
-        return (sqr(B)-4*A*C) >= 0.0;
+        //Check discriminant
+        float dscmnt = sqr(B)-4*A*C;
+        if (dscmnt < 0.0) {
+            return false;
+        }else if (dscmnt == 0.0){
+            //grazes the sphere, one point
+            float thit = (-d.dot(e-c))/(d.dot(d));
+            Point p;
+            if (ray.valueAt(thit, &p)) return true;
+            else return false;
+        }else{
+            float t1 = (-B+sqrt(sqr(B)-4*A*C))/(2*A);
+            float t2 = (-B-sqrt(sqr(B)-4*A*C))/(2*A);
+            float thit = (t1 < t2) ? t1 : t2; //smaller of two
+            Point p;
+            if (ray.valueAt(thit, &p)) return true;
+            else return false;
+        }
     }
 };
 

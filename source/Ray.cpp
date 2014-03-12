@@ -1,6 +1,6 @@
 #ifndef RAY_H
 #define RAY_H
-
+#include <float.h>
 #include "preHeader.h"
 
 class Ray {
@@ -13,7 +13,7 @@ public:
         position = Point(0,0,0);
         direction = Vector(0,0,0);
         t_min = 0.0;
-        t_max = 1.0;
+        t_max = FLT_MAX;
     }
     
     Ray(Point start, Vector direction, float min, float max) {

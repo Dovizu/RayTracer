@@ -8,11 +8,11 @@
 extern Point eye;
 
 class Raytracer {
+public:
     AggregatePrimitive primitives;
     vector<Light> lights;
     int maxDepth;
     
-public:
     Raytracer (){};
     Raytracer(AggregatePrimitive list, vector<Light> lights, int maxDepth);
     void trace(Ray& ray, int depth, Color* color);

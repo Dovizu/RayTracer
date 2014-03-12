@@ -47,7 +47,6 @@ void Camera::generateRay(Sample& s, Ray* ray)
 //    float b = yUnit*yPix/xPixels;
     float a = xPix/xPixels;
     float b = yPix/yPixels;
-    printf("a = %f, b = %f ", a, b);
     (ray->direction)(0) = (LL(0) + a*u(0) + b*v(0)) - eye(0);
     (ray->direction)(1) = (LL(1) + a*u(1) + b*v(1)) - eye(1);
     (ray->direction)(2) = (LL(2) + a*u(2) + b*v(2)) - eye(2);

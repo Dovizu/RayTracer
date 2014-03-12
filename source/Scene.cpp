@@ -14,19 +14,26 @@ Camera camera(Point(-1,  1, -1),
               Point(0,0,0),
               320,
               320);
-Raytracer raytracer(world, lights, 2);
+Raytracer raytracer(world, lights, 1);
 Film film(320, 320);
 
 void render() {
+    raytracer.lights = lights;
+    raytracer.primitives = world;
     Sample sample;
     Ray ray;
-    while (!sampler.getSample(&sample)) {
+    while (sampler.getSample(&sample)) {
         Color color;
         camera.generateRay(sample, &ray);
+        if (sample(0)==160.5 && sample(1)==160.5) {
+            //break
+        }
         raytracer.trace(ray, 0, &color);
+        cout << "Color at: x:" << sample(0) << " y:" << sample(1) << " ";
+        printf("%f %f %f \n", color(0), color(1), color(2));
         film.commit(sample, color);
     }
-    film.writeImage("testImage.png");
+    film.writeImage("testImage.bmp");
 }
 
 int main(int argc, char *argv[]) {
@@ -77,9 +84,6 @@ int main(int argc, char *argv[]) {
         }
         if (result.optName.compare("-render") == 0) {
             doesRender = true;
-            if (result.args->at(0).compare("manual")) {
-                doesRender = true;
-            }
         }
         if (result.optName.compare("-sphere") == 0) {
             Sphere *sphere = new Sphere(stof(result.args->at(0)),0.0,0.0,0.0);
