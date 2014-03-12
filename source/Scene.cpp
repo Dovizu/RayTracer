@@ -23,9 +23,9 @@ void render() {
     Sample sample;
     Ray ray;
     while (sampler.getSample(&sample)) {
-        Color color;
+        Color color = {0,0,0};
         camera.generateRay(sample, &ray);
-        if (sample(0)==160.5 && sample(1)==160.5) {
+        if (sample(0)==103.5 && sample(1)==116.5) {
             //break
         }
         raytracer.trace(ray, 0, &color);

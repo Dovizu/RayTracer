@@ -34,7 +34,7 @@ void Light::generateLightRay(LocalGeo& local, Ray* lray, Color* lcolor)
         lray->position = location;
         lray->direction = lvec;
         lray->t_min = 0.01f;
-        lray->t_max = 1;
+        lray->t_max = 1.0;
     }
     if (lightType == LightSourceDirectional)
     {

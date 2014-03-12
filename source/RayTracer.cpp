@@ -49,7 +49,7 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
     //There is an intersection; loop through all light sources
     for (int i = 0; i < lights.size(); i++) {
         Ray lray = Ray();
-        Color lcolor;
+        Color lcolor = {0,0,0};
         lights[i].generateLightRay(in.localGeo, &lray, &lcolor);
         if (!primitives.intersectP(lray)) {
             *color += shading(in.localGeo,brdf,lray,lcolor);
@@ -59,7 +59,7 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         Ray reflectRay = createReflectRay(in.localGeo, ray);
         
         //Make a recursive call to trace the reflected ray
-        Color tempColor;
+        Color tempColor = {0,0,0};
         trace(reflectRay, depth+1, &tempColor);
         *color += brdf.kr*tempColor;
     }
@@ -77,10 +77,11 @@ Color Raytracer::shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor)
     Color colorValue;
     
     Vector n = local.surfaceNormal;
-    Vector l = lray.direction.normalized();
+    Vector l = lray.direction.normalized(); //surface->light
     float NDotL = n.dot(l);
     Vector r = -l + 2*NDotL*n; //The reflection ray
-    Vector v = makeVec(lray.position,eye).normalized(); //The view vector
+    r = r.normalized();
+    Vector v = makeVec(local.position,eye).normalized(); //The view vector
     Color diffuse_comp = brdf.kd*lcolor*max<float>(NDotL, 0.0f);
     Color spec_comp = brdf.ks*lcolor*pow(max<float>(r.dot(v),0.0),brdf.sp);
     Color ambient_comp = brdf.ka*lcolor;
@@ -90,8 +91,7 @@ Color Raytracer::shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor)
 Ray Raytracer::createReflectRay(LocalGeo &local, Ray &ray)
 {
     Vector n = local.surfaceNormal;
-    Vector l = ray.direction.normalized();
-    float NDotL = n.dot(l);
+    Vector l = -ray.direction.normalized();
     //What is the best way to make sure reflect ray doesn't think it intersects at object? Adjust tmin?
-    return Ray(local.position, -l + 2*NDotL*n, 0.01f, FLT_MAX);
+    return Ray(local.position, -l + 2*n.dot(l)*n, 0.01f, FLT_MAX);
 }
