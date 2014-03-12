@@ -25,7 +25,7 @@ void render() {
     while (sampler.getSample(&sample)) {
         Color color = {0,0,0};
         camera.generateRay(sample, &ray);
-        if (sample(0)==103.5 && sample(1)==116.5) {
+        if (sample(0)==160.5 && sample(1)==160.5) {
             //break
         }
         raytracer.trace(ray, 0, &color);
@@ -53,8 +53,9 @@ int main(int argc, char *argv[]) {
      -sphere radius x y z ka kd kr ks sp
      -triangle x1 y1 z1 x2 y2 z2 x3 y3 z3 r g b
      -light r g b x y z
+     -dl    r g b x y z
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(12)-light(6)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(12)-light(6)-dl(6)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
@@ -111,6 +112,15 @@ int main(int argc, char *argv[]) {
                            stof(result.args->at(4)),
                            stof(result.args->at(5)));
             lights.push_back(Light(liteColor, Vector(), location, LightSourcePoint));
+        }
+        if (result.optName.compare("-dl") == 0) {
+            Color liteColor(stof(result.args->at(0)),
+                            stof(result.args->at(1)),
+                            stof(result.args->at(2)));
+            Vector direction(stof(result.args->at(3)),
+                           stof(result.args->at(4)),
+                           stof(result.args->at(5)));
+            lights.push_back(Light(liteColor, direction, Point(), LightSourceDirectional));
         }
     }
     

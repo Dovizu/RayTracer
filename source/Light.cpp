@@ -39,7 +39,7 @@ void Light::generateLightRay(LocalGeo& local, Ray* lray, Color* lcolor)
     if (lightType == LightSourceDirectional)
     {
         lray->position = local.position;
-        lray->direction = vector;
+        lray->direction = -vector;
         lray->t_min = 0.01f;
         lray->t_max = FLT_MAX; //why is this infinite?
     }

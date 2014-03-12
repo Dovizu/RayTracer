@@ -18,6 +18,7 @@ public:
     void trace(Ray& ray, int depth, Color* color);
     void setToBlack(Color* c);
     Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
+    Color shadeAmbient(BRDF &brdf, Color &lcolor);
     Ray createReflectRay(LocalGeo &local, Ray &ray);
 };
 
@@ -53,6 +54,8 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         lights[i].generateLightRay(in.localGeo, &lray, &lcolor);
         if (!primitives.intersectP(lray)) {
             *color += shading(in.localGeo,brdf,lray,lcolor);
+        }else{
+            *color += shadeAmbient(brdf, lcolor);
         }
     }
     if(brdf.kr(0) + brdf.kr(1)+brdf.kr(2) > 0){
@@ -86,6 +89,11 @@ Color Raytracer::shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor)
     Color spec_comp = brdf.ks*lcolor*pow(max<float>(r.dot(v),0.0),brdf.sp);
     Color ambient_comp = brdf.ka*lcolor;
     return diffuse_comp + spec_comp + ambient_comp;
+}
+
+Color Raytracer::shadeAmbient(BRDF &brdf, Color &lcolor)
+{
+    return brdf.ka*lcolor;
 }
 
 Ray Raytracer::createReflectRay(LocalGeo &local, Ray &ray)
