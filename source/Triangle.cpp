@@ -81,7 +81,13 @@ public:
         Vector sol = A_mat.colPivHouseholderQr().solve(b_vec);
         float beta = sol(0);
         float gamma = sol(1);
-        return (beta > 0.0 && gamma > 0.0 && beta + gamma < 1.0);
+        if ((beta > 0.0 && gamma > 0.0 && beta + gamma < 1.0)) {
+            Point p; float thit;
+            if (ray.valueAt(&thit, &p)) {
+                return true;
+            }
+        }
+        return false;
     }
 };
 

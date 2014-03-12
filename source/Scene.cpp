@@ -51,11 +51,11 @@ int main(int argc, char *argv[]) {
      -render obj  (render image using obj files)
      -render manual (render image using manual input)
      -sphere radius x y z ka kd kr ks sp
-     -triangle x1 y1 z1 x2 y2 z2 x3 y3 z3 r g b
+     -triangle x1 y1 z1 x2 y2 z2 x3 y3 z3 x y z ka kd kr ks sp
      -light r g b x y z
      -dl    r g b x y z
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(12)-light(6)-dl(6)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(17)-light(6)-dl(6)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
@@ -85,6 +85,35 @@ int main(int argc, char *argv[]) {
         }
         if (result.optName.compare("-render") == 0) {
             doesRender = true;
+        }
+        if (result.optName.compare("-triangle")==0) {
+            Triangle *tri = new Triangle(Point(stof(result.args->at(0)),
+                                               stof(result.args->at(1)),
+                                               stof(result.args->at(2))),
+                                         Point(stof(result.args->at(3)),
+                                               stof(result.args->at(4)),
+                                               stof(result.args->at(5))),
+                                         Point(stof(result.args->at(6)),
+                                               stof(result.args->at(7)),
+                                               stof(result.args->at(8))));
+            Translation3f translate(stof(result.args->at(9)),
+                                    stof(result.args->at(10)),
+                                    stof(result.args->at(11)));
+            float ka = stof(result.args->at(12));
+            float kd = stof(result.args->at(13));
+            float kr = stof(result.args->at(14));
+            float ks = stof(result.args->at(15));
+            int sp = stoi(result.args->at(16));
+            Material *mat = new Material(BRDF(Color(kd, kd, kd),
+                                              Color(ks, ks, ks),
+                                              Color(ka, ka, ka),
+                                              Color(kr, kr, kr),
+                                              sp));
+            GeometricPrimitive *prim = new GeometricPrimitive(Transformation(translate),
+                                                              tri,
+                                                              mat);
+            world.primList.push_back(prim);
+            
         }
         if (result.optName.compare("-sphere") == 0) {
             Sphere *sphere = new Sphere(stof(result.args->at(0)),0.0,0.0,0.0);
