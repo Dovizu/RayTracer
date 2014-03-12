@@ -13,6 +13,17 @@ public:
     Transformation objToWorld, worldToObj;
     Shape* shape;
     Material* mat;
+    
+    GeometricPrimitive(){
+        shape = NULL;
+        mat = NULL;
+    }
+    GeometricPrimitive(Transformation objToWorldTrans, Shape *shape, Material *mat) {
+        objToWorld = objToWorldTrans;
+        worldToObj = Transformation(objToWorld.m.inverse());
+        this->shape = shape;
+        this->mat = mat;
+    }
 
     bool intersect(Ray& ray, float* thit, Intersection* in)  {
         Ray oray = worldToObj*ray;

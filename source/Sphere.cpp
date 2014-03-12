@@ -3,7 +3,7 @@
 
 #include "preHeader.h"
 
-class Sphere : Shape {
+class Sphere : public Shape {
 public:
     float radius;
     Point center;

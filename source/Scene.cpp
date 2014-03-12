@@ -1,22 +1,53 @@
 #include "preHeader.h"
 #include "test.cpp"
+#include "AggregatePrimitive.cpp"
 
+bool doesRender;
 Point eye;
+vector<Light> lights;
+AggregatePrimitive world;
+Sampler sampler;
+Camera camera(Point(-1,  1, -1),
+              Point(1,  1, -1),
+              Point(1, -1, -1),
+              Point(-1, -1, -1),
+              Point(0,0,0),
+              320,
+              320);
+Raytracer raytracer(world, lights, 2);
+Film film(320, 320);
+
+void render() {
+    Sample sample;
+    Ray ray;
+    while (!sampler.getSample(&sample)) {
+        Color color;
+        camera.generateRay(sample, &ray);
+        raytracer.trace(ray, 0, &color);
+        film.commit(sample, color);
+    }
+    film.writeImage("testImage.png");
+}
 
 int main(int argc, char *argv[]) {
     
     vector<CmdLineOptResult> *results;
     /*
-     -t         comprehensive testing
-     -tobj      test tinyObjLoader
-     -tsampler  test Sampler
-     -tcam      test Camera
-     -tsintersect   test Sphere Intersection
-     -ttintersect   test Triangle Intersection
-     -ttrans    test Transformation
-     -tparser basePath   test parser
+     -t         (comprehensive testing)
+     -tobj      (test tinyObjLoader)
+     -tsampler  (test Sampler)
+     -tcam      (test Camera)
+     -tsintersect   (test Sphere Intersection)
+     -ttintersect   (test Triangle Intersection)
+     -ttrans    (test Transformation)
+     -tparser basePath   (test parser)
+     -render obj  (render image using obj files)
+     -render manual (render image using manual input)
+     -sphere radius x y z ka kd kr ks sp
+     -triangle x1 y1 z1 x2 y2 z2 x3 y3 z3 r g b
+     -light r g b x y z
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(12)-light(6)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-t") == 0) {
@@ -44,6 +75,43 @@ int main(int argc, char *argv[]) {
             string basePath = result.args->at(0);
             testParser(basePath);
         }
+        if (result.optName.compare("-render") == 0) {
+            doesRender = true;
+            if (result.args->at(0).compare("manual")) {
+                doesRender = true;
+            }
+        }
+        if (result.optName.compare("-sphere") == 0) {
+            Sphere *sphere = new Sphere(stof(result.args->at(0)),0.0,0.0,0.0);
+            Translation3f transform(stof(result.args->at(1)),
+                                  stof(result.args->at(2)),
+                                  stof(result.args->at(3)));
+            float ka = stof(result.args->at(4));
+            float kd = stof(result.args->at(5));
+            float kr = stof(result.args->at(6));
+            float ks = stof(result.args->at(7));
+            int sp = stoi(result.args->at(8));
+            Material *mat = new Material(BRDF(Color(kd, kd, kd),
+                                              Color(ks, ks, ks),
+                                              Color(ka, ka, ka),
+                                              Color(kr, kr, kr),
+                                              sp));
+            GeometricPrimitive *prim = new GeometricPrimitive(Transformation(transform), sphere, mat);
+            world.primList.push_back(prim);
+        }
+        if (result.optName.compare("-light") == 0) {
+            Color liteColor(stof(result.args->at(0)),
+                            stof(result.args->at(1)),
+                            stof(result.args->at(2)));
+            Point location(stof(result.args->at(3)),
+                           stof(result.args->at(4)),
+                           stof(result.args->at(5)));
+            lights.push_back(Light(liteColor, Vector(), location, LightSourcePoint));
+        }
+    }
+    
+    if (doesRender) {
+        render();
     }
     return 0;
 }

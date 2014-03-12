@@ -6,9 +6,18 @@ class Sampler {
     int xIndex, yIndex;
     
 public:
+    Sampler();
     Sampler(int xPix, int yPix);
     bool getSample(Sample* s);
 };
+
+Sampler::Sampler()
+{
+    xPixels = 320;
+    yPixels = 320;
+    xIndex = 0;
+    yIndex = 0;
+}
 
 Sampler::Sampler(int xPix, int yPix)
 {
