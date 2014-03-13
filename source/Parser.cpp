@@ -44,6 +44,45 @@ Color getKr(string& args) {
     return Color(kr.at(0), kr.at(1), kr.at(2));
 }
 
+void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
+    const int MAX_CHARS_PER_LINE = 512;
+    const int MAX_TOKENS_PER_LINE = 100;
+    const char* const DELIMITER = " ";
+    // create a file-reading object
+    ifstream fin;
+    fin.open(fileName); // open a file
+    if (!fileName.find(".transform") || !fin.good()) {
+        *transPtr2Ptr = new Transformation(); // set good-for-nothing transformation
+        return;
+    }
+    // read each line of the file
+    while (!fin.eof()) {
+        // read an entire line into memory
+        char buf[MAX_CHARS_PER_LINE];
+        fin.getline(buf, MAX_CHARS_PER_LINE);
+        // parse the line into blank-delimited tokens
+        int n = 0; // a for-loop index
+        // array to store memory addresses of the tokens in buf
+        const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
+        // parse the line
+        token[0] = strtok(buf, DELIMITER); // first token
+        if (token[0]) { // zero if line is blank
+            for (n = 1; n < MAX_TOKENS_PER_LINE; n++) {
+                token[n] = strtok(NULL, DELIMITER); // subsequent tokens
+                if (!token[n]) break; // no more tokens
+            }
+        }
+        // process the tokens
+        for (int i = 0; i < n; i++) // n = #of tokens
+            cout << "Token[" << i << "] = " << token[i] << endl;
+        cout << endl;
+        
+        /**
+         *  Do my transformation creation here
+         */
+    }
+}
+
 void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
     vector<shape_t> shapes;
     //get all the file names
@@ -51,16 +90,21 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
     TransformMap tMap;
     getFileNamesOfDirectory(basePath, filenames, tMap);
     for (auto & file : filenames) {
+        shapes.clear();
         string err = LoadObj(shapes, file.c_str(), basePath.c_str());
         if (!err.empty()){
             cerr << err << endl;
             return;
         }
+        Transformation *transformation;
+        parseTransformFile(tMap[fileNameWithoutExt(file)], &transformation);
+        
         for (auto & shape : shapes) {
             assert(shape.mesh.indices.size() % 3 == 0);
             //mat is same for all primitives of this shape
             Material *material = new Material();
             BRDF *brdf = &(material->brdf);
+            
             brdf->ka = Color(shape.material.ambient[0],
                              shape.material.ambient[1],
                              shape.material.ambient[2]);
@@ -102,6 +146,8 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
                     GeometricPrimitive *geoPrim = new GeometricPrimitive();
                     geoPrim->shape = tri;
                     geoPrim->mat = material;
+                    geoPrim->objToWorld = transformation;
+                    geoPrim->completeTransformationData();
                     //do transformation here
                     convertedShape->primList.push_back(geoPrim);
                 }

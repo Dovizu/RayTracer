@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
                                               Color(ka, ka, ka),
                                               Color(kr, kr, kr),
                                               sp));
-            GeometricPrimitive *prim = new GeometricPrimitive(Transformation(translate),
+            GeometricPrimitive *prim = new GeometricPrimitive(new Transformation(translate),
                                                               tri,
                                                               mat);
             scene.world->primList.push_back(prim);
@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
                                               Color(ka, ka, ka),
                                               Color(kr, kr, kr),
                                               sp));
-            GeometricPrimitive *prim = new GeometricPrimitive(Transformation(transform), sphere, mat);
+            GeometricPrimitive *prim = new GeometricPrimitive(new Transformation(transform), sphere, mat);
             scene.world->primList.push_back(prim);
         }
         if (result.optName.compare("-pl") == 0) {

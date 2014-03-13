@@ -2,6 +2,7 @@
 #define Assignment2_preHeader_h
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstdlib>
 #include <vector>
