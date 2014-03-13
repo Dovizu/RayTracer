@@ -66,7 +66,7 @@ public:
 //            printf("%f %f %f \n", color(0), color(1), color(2));
             film->commit(sample, color);
         }
-        film->writeImage("testImage.bmp");
+        film->writeImage("testImage.png");
     }
 };
 
