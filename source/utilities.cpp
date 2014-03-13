@@ -42,6 +42,11 @@ float Z(Array3f c) {return c(2);}
 
 #pragma mark - Utilities
 
+string fileNameWithoutExt(const string& fileName) {
+    size_t position = fileName.find(".");
+    return (string::npos == position)? fileName : fileName.substr(0, position);
+}
+
 /**
  *  Prints one string using std::cout
  *

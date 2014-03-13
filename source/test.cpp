@@ -210,9 +210,11 @@ void testTransformation() {
 
 void testParser(string basePath) {
     vector<string> filenames;
-    getFileNamesOfDirectory(basePath, filenames);
+    map<string, string> tMap;
+    getFileNamesOfDirectory(basePath, filenames, tMap);
     for (auto & name : filenames) {
         println(name);
+        println(tMap[fileNameWithoutExt(name)]);
     }
     string args = "0.5 1.0 0.9";
     Color kr = getKr(args);
@@ -220,7 +222,7 @@ void testParser(string basePath) {
     
     AggregatePrimitive aggregate;
     parseObjectFiles(aggregate, basePath);
-    vector<Primitive*> blah = aggregate.primList;
+    vector<Primitive*> blah = aggregate.primList; //break here
 }
 
 void testAggregatePrimitive(){

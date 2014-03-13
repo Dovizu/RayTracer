@@ -7,8 +7,8 @@
 #include "GeometricPrimitive.cpp"
 #include "BRDF.cpp"
 
-
-void getFileNamesOfDirectory(const string& basePath, vector<string>& filenames) {
+typedef map<string, string> TransformMap;
+void getFileNamesOfDirectory(const string& basePath, vector<string>& filenames, TransformMap& tMap) {
     dirent *de;
     DIR *dirp = opendir(basePath.c_str());
     if (dirp) {
@@ -18,7 +18,11 @@ void getFileNamesOfDirectory(const string& basePath, vector<string>& filenames) 
             if (de == NULL) break;
             string name = string(de->d_name);
             if (name.find(".obj") != string::npos) {
+                tMap[fileNameWithoutExt(basePath+name)] = "";
                 filenames.push_back(basePath+name);
+            }
+            if (name.find(".transform") != string::npos) {
+                tMap[fileNameWithoutExt(basePath+name)] = basePath+name;
             }
         }
         closedir(dirp);
@@ -44,8 +48,8 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
     vector<shape_t> shapes;
     //get all the file names
     vector<string> filenames;
-    getFileNamesOfDirectory(basePath, filenames);
-
+    TransformMap tMap;
+    getFileNamesOfDirectory(basePath, filenames, tMap);
     for (auto & file : filenames) {
         string err = LoadObj(shapes, file.c_str(), basePath.c_str());
         if (!err.empty()){
