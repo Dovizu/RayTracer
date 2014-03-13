@@ -30,7 +30,6 @@
 		F11AB4CA18BAB21600D8FED4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		F161C8E818C3F4EC00959064 /* tiny_obj_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cpp; sourceTree = "<group>"; };
 		F161C8E918C3F4EC00959064 /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
-		F161C8EA18C3FEEB00959064 /* World.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = source/World.cpp; sourceTree = "<group>"; };
 		F161C8EC18C418EA00959064 /* Sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Sphere.cpp; path = source/Sphere.cpp; sourceTree = "<group>"; };
 		F161C8EE18C431A100959064 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Triangle.cpp; path = source/Triangle.cpp; sourceTree = "<group>"; };
 		F1DABDEA18CDA7BB00563184 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = source/Scene.cpp; sourceTree = "<group>"; };
@@ -853,7 +852,6 @@
 				F102F29618C1A7B0009A9505 /* Material.cpp */,
 				F102F29418C1A7B0009A9505 /* Light.cpp */,
 				F102F29518C1A7B0009A9505 /* LocalGeo.cpp */,
-				F1E5EFF618CD5F0A00FB0E40 /* Parser.cpp */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";
@@ -879,7 +877,7 @@
 				F102F29118C1A7B0009A9505 /* Film.cpp */,
 				F102F29818C1A7B0009A9505 /* RayTracer.cpp */,
 				F102F29A18C1A7B0009A9505 /* Sampler.cpp */,
-				F161C8EA18C3FEEB00959064 /* World.cpp */,
+				F1E5EFF618CD5F0A00FB0E40 /* Parser.cpp */,
 			);
 			name = Scene;
 			sourceTree = "<group>";

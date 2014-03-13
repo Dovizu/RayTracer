@@ -5,16 +5,16 @@
 #include "BRDF.cpp"
 #include "LocalGeo.cpp"
 
-extern Point eye;
 
 class Raytracer {
 public:
     AggregatePrimitive primitives;
     vector<Light> lights;
     int maxDepth;
+    Point eye;
     
     Raytracer (){};
-    Raytracer(AggregatePrimitive list, vector<Light> lights, int maxDepth);
+    Raytracer(AggregatePrimitive &list, vector<Light> &lights, int maxDepth);
     void trace(Ray& ray, int depth, Color* color);
     void setToBlack(Color* c);
     Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
@@ -22,7 +22,7 @@ public:
     Ray createReflectRay(LocalGeo &local, Ray &ray);
 };
 
-Raytracer::Raytracer(AggregatePrimitive list, vector<Light> lights, int maxDepth)
+Raytracer::Raytracer(AggregatePrimitive& list, vector<Light> &lights, int maxDepth)
 {
     primitives = list;
     this->lights = lights;

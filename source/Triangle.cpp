@@ -82,8 +82,9 @@ public:
         float beta = sol(0);
         float gamma = sol(1);
         if ((beta > 0.0 && gamma > 0.0 && beta + gamma < 1.0)) {
-            Point p; float thit;
-            if (ray.valueAt(&thit, &p)) {
+            Point p;
+            float thit=0;
+            if (ray.valueAt(thit, &p)) {
                 return true;
             }
         }
