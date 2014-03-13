@@ -58,7 +58,6 @@ bool AggregatePrimitive::intersectP(Ray& ray)
     for (auto &primitive: primList)
     {
         if (primitive->intersectP(ray)) {
-            println("Intersected");
             return true;
         }
     }
