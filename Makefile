@@ -4,7 +4,7 @@ BUILD = build
 SRC = source
 LIB = libraries
 
-CIMG = -I$(LIB)/CImg/ -I/opt/X11/include -L/opt/X11/lib -lX11
+CIMG = -I$(LIB)/CImg/ -I/opt/X11/include -L/opt/X11/lib -lX11 -I/usr/local/bin/
 EIGEN = -I$(LIB)/Eigen/
 OBJLOADER = -I$(LIB)/TinyObjLoader/
 

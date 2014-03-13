@@ -27,32 +27,6 @@ void testCImg() {
     img.save("TestImage.bmp");
 }
 
-void testFreeImage() {
-//    println("===Testing FreeImage===");
-//    //Test FreeImage library
-//    FreeImage_Initialise();
-//    cout << "FreeImage " << FreeImage_GetVersion() << endl;
-//    cout << FreeImage_GetCopyrightMessage() << "\n\n";
-//    
-//    //Test FreeImage file saving function
-//    FIBITMAP *bitmap = FreeImage_Allocate(800, 600, 24);
-//    RGBQUAD color;
-//    if (!bitmap)
-//        exit(1);
-//    for (int i=0; i<800; i++) {
-//        for (int j=0; j<600; j++) {
-//            color.rgbRed = 0;
-//            color.rgbGreen = (double) i/800 * 255.0;
-//            color.rgbBlue = (double) j/600 * 255.0;
-//            FreeImage_SetPixelColor(bitmap, i, j, &color);
-//        }
-//    }
-//    if (FreeImage_Save(FIF_PNG, bitmap, "FITest.png", 0))
-//        cout << "Image Successfully Saved!" << endl;
-//    
-//    FreeImage_DeInitialise();
-}
-
 void testEigen() {
     //Test Eigen
     println("===Testing Eigen===");
@@ -250,22 +224,21 @@ void testParser(string basePath) {
 }
 
 void testAggregatePrimitive(){
-    Sphere ball = Sphere(1.0, 0.0, 0.0, -3.0);
-    Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
-    float thit;
-    LocalGeo local;
+//    Sphere ball = Sphere(1.0, 0.0, 0.0, -3.0);
+//    Ray ray(Point(0,0,0), Vector(0,0,-1), 0.0, 100.0);
+//    float thit;
+//    LocalGeo local;
 }
 
 void testDisplay()
 {
-    Sampler sampler = Sampler(100,100);
+//    Sampler sampler = Sampler(100,100);
     
 }
 
 void testAll() {
     println("===Begin Comprehensive Testing===");
     testCImg();
-    testFreeImage();
     testEigen();
     testMakeVec();
     testSampler();

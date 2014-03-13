@@ -20,7 +20,7 @@ public:
     Film *film;
     
     Scene() {
-        float defaultResolution = 640;
+        float defaultResolution = 320;
         UL = Point(-1,  1, -1);
         UR = Point(1,  1, -1);
         LR = Point(1, -1, -1);

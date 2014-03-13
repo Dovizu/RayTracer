@@ -9,6 +9,7 @@
 #include "float.h"
 
 #include <Eigen> //Eigen needs to go before CImg because X11 re-defines "Success" macro
+#define cimg_use_jpg
 #include <CImg.h>
 #include <tiny_obj_loader.h>
 #include <dirent.h>
