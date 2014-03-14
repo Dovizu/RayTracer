@@ -131,7 +131,7 @@ Film
 
 Scene
 
-Transform Files
+.param Files
 -------------
 
 ##Syntax Guide
@@ -145,5 +145,11 @@ Transform Files
 `rotate <x> <y> <z> <radians>`
 
 `translate <x> <y> <z>`
+
+##Eye and Plane location, only indicate once
+
+`eye x y z`
+
+`plane ulx uly ulz urx ury urz lrx lry lrz llx lly llz`
 
 Composed transformations should be written in order from top to bottom, where the top matrix is the first transformation and bottom one is the last.

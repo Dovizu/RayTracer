@@ -13,7 +13,6 @@ public:
     Point LR;
     Point LL;
     Point eye;
-    
     vector<Light> lights;
     AggregatePrimitive *world;
     Sampler *sampler;
@@ -216,7 +215,14 @@ int main(int argc, char *argv[]) {
     if (doesRender) {
         if (automatic) {
             println("Automatic Mode");
-            parseObjectFiles(*(scene.world), basePath);
+            vector<Point> plane;
+            parseObjectFiles(*(scene.world), basePath, &(scene.eye), plane);
+            if (plane.size() == 4) {
+                scene.UL = plane[0];
+                scene.UR = plane[1];
+                scene.LR = plane[2];
+                scene.LL = plane[3];
+            }
         }
         scene.render();
     }

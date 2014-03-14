@@ -21,7 +21,7 @@ void getFileNamesOfDirectory(const string& basePath, vector<string>& filenames, 
                 tMap[fileNameWithoutExt(basePath+name)] = "";
                 filenames.push_back(basePath+name);
             }
-            if (name.find(".transform") != string::npos) {
+            if (name.find(".param") != string::npos) {
                 tMap[fileNameWithoutExt(basePath+name)] = basePath+name;
             }
         }
@@ -44,14 +44,14 @@ Color getKr(string& args) {
     return Color(kr.at(0), kr.at(1), kr.at(2));
 }
 
-void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
+void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr, Point *eye, vector<Point>& plane) {
     const int MAX_CHARS_PER_LINE = 512;
     const int MAX_TOKENS_PER_LINE = 100;
     const char* const DELIMITER = " ";
     // create a file-reading object
     ifstream fin;
     fin.open(fileName); // open a file
-    if (!fileName.find(".transform") || !fin.good()) {
+    if (!fileName.find(".param") || !fin.good()) {
         *transPtr2Ptr = new Transformation(); // set good-for-nothing transformation
         return;
     }
@@ -73,13 +73,13 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
                 if (!token[n]) break; // no more tokens
             }
         }
-        // process the tokens
-//        for (int i = 0; i < n; i++) // n = #of tokens
-//            cout << "Token[" << i << "] = " << token[i] << endl;
-//        cout << endl;
-        
+        if (verbose) {
+            for (int i = 0; i < n; i++) // n = #of tokens
+                cout << "Token[" << i << "] = " << token[i] << endl;
+            cout << endl;
+        }
         /**
-         *  Construct Transformation
+         *  Construct Transformation and other parameters
          */
         if (token[0]) {
             if (strcmp(token[0], "scale")==0) {
@@ -106,13 +106,33 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
                 composedTransform *= Translation3f(atof(token[1]),
                                                    atof(token[2]),
                                                    atof(token[3]));
+            }else if (strcmp(token[0], "plane")==0) {
+                if (!(token[1] && token[2] && token[3] &&
+                      token[4] && token[5] && token[6] &&
+                      token[7] && token[8] && token[9] &&
+                      token[10] && token[11] && token[12])) {
+                    cerr << "syntax error for plane" << endl;
+                    continue;
+                }
+                plane.push_back(Point(atof(token[1]), atof(token[2]), atof(token[3])));
+                plane.push_back(Point(atof(token[4]), atof(token[5]), atof(token[6])));
+                plane.push_back(Point(atof(token[7]), atof(token[8]), atof(token[9])));
+                plane.push_back(Point(atof(token[10]), atof(token[11]), atof(token[12])));
+            }else if (strcmp(token[0], "eye")==0) {
+                if (!(token[1] && token[2] && token[3])) {
+                    cerr << "syntax error for eye" << endl;
+                    continue;
+                }
+                *eye = Point(atof(token[1]),
+                             atof(token[2]),
+                             atof(token[3]));
             }
         }
     }
     *transPtr2Ptr = new Transformation(composedTransform);
 }
 
-void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
+void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath, Point *eye, vector<Point>& plane) {
     vector<shape_t> shapes;
     //get all the file names
     vector<string> filenames;
@@ -126,7 +146,7 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
             return;
         }
         Transformation *transformation;
-        parseTransformFile(tMap[fileNameWithoutExt(file)], &transformation);
+        parseTransformFile(tMap[fileNameWithoutExt(file)], &transformation, eye, plane);
         
         for (auto & shape : shapes) {
             assert(shape.mesh.indices.size() % 3 == 0);
