@@ -2,7 +2,7 @@
 #include "test.cpp"
 #include "AggregatePrimitive.cpp"
 
-bool verbose = false;
+extern bool verbose;
 
 class Scene {
 public:
@@ -62,9 +62,6 @@ public:
         Sample sample;
         Ray ray;
         while (sampler->getSample(&sample)) {
-            if (sample(0) == 74.5 && sample(1) == 94.5) {
-                //break
-            }
             Color color = {0,0,0};
             camera->generateRay(sample, &ray);
             raytracer->trace(ray, 0, &color);
@@ -73,6 +70,10 @@ public:
                 printf("%f %f %f \n", color(0), color(1), color(2));
             }
             film->commit(sample, color);
+            //Report progress
+            float percentage = (sample(0)+sample(1)*resolution)/sqr(resolution)*100.0;
+            if (percentage % 10 == 0)
+                printf("Progress: %d%%\n", ((int)percentage));
         }
         film->writeImage("testImage.png");
     }

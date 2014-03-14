@@ -23,6 +23,7 @@ typedef struct {
     int numOfArgs;
     vector<string> *args;
 } CmdLineOptResult;
+bool verbose = false;
 
 #pragma mark - Math
 float sqr(float x) { return x*x;}

@@ -6,7 +6,7 @@
 #include "Triangle.cpp"
 #include "GeometricPrimitive.cpp"
 #include "BRDF.cpp"
-
+extern bool verbose;
 typedef map<string, string> TransformMap;
 void getFileNamesOfDirectory(const string& basePath, vector<string>& filenames, TransformMap& tMap) {
     dirent *de;
@@ -198,10 +198,12 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
                 geoPrim->completeTransformationData();
                 //do transformation here
                 convertedShape->primList.push_back(geoPrim);
-                println("Obtained Triangle");
-                printf("A: %f, %f, %f\n", tri->A(0), tri->A(1), tri->A(2));
-                printf("B: %f, %f, %f\n", tri->B(0), tri->B(1), tri->B(2));
-                printf("C: %f, %f, %f\n", tri->C(0), tri->C(1), tri->C(2));
+                if (verbose) {
+                    println("Obtained Triangle");
+                    printf("A: %f, %f, %f\n", tri->A(0), tri->A(1), tri->A(2));
+                    printf("B: %f, %f, %f\n", tri->B(0), tri->B(1), tri->B(2));
+                    printf("C: %f, %f, %f\n", tri->C(0), tri->C(1), tri->C(2));
+                }
             }
         }
     }
