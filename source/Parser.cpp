@@ -21,7 +21,7 @@ void getFileNamesOfDirectory(const string& basePath, vector<string>& filenames, 
                 tMap[fileNameWithoutExt(basePath+name)] = "";
                 filenames.push_back(basePath+name);
             }
-            if (name.find(".transform") != string::npos) {
+            if (name.find(".param") != string::npos) {
                 tMap[fileNameWithoutExt(basePath+name)] = basePath+name;
             }
         }
@@ -44,19 +44,25 @@ Color getKr(string& args) {
     return Color(kr.at(0), kr.at(1), kr.at(2));
 }
 
-void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
-    const int MAX_CHARS_PER_LINE = 512;
+void parseTransformFile(AggregatePrimitive& aggregate,
+                        vector<Light>& lights,
+                        const string& fileName, 
+                        Transformation** transPtr2Ptr, 
+                        Point *eye,
+                        vector<Point>& plane)
+{
+    const int MAX_CHARS_PER_LINE = 100;
     const int MAX_TOKENS_PER_LINE = 100;
     const char* const DELIMITER = " ";
     // create a file-reading object
     ifstream fin;
     fin.open(fileName); // open a file
-    if (!fileName.find(".transform") || !fin.good()) {
+    if (!fileName.find(".param") || !fin.good()) {
         *transPtr2Ptr = new Transformation(); // set good-for-nothing transformation
         return;
     }
+    Transform3fAffine composedTransform = IdentityTransform(); //to combine all parsed transformations
     // read each line of the file
-    Transform3fAffine composedTransform = IdentityTransform();
     while (!fin.eof()) {
         // read an entire line into memory
         char buf[MAX_CHARS_PER_LINE];
@@ -73,22 +79,23 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
                 if (!token[n]) break; // no more tokens
             }
         }
-        // process the tokens
-//        for (int i = 0; i < n; i++) // n = #of tokens
-//            cout << "Token[" << i << "] = " << token[i] << endl;
-//        cout << endl;
-        
+        if (verbose) {
+            for (int i = 0; i < n; i++) // n = #of tokens
+                cout << "Token[" << i << "] = " << token[i] << endl;
+            cout << endl;
+        }
         /**
-         *  Construct Transformation
+         *  Construct Transformation and other parameters
          */
         if (token[0]) {
             if (strcmp(token[0], "scale")==0) {
-                if (!token[1]) {
+                if (!(token[1] && token[2] && token[3])) {
                     cerr << "syntax error for scale" << endl;
                     continue;
                 }
-                float factor = atof(token[1]);
-                composedTransform *= Scalingf(factor);
+                composedTransform = Scaling3f(atof(token[1]),
+                                               atof(token[2]),
+                                               atof(token[3])) * composedTransform;
             }else if (strcmp(token[0], "rotate")==0) {
                 if (!(token[1] && token[2] && token[3] && token[4])) {
                     cerr << "syntax error for rotate" << endl;
@@ -96,24 +103,176 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
                 }
                 Vector axis = {atof(token[1]), atof(token[2]), atof(token[3])};
                 float angle = atof(token[4]);
-                composedTransform *= AngleAxisf(angle, axis.normalized());
+                composedTransform = AngleAxisf(angle, axis.normalized()) * composedTransform;
             }else if (strcmp(token[0], "translate")==0) {
                 if (!(token[1] && token[2] && token[3])) {
                     cerr << "syntax error for translate" << endl;
                     continue;
                 }
-                composedTransform *= Translation3f(atof(token[1]),
+                composedTransform = Translation3f(atof(token[1]),
                                                    atof(token[2]),
-                                                   atof(token[3]));
-            }
-        }
-    }
+                                                   atof(token[3])) * composedTransform;
+            }else if (strcmp(token[0], "plane")==0) {
+                if (!(token[1] && token[2] && token[3] &&
+                      token[4] && token[5] && token[6] &&
+                      token[7] && token[8] && token[9] &&
+                      token[10] && token[11] && token[12])) {
+                    cerr << "syntax error for plane" << endl;
+                    continue;
+                }
+                plane.push_back(Point(atof(token[1]), atof(token[2]), atof(token[3])));
+                plane.push_back(Point(atof(token[4]), atof(token[5]), atof(token[6])));
+                plane.push_back(Point(atof(token[7]), atof(token[8]), atof(token[9])));
+                plane.push_back(Point(atof(token[10]), atof(token[11]), atof(token[12])));
+            }else if (strcmp(token[0], "eye")==0) {
+                if (!(token[1] && token[2] && token[3])) {
+                    cerr << "syntax error for eye" << endl;
+                    continue;
+                }
+                *eye = Point(atof(token[1]),
+                             atof(token[2]),
+                             atof(token[3]));
+            }else if (strcmp(token[0], "pl")==0) {
+                if (!(token[1] && token[2] && token[3] &&
+                      token[4] && token[5] && token[6])) {
+                    cerr << "syntax error for point light" << endl;
+                    continue;
+                }
+                Color liteColor(atof(token[1]),
+                                atof(token[2]),
+                                atof(token[3]));
+                Point location(atof(token[4]),
+                               atof(token[5]),
+                               atof(token[6]));
+                lights.push_back(Light(liteColor, Vector(), location, LightSourcePoint));
+            }else if (strcmp(token[0], "dl")==0) {
+                if (!(token[1] && token[2] && token[3] &&
+                      token[4] && token[5] && token[6])) {
+                    cerr << "syntax error for directional light" << endl;
+                    continue;
+                }
+                Color liteColor(atof(token[1]),
+                                atof(token[2]),
+                                atof(token[3]));
+                Point direction(atof(token[4]),
+                                atof(token[5]),
+                                atof(token[6]));
+                lights.push_back(Light(liteColor, direction, Point(), LightSourceDirectional));
+            }else if (strcmp(token[0], "sphere")==0) {
+                if (!(token[1] && //radius
+                      token[2] && token[3] && token[4] && //center x y z
+                      token[5] && token[6] && token[7] && // ka
+                      token[8] && token[9] && token[10] && // kd
+                      token[11] && token[12] && token[13] && // kr
+                      token[14] && token[15] && token[16] && // ks
+                      token[17] && //sp
+                      token[18] && token[19] && token[20] //scale x y z
+                      )) {
+                    cerr << "syntax error for sphere" << endl;
+                    continue;
+                }
+                Sphere *sphere = new Sphere(atof(token[1]),0,0,0);
+                Translation3f translate(atof(token[2]), atof(token[3]), atof(token[4]));
+                Transform3fAffine transform(Scaling3f(atof(token[18]),atof(token[19]),atof(token[20])));
+                Color ka(atof(token[5]), atof(token[6]), atof(token[7]));
+                Color kd(atof(token[8]), atof(token[9]), atof(token[10]));
+                Color kr(atof(token[11]), atof(token[12]), atof(token[13]));
+                Color ks(atof(token[14]), atof(token[15]), atof(token[16]));
+                int sp = atoi(token[17]);
+                Material *mat = new Material(BRDF(kd, ks, ka, kr, sp));
+                GeometricPrimitive *prim = new GeometricPrimitive(new Transformation(translate*transform),
+                                                                  sphere,
+                                                                  mat);
+                aggregate.primList.push_back(prim);
+            }else if (strcmp(token[0], "triangle")==0) {
+                if (!(token[1] && token[2] && token[3] && // Point 1 x y z
+                      token[4] && token[5] && token[6] && // Point 2 x y z
+                      token[7] && token[8] && token[9] && // Point 3 x y z
+                      token[10] && token[11] && token[12] && //center x y z
+                      token[13] && token[14] && token[15] && // ka
+                      token[16] && token[17] && token[18] && // kd
+                      token[19] && token[20] && token[21] && // kr
+                      token[22] && token[23] && token[24] && // ks
+                      token[25] //sp
+                      )) {
+                    cerr << "syntax error for triangle" << endl;
+                    continue;
+                }
+                Triangle *tri = new Triangle(Point(atof(token[1]),
+                                                   atof(token[2]),
+                                                   atof(token[3])),
+                                             Point(atof(token[4]),
+                                                   atof(token[5]),
+                                                   atof(token[6])),
+                                             Point(atof(token[7]),
+                                                   atof(token[8]),
+                                                   atof(token[9])));
+                Translation3f translate(atof(token[10]),atof(token[11]),atof(token[12]));
+                Color ka(atof(token[13]), atof(token[14]), atof(token[15]));
+                Color kd(atof(token[16]), atof(token[17]), atof(token[18]));
+                Color kr(atof(token[19]), atof(token[20]), atof(token[21]));
+                Color ks(atof(token[22]), atof(token[23]), atof(token[24]));
+                int sp = atoi(token[25]);
+                Material *mat = new Material(BRDF(kd, ks, ka, kr, sp));
+                GeometricPrimitive *prim = new GeometricPrimitive(new Transformation(translate), tri, mat);
+                aggregate.primList.push_back(prim);
+            }else if (strcmp(token[0], "rect")==0) {
+                if (!(token[1] && token[2] && token[3] && // Point 1 x y z
+                      token[4] && token[5] && token[6] && // Point 2 x y z
+                      token[7] && token[8] && token[9] && // Point 3 x y z
+                      token[10] && token[11] && token[12] && //Point 4 x y z
+                      token[13] && token[14] && token[15] && // ka
+                      token[16] && token[17] && token[18] && // kd
+                      token[19] && token[20] && token[21] && // kr
+                      token[22] && token[23] && token[24] && // ks
+                      token[25] && //sp
+                      token[26] && token[27] && token[28] //translate x y z
+                      )) {
+                    cerr << "syntax error for rectangle" << endl;
+                    continue;
+                }
+                Triangle *tri1 = new Triangle(Point(atof(token[1]),
+                                                    atof(token[2]),
+                                                    atof(token[3])),
+                                              Point(atof(token[4]),
+                                                    atof(token[5]),
+                                                    atof(token[6])),
+                                              Point(atof(token[7]),
+                                                    atof(token[8]),
+                                                    atof(token[9])));
+                Triangle *tri2 = new Triangle(Point(atof(token[1]),
+                                                    atof(token[2]),
+                                                    atof(token[3])),
+                                              Point(atof(token[7]),
+                                                    atof(token[8]),
+                                                    atof(token[9])),
+                                              Point(atof(token[10]),
+                                                    atof(token[11]),
+                                                    atof(token[12])));
+                Translation3f translate(atof(token[26]),atof(token[27]),atof(token[28]));
+                Color ka(atof(token[13]), atof(token[14]), atof(token[15]));
+                Color kd(atof(token[16]), atof(token[17]), atof(token[18]));
+                Color kr(atof(token[19]), atof(token[20]), atof(token[21]));
+                Color ks(atof(token[22]), atof(token[23]), atof(token[24]));
+                int sp = atoi(token[25]);
+                Material *mat = new Material(BRDF(kd, ks, ka, kr, sp));
+                Transformation *trans = new Transformation(translate);
+                GeometricPrimitive *prim1 = new GeometricPrimitive(trans, tri1, mat);
+                GeometricPrimitive *prim2 = new GeometricPrimitive(trans, tri2, mat);
+                aggregate.primList.push_back(prim1);
+                aggregate.primList.push_back(prim2);
+            } //end if else
+        } // end if (token[0])
+    } //end while
     *transPtr2Ptr = new Transformation(composedTransform);
 }
 
-void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
+void parseObjectFiles(AggregatePrimitive& aggregate,
+                      vector<Light>& lights,
+                      const string& basePath,
+                      Point *eye,
+                      vector<Point>& plane) {
     vector<shape_t> shapes;
-    //get all the file names
     vector<string> filenames;
     TransformMap tMap;
     getFileNamesOfDirectory(basePath, filenames, tMap);
@@ -125,7 +284,7 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
             return;
         }
         Transformation *transformation;
-        parseTransformFile(tMap[fileNameWithoutExt(file)], &transformation);
+        parseTransformFile(aggregate, lights, tMap[fileNameWithoutExt(file)], &transformation, eye, plane);
         
         for (auto & shape : shapes) {
             assert(shape.mesh.indices.size() % 3 == 0);

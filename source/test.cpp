@@ -204,8 +204,9 @@ void testTransformation() {
     println("Should be: rotation*(4,5,6), which is some negative x, positive y, and z=6");
     cout << "Got: " << p << endl;
     
-    println("UNTESTED: Projective Transform");
-    //Test when we need it
+    println("Transformation: Non-uniform scaling");
+    t = Transformation(Scaling3f(3, 2, 1));
+    cout << t.m.matrix() << endl;
 }
 
 void testParser(string basePath) {
@@ -221,15 +222,28 @@ void testParser(string basePath) {
     cout << kr;
     
     AggregatePrimitive aggregate;
-    parseObjectFiles(aggregate, basePath);
+    vector<Light> lights;
+    Point eye;
+    vector<Point> plane;
+    parseObjectFiles(aggregate, lights, basePath, &eye, plane);
     vector<Primitive*> blah = aggregate.primList; //break here
     
     println("Testing Parsing Transform Files");
     Transformation *transform;
-    parseTransformFile("testFolder/cornell_box.transform", &transform);
+    parseTransformFile(aggregate, lights, "testFolder/cube.param", &transform, &eye, plane);
     cout << transform->m.matrix() << endl;
     println("Demonstrate empty trasnform");
     cout << IdentityTransform().matrix() << endl;
+    
+    println("Demonstrate eye and plane transform");
+    cout << eye << endl;
+    printf("UL: %f, %f, %f\n", plane[0](0), plane[0](1), plane[0](2));
+    printf("UR: %f, %f, %f\n", plane[1](0), plane[1](1), plane[1](2));
+    printf("LR: %f, %f, %f\n", plane[2](0), plane[2](1), plane[2](2));
+    printf("LL: %f, %f, %f\n", plane[3](0), plane[3](1), plane[3](2));
+    
+    //println("Demonstratte sphere & ellipsoid");
+    //break here
 }
 
 void testAggregatePrimitive(){

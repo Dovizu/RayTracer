@@ -131,7 +131,7 @@ Film
 
 Scene
 
-Transform Files
+.param Files
 -------------
 
 ##Syntax Guide
@@ -140,10 +140,47 @@ Transform Files
 
 ##Supported Transformations
 
-`scale <factor>`
+`scale <x> <y> <z>`
 
 `rotate <x> <y> <z> <radians>`
 
 `translate <x> <y> <z>`
 
+##Eye and Plane location (only add once)
+
+`eye x y z`
+
+`plane ulx uly ulz urx ury urz lrx lry lrz llx lly llz`
+
+## Light Source Locations
+`pl r g b x y z`
+
+`dl r g b x y z`
+
+##Manual Input Objects (in any .param file)
+
+`sphere radius centerX centerY centerZ ka ka ka kd kd kd kr kr kr ks ks ks sp scaleX scaleY scaleZ`
+
+`triangle Ax Ay Az Bx By Bz Cx Cy Cz translateX translateY translateZ ka ka ka kd kd kd kr kr kr ks ks ks sp`
+
+Triangle surface normal is interpolated in the A-B-C orientation
+
+`rect Ax Ay Az Bx By Bz Cx Cy Cz Dx Dy Dz ka ka ka kd kd kd kr kr kr ks ks ks sp translateX translateY translateZ`
+
+Rectangles are basically two ABC ACD triangles, with normals facing in the same direction
+
 Composed transformations should be written in order from top to bottom, where the top matrix is the first transformation and bottom one is the last.
+
+##Reflection in MTL file
+just add
+
+`kr r g b` 
+
+to enable reflection.
+
+Note: `Ni` = `sp` in MTL file.
+
+Command Line Usage
+-------------------
+
+`$> ./scene -render path/to/files/ -out outputfilename.extension -resolution pixels`
