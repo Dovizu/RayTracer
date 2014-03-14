@@ -32,6 +32,7 @@
 		F161C8E918C3F4EC00959064 /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
 		F161C8EC18C418EA00959064 /* Sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Sphere.cpp; path = source/Sphere.cpp; sourceTree = "<group>"; };
 		F161C8EE18C431A100959064 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Triangle.cpp; path = source/Triangle.cpp; sourceTree = "<group>"; };
+		F1C8F44318D2D40E00969CA5 /* objLoader.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = objLoader.o; sourceTree = "<group>"; };
 		F1DABDEA18CDA7BB00563184 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = source/Scene.cpp; sourceTree = "<group>"; };
 		F1E39BC818C0384D005BC8FE /* CImg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CImg.h; sourceTree = "<group>"; };
 		F1E39BCA18C0384D005BC8FE /* captcha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = captcha.cpp; sourceTree = "<group>"; };
@@ -895,6 +896,9 @@
 		F11AB4BD18BAB0D800D8FED4 = {
 			isa = PBXGroup;
 			children = (
+				F1C8F44018D2D40E00969CA5 /* input */,
+				F1C8F44118D2D40E00969CA5 /* objects */,
+				F1C8F44218D2D40E00969CA5 /* build */,
 				F1E3A39918C056A6005BC8FE /* .gitignore */,
 				F11AB4CF18BABD8700D8FED4 /* Support */,
 				F11AB4CE18BABD7C00D8FED4 /* Source */,
@@ -931,6 +935,28 @@
 			);
 			name = TinyObjLoader;
 			path = libraries/TinyObjLoader;
+			sourceTree = "<group>";
+		};
+		F1C8F44018D2D40E00969CA5 /* input */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = input;
+			sourceTree = "<group>";
+		};
+		F1C8F44118D2D40E00969CA5 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = objects;
+			sourceTree = "<group>";
+		};
+		F1C8F44218D2D40E00969CA5 /* build */ = {
+			isa = PBXGroup;
+			children = (
+				F1C8F44318D2D40E00969CA5 /* objLoader.o */,
+			);
+			path = build;
 			sourceTree = "<group>";
 		};
 		F1E39BC618C037ED005BC8FE /* Libraries */ = {

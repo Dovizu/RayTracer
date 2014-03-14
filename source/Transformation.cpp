@@ -44,6 +44,11 @@ public:
         mInverseTranspose = m.linear().inverse().transpose();
         type = TransformationAffine;
     }
+    Transformation(Scaling3f t) {
+        m = t;
+        mInverseTranspose = m.linear().inverse().transpose();
+        type = TransformationAffine;
+    }
     //General Affine transformation (assume <0,0,0,1> for last row)
     //Transformation compose(M3*M2*M1);
     Transformation(Transform<float, 3, Affine> t) {

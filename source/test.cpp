@@ -204,8 +204,9 @@ void testTransformation() {
     println("Should be: rotation*(4,5,6), which is some negative x, positive y, and z=6");
     cout << "Got: " << p << endl;
     
-    println("UNTESTED: Projective Transform");
-    //Test when we need it
+    println("Transformation: Non-uniform scaling");
+    t = Transformation(Scaling3f(3, 2, 1));
+    cout << t.m.matrix() << endl;
 }
 
 void testParser(string basePath) {
