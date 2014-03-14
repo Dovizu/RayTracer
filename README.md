@@ -140,7 +140,7 @@ Transform Files
 
 ##Supported Transformations
 
-`scale <factor>`
+`scale <x> <y> <z>`
 
 `rotate <x> <y> <z> <radians>`
 

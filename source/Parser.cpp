@@ -83,12 +83,13 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
          */
         if (token[0]) {
             if (strcmp(token[0], "scale")==0) {
-                if (!token[1]) {
+                if (!(token[1] && token[2] && token[3])) {
                     cerr << "syntax error for scale" << endl;
                     continue;
                 }
-                float factor = atof(token[1]);
-                composedTransform *= Scalingf(factor);
+                composedTransform *= Scaling3f(atof(token[1]),
+                                               atof(token[2]),
+                                               atof(token[3]));
             }else if (strcmp(token[0], "rotate")==0) {
                 if (!(token[1] && token[2] && token[3] && token[4])) {
                     cerr << "syntax error for rotate" << endl;
