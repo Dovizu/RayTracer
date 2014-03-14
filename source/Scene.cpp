@@ -2,6 +2,8 @@
 #include "test.cpp"
 #include "AggregatePrimitive.cpp"
 
+bool verbose = false;
+
 class Scene {
 public:
     float resolution;
@@ -20,13 +22,14 @@ public:
     Film *film;
     
     Scene() {
-        float defaultResolution = 320;
+        float defaultResolution = 160;
         UL = Point(-1,  1, -1);
         UR = Point(1,  1, -1);
         LR = Point(1, -1, -1);
         LL = Point(-1, -1, -1);
         eye = Point(0,0,0);
         maxDepth = 1;
+        resolution = defaultResolution;
         world = new AggregatePrimitive();
         sampler = new Sampler(defaultResolution, defaultResolution);
         camera = new Camera(UL, UR, LR, LL, eye, defaultResolution, defaultResolution);
@@ -59,11 +62,16 @@ public:
         Sample sample;
         Ray ray;
         while (sampler->getSample(&sample)) {
+            if (sample(0) == 74.5 && sample(1) == 94.5) {
+                //break
+            }
             Color color = {0,0,0};
             camera->generateRay(sample, &ray);
             raytracer->trace(ray, 0, &color);
-//            cout << "Color at: x:" << sample(0) << " y:" << sample(1) << " ";
-//            printf("%f %f %f \n", color(0), color(1), color(2));
+            if (verbose) {
+                cout << "Color at: x:" << sample(0) << " y:" << sample(1) << " ";
+                printf("%f %f %f \n", color(0), color(1), color(2));
+            }
             film->commit(sample, color);
         }
         film->writeImage("testImage.png");
@@ -74,6 +82,7 @@ public:
 
 bool doesRender;
 bool automatic;
+string basePath;
 int main(int argc, char *argv[]) {
     
     Scene scene;
@@ -94,11 +103,15 @@ int main(int argc, char *argv[]) {
      -triangle x1 y1 z1 x2 y2 z2 x3 y3 z3 x y z ka kd kr ks sp
      -pl r g b x y z
      -dl r g b x y z
-     -rendertype manual | auto
+     -render manual | auto
+     -path path/to/object/
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(17)-pl(6)-dl(6)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tsintersect(0)-ttintersect(0)-ttrans(0)-tparser(1)-render(1)-sphere(9)-triangle(17)-pl(6)-dl(6)-path(1)-verbose(0)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
+        if (result.optName.compare("-verbose")==0) {
+            verbose = true;
+        }
         if (result.optName.compare("-t") == 0) {
             testAll();
         }
@@ -127,6 +140,9 @@ int main(int argc, char *argv[]) {
         if (result.optName.compare("-render") == 0) {
             doesRender = true;
             automatic = result.args->at(0).compare("auto") == 0;
+        }
+        if (result.optName.compare("-path")==0) {
+            basePath = result.args->at(0);
         }
         if (result.optName.compare("-triangle")==0) {
             Triangle *tri = new Triangle(Point(stof(result.args->at(0)),
@@ -197,7 +213,8 @@ int main(int argc, char *argv[]) {
     
     if (doesRender) {
         if (automatic) {
-            //do parsing for obj files
+            println("Automatic Mode");
+            parseObjectFiles(*(scene.world), basePath);
         }
         scene.render();
     }

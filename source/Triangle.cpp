@@ -6,7 +6,8 @@
 class Triangle : public Shape {
 public:
     Point A, B, C;
-    
+    Vector Anorm, Bnorm, Cnorm;
+    bool predefinedNormal = false;
     Triangle() {
         A=Point(0,0,0);
         B=Point(0,0,0);
@@ -47,9 +48,18 @@ public:
         if (beta > 0.0 && gamma > 0.0 && beta + gamma < 1.0) {
             Point p;
             if (ray.valueAt(*thit, &p)) {
-                Vector ab = makeVec(A, B);
-                Vector ac = makeVec(A, C);
-                local->surfaceNormal = ab.cross(ac);
+                Vector normal;
+                if (!predefinedNormal) {
+                    Vector ab = makeVec(A, B);
+                    Vector ac = makeVec(A, C);
+                    normal = ab.cross(ac);
+                }else{
+                    normal = ((Anorm+Bnorm+Cnorm)/3.0).normalized();
+                }
+                if (ray.direction.dot(normal) > 0.0) {
+                    normal *= -1.0;
+                }
+                local->surfaceNormal = normal;
                 local->surfaceNormal.normalize();
                 local->position = p;
                 return true;

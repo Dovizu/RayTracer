@@ -6,6 +6,8 @@
 #include "Intersection.cpp"
 #include "BRDF.cpp"
 #include "float.h"
+#include "GeometricPrimitive.cpp"
+#include "Triangle.cpp"
 
 class AggregatePrimitive : public Primitive{
 public:

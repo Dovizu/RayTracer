@@ -223,6 +223,13 @@ void testParser(string basePath) {
     AggregatePrimitive aggregate;
     parseObjectFiles(aggregate, basePath);
     vector<Primitive*> blah = aggregate.primList; //break here
+    
+    println("Testing Parsing Transform Files");
+    Transformation *transform;
+    parseTransformFile("testFolder/cornell_box.transform", &transform);
+    cout << transform->m.matrix() << endl;
+    println("Demonstrate empty trasnform");
+    cout << IdentityTransform().matrix() << endl;
 }
 
 void testAggregatePrimitive(){

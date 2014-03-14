@@ -131,3 +131,19 @@ Film
 
 Scene
 
+Transform Files
+-------------
+
+##Syntax Guide
+
+`<transformation name> <parameters list>` 
+
+##Supported Transformations
+
+`scale <factor>`
+
+`rotate <x> <y> <z> <radians>`
+
+`translate <x> <y> <z>`
+
+Composed transformations should be written in order from top to bottom, where the top matrix is the first transformation and bottom one is the last.

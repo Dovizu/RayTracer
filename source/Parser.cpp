@@ -56,6 +56,7 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
         return;
     }
     // read each line of the file
+    Transform3fAffine composedTransform = IdentityTransform();
     while (!fin.eof()) {
         // read an entire line into memory
         char buf[MAX_CHARS_PER_LINE];
@@ -73,14 +74,41 @@ void parseTransformFile(const string& fileName, Transformation** transPtr2Ptr) {
             }
         }
         // process the tokens
-        for (int i = 0; i < n; i++) // n = #of tokens
-            cout << "Token[" << i << "] = " << token[i] << endl;
-        cout << endl;
+//        for (int i = 0; i < n; i++) // n = #of tokens
+//            cout << "Token[" << i << "] = " << token[i] << endl;
+//        cout << endl;
         
         /**
-         *  Do my transformation creation here
+         *  Construct Transformation
          */
+        if (token[0]) {
+            if (strcmp(token[0], "scale")==0) {
+                if (!token[1]) {
+                    cerr << "syntax error for scale" << endl;
+                    continue;
+                }
+                float factor = atof(token[1]);
+                composedTransform *= Scalingf(factor);
+            }else if (strcmp(token[0], "rotate")==0) {
+                if (!(token[1] && token[2] && token[3] && token[4])) {
+                    cerr << "syntax error for rotate" << endl;
+                    continue;
+                }
+                Vector axis = {atof(token[1]), atof(token[2]), atof(token[3])};
+                float angle = atof(token[4]);
+                composedTransform *= AngleAxisf(angle, axis.normalized());
+            }else if (strcmp(token[0], "translate")==0) {
+                if (!(token[1] && token[2] && token[3])) {
+                    cerr << "syntax error for translate" << endl;
+                    continue;
+                }
+                composedTransform *= Translation3f(atof(token[1]),
+                                                   atof(token[2]),
+                                                   atof(token[3]));
+            }
+        }
     }
+    *transPtr2Ptr = new Transformation(composedTransform);
 }
 
 void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
@@ -114,6 +142,7 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
             brdf->ks = Color(shape.material.specular[0],
                              shape.material.specular[1],
                              shape.material.specular[2]);
+            brdf->sp = shape.material.shininess;
             //for extra parameters that standard MTL format doesn't support
             map<string, string>::iterator it(shape.material.unknown_parameter.begin());
             map<string, string>::iterator itEnd(shape.material.unknown_parameter.end());
@@ -130,27 +159,49 @@ void parseObjectFiles(AggregatePrimitive& aggregate, const string& basePath) {
             //convertedShape is an aggregate of triangles
             AggregatePrimitive *convertedShape = new AggregatePrimitive();
             aggregate.primList.push_back(convertedShape);
-            vector<Point> threePoints; //placeholder
-            for (size_t v = 0; v < shape.mesh.positions.size() / 3; v++) {
-                float p1 = shape.mesh.positions[3*v+0]; //x
-                float p2 = shape.mesh.positions[3*v+1]; //y
-                float p3 = shape.mesh.positions[3*v+2]; //z
-                if (threePoints.size() != 3) {
-                    threePoints.push_back(Point(p1, p2, p3));
-                }else{
-                    Triangle *tri = new Triangle();
-                    tri->A = threePoints.at(0);
-                    tri->B = threePoints.at(1);
-                    tri->C = threePoints.at(2);
-                    threePoints.clear();
-                    GeometricPrimitive *geoPrim = new GeometricPrimitive();
-                    geoPrim->shape = tri;
-                    geoPrim->mat = material;
-                    geoPrim->objToWorld = transformation;
-                    geoPrim->completeTransformationData();
-                    //do transformation here
-                    convertedShape->primList.push_back(geoPrim);
-                }
+
+            vector<float> normals = shape.mesh.normals;
+            vector<unsigned int> indices = shape.mesh.indices;
+            vector<float> positions = shape.mesh.positions;
+
+            for (size_t v = 0; v < indices.size(); v+=3) {
+                Point p1(positions[indices[v+0]*3+0],
+                         positions[indices[v+0]*3+1],
+                         positions[indices[v+0]*3+2]);
+                Point p2(positions[indices[v+1]*3+0],
+                         positions[indices[v+1]*3+1],
+                         positions[indices[v+1]*3+2]);
+                Point p3(positions[indices[v+2]*3+0],
+                         positions[indices[v+2]*3+1],
+                         positions[indices[v+2]*3+2]);
+                Vector n1(normals[indices[v+0]*3+0],
+                          normals[indices[v+0]*3+1],
+                          normals[indices[v+0]*3+2]);
+                Vector n2(normals[indices[v+1]*3+0],
+                          normals[indices[v+1]*3+1],
+                          normals[indices[v+1]*3+2]);
+                Vector n3(normals[indices[v+2]*3+0],
+                          normals[indices[v+2]*3+1],
+                          normals[indices[v+2]*3+2]);
+                Triangle *tri = new Triangle();
+                tri->predefinedNormal = true;
+                tri->A = p1;
+                tri->B = p2;
+                tri->C = p3;
+                tri->Anorm = n1;
+                tri->Bnorm = n2;
+                tri->Cnorm = n3;
+                GeometricPrimitive *geoPrim = new GeometricPrimitive();
+                geoPrim->shape = tri;
+                geoPrim->mat = material;
+                geoPrim->objToWorld = transformation;
+                geoPrim->completeTransformationData();
+                //do transformation here
+                convertedShape->primList.push_back(geoPrim);
+                println("Obtained Triangle");
+                printf("A: %f, %f, %f\n", tri->A(0), tri->A(1), tri->A(2));
+                printf("B: %f, %f, %f\n", tri->B(0), tri->B(1), tri->B(2));
+                printf("C: %f, %f, %f\n", tri->C(0), tri->C(1), tri->C(2));
             }
         }
     }
