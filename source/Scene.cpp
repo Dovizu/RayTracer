@@ -22,6 +22,7 @@ public:
     Camera *camera;
     Raytracer *raytracer;
     Film *film;
+    string outputFileName = "output.png";
     
     Scene() {
         float defaultResolution = 160;
@@ -90,7 +91,7 @@ public:
                 printf("Progress: %d%%\n", (currentPercentage));
             }
         }
-        film->writeImage("output.png");
+        film->writeImage(outputFileName.c_str());
     }
 };
 
@@ -111,11 +112,10 @@ int main(int argc, char *argv[]) {
      -tparser basePath   (test parser)
      
      //rendering
-     -render
-     -path path/to/object/
+     -render path/to/object/
      -resolution pixels
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tintersect(0)-ttrans(0)-tparser(1)-render(0)-path(1)-resolution(1)-verbose(0)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tintersect(0)-ttrans(0)-tparser(1)-render(1)-resolution(1)-out(1)-verbose(0)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-verbose")==0) {
@@ -146,13 +146,14 @@ int main(int argc, char *argv[]) {
         }
         if (result.optName.compare("-render") == 0) {
             doesRender = true;
-        }
-        if (result.optName.compare("-path")==0) {
             basePath = result.args->at(0);
         }
         if (result.optName.compare("-resolution")==0) {
             int pix = stoi(result.args->at(0));
             scene.changeResolution(pix);
+        }
+        if (result.optName.compare("-out")==0) {
+            scene.outputFileName = result.args->at(0);
         }
     }
     

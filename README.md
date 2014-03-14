@@ -179,3 +179,8 @@ just add
 to enable reflection.
 
 Note: `Ni` = `sp` in MTL file.
+
+Command Line Usage
+-------------------
+
+`$> ./scene -render path/to/files/ -out outputfilename.extension -resolution pixels`
