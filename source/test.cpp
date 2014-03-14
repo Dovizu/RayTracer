@@ -222,14 +222,15 @@ void testParser(string basePath) {
     cout << kr;
     
     AggregatePrimitive aggregate;
+    vector<Light> lights;
     Point eye;
     vector<Point> plane;
-    parseObjectFiles(aggregate, basePath, &eye, plane);
+    parseObjectFiles(aggregate, lights, basePath, &eye, plane);
     vector<Primitive*> blah = aggregate.primList; //break here
     
     println("Testing Parsing Transform Files");
     Transformation *transform;
-    parseTransformFile("testFolder/cube.param", &transform, &eye, plane);
+    parseTransformFile(aggregate, lights, "testFolder/cube.param", &transform, &eye, plane);
     cout << transform->m.matrix() << endl;
     println("Demonstrate empty trasnform");
     cout << IdentityTransform().matrix() << endl;
@@ -240,6 +241,9 @@ void testParser(string basePath) {
     printf("UR: %f, %f, %f\n", plane[1](0), plane[1](1), plane[1](2));
     printf("LR: %f, %f, %f\n", plane[2](0), plane[2](1), plane[2](2));
     printf("LL: %f, %f, %f\n", plane[3](0), plane[3](1), plane[3](2));
+    
+    //println("Demonstratte sphere & ellipsoid");
+    //break here
 }
 
 void testAggregatePrimitive(){
