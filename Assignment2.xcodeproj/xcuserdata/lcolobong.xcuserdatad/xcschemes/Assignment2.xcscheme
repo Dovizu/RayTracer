@@ -48,22 +48,45 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-light 1.0 1.0 1.0 3.0 3.0 0.0"
-            isEnabled = "YES">
+            argument = "-pl 1.0 1.0 1.0 3.0 3.0 0.0"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-sphere 1 1 1 -5 0.2 0.5 0.1 0.6 6"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-sphere 1 -1 -1 -5 0.2 0.5 0.1 0.6 6"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-sphere 6 0 0 -10 0.2 0.5 0.1 0.6 6"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-sphere 6 0 0 -20 0.2 0.5 0.1 0.6 6"
+            argument = "-sphere 1 0 0 -7 0.2 0.5 0.1 0.6 6"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-dl 1.0 1.0 1.0 0 0 -1"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-pl 0.2 0.5 0.5 1 1 1"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = ""
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "PATH"
+            value = "/Users/lcolobong/anaconda/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin&#10;"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
