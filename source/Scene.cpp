@@ -61,6 +61,7 @@ public:
         raytracer->eye = eye;
         Sample sample;
         Ray ray;
+        int currentPercentage = 0;
         while (sampler->getSample(&sample)) {
             Color color = {0,0,0};
             camera->generateRay(sample, &ray);
@@ -71,23 +72,23 @@ public:
             }
             film->commit(sample, color);
             //Report progress
-            float percentage = (sample(0)+sample(1)*resolution)/sqr(resolution)*100.0;
-            if (percentage % 10 == 0)
-                printf("Progress: %d%%\n", ((int)percentage));
+            int percentage = (int)((sample(0)+sample(1)*resolution)/sqr(resolution)*100.0);
+            if (percentage != currentPercentage) {
+                currentPercentage = percentage;
+                printf("Progress: %d%%\n", (currentPercentage));
+            }
         }
-        film->writeImage("testImage.png");
+        film->writeImage("output.png");
     }
 };
 
-
-
-bool doesRender;
-bool automatic;
-string basePath;
 int main(int argc, char *argv[]) {
     
     Scene scene;
     vector<CmdLineOptResult> *results;
+    bool doesRender;
+    bool automatic;
+    string basePath;
     /*
      //testing
      -t         (comprehensive testing)
