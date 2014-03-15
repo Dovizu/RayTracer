@@ -22,7 +22,6 @@
 		F102F29518C1A7B0009A9505 /* LocalGeo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LocalGeo.cpp; path = source/LocalGeo.cpp; sourceTree = "<group>"; };
 		F102F29618C1A7B0009A9505 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = source/Material.cpp; sourceTree = "<group>"; };
 		F102F29718C1A7B0009A9505 /* Primitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Primitive.cpp; path = source/Primitive.cpp; sourceTree = "<group>"; };
-		F102F29818C1A7B0009A9505 /* RayTracer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RayTracer.cpp; path = source/RayTracer.cpp; sourceTree = "<group>"; };
 		F102F29A18C1A7B0009A9505 /* Sampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sampler.cpp; path = source/Sampler.cpp; sourceTree = "<group>"; };
 		F102F29B18C1A7B0009A9505 /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shape.cpp; path = source/Shape.cpp; sourceTree = "<group>"; };
 		F11AB4C818BAB0F600D8FED4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; usesTabs = 1; };
@@ -848,6 +847,7 @@
 		F1E3A50218C06F3E005BC8FE /* SVD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SVD; sourceTree = "<group>"; };
 		F1E3A50318C06F3E005BC8FE /* UmfPackSupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UmfPackSupport; sourceTree = "<group>"; };
 		F1E5EFF618CD5F0A00FB0E40 /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = source/Parser.cpp; sourceTree = "<group>"; };
+		F1E9479818D45C1B00A4DEC5 /* Raytracer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Raytracer.cpp; path = source/Raytracer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -885,9 +885,9 @@
 				F1DABDEA18CDA7BB00563184 /* Scene.cpp */,
 				F102F28F18C1A7B0009A9505 /* Camera.cpp */,
 				F102F29118C1A7B0009A9505 /* Film.cpp */,
-				F102F29818C1A7B0009A9505 /* RayTracer.cpp */,
 				F102F29A18C1A7B0009A9505 /* Sampler.cpp */,
 				F1E5EFF618CD5F0A00FB0E40 /* Parser.cpp */,
+				F1E9479818D45C1B00A4DEC5 /* Raytracer.cpp */,
 			);
 			name = Scene;
 			sourceTree = "<group>";

@@ -6,7 +6,7 @@
 
 class AABBNode {
 public:
-    vector<Primitive*> *shape;
+    vector<Primitive*> *shapes;
     AABBNode *left;
     AABBNode *right;
     BoundingBox bb;
@@ -14,7 +14,9 @@ public:
     bool isLeaf;
     
     AABBNode() {
-        shape = NULL;
+        shapes = NULL;
+        left = NULL;
+        right = NULL;
     }
     
     AABBNode(vector<Primitive*>& primList, int depth) {
@@ -23,13 +25,13 @@ public:
         Point max = {FLT_MIN, FLT_MIN, FLT_MIN};
         vector<Primitive*> leftList;
         vector<Primitive*> rightList;
-        shape = new vector<Primitive*>();
+        shapes = new vector<Primitive*>();
         
-        for (auto primPtr : primList) {
+        for (auto & primPtr : primList) {
             Point center;
             primPtr->getCenter(&center);
             average += center;
-            BoundingBox box;
+            BoundingBox box = {Point(0,0,0), Point(0,0,0)};
             primPtr->getBoundingBox(&box);
             min(0) = minf(min(0), box.min(0));
             min(1) = minf(min(1), box.min(1));
@@ -42,11 +44,12 @@ public:
         bb.min = min;
         bb.max = max;
         
-        if (primList.size() <= 6 || depth > 12) {
+        
+        if (primList.size() < 6 || depth > 10) {
             if (primList.size() != 0) {
-                for (auto primPtr : primList) {
-                    shape->push_back(primPtr);
-                    printf("Leaf node at: %d push primitive", depth);
+                for (auto & primPtr : primList) {
+                    shapes->push_back(primPtr);
+//                    printf("Leaf node at: %d push primitive\n", depth);
                 }
             }
             isLeaf = true;
@@ -54,18 +57,17 @@ public:
         }
         
         findLongestAxisIndex();
+        cout << "avgb4cmp: " << average << endl;
         average /= (float)primList.size();
         cout << "average: " << average << endl;
         cout << "axis: " << longestAxisIndex << endl;
-        for (auto primPtr : primList) {
+        for (auto & primPtr : primList) {
             if (primPtr->isLeftOf(average, longestAxisIndex)) {
                 leftList.push_back(primPtr);
             }else{
                 rightList.push_back(primPtr);
             }
         }
-        printf("Depth: %d left: %d\n", depth, leftList.size());
-        printf("Depth: %d right: %d\n", depth, rightList.size());
         left = new AABBNode(leftList, depth+1);
         right = new AABBNode(rightList, depth+1);
     }
@@ -90,10 +92,10 @@ public:
     
     bool intersect(Ray& ray, float* thit, Intersection* in)  {
         bool foundIntersection = false;
+        *thit = FLT_MAX;
         if (intersectP(ray)) {
-            *thit = FLT_MAX;
             if (isLeaf) {
-                for (auto primPtr : *shape) {
+                for (auto &primPtr : *shapes) {
                     float newThit;
                     Intersection newIn;
                     if (primPtr->intersect(ray, &newThit, &newIn)) {
@@ -131,57 +133,70 @@ public:
     }
     
     bool intersectP(Ray& ray) {
-        Vector dir = ray.direction;
-        Point pos = ray.position;
-        Point min = bb.min;
-        Point max = bb.max;
-        float txmin, txmax, tymin, tymax, tzmin, tzmax;
-        float ax = 1/X(dir);
-        float ay = 1/Y(dir);
-        float az = 1/Z(dir);
-        if (ax >= 0) {
-            txmin = (X(min) - X(pos))*ax;
-            txmax = (X(max) - X(pos))*ax;
-        } else {
-            txmin = (X(max) - X(pos))*ax;
-            txmax = (X(min) - X(pos))*ax;
+        if (isLeaf) {
+            for (auto &primPtr : *shapes) {
+                if (primPtr->intersectP(ray)) {
+                    return true;
+                }
+            }
+        }else{
+            Vector dir = ray.direction;
+            Point pos = ray.position;
+            Point min = bb.min;
+            Point max = bb.max;
+            float txmin, txmax, tymin, tymax, tzmin, tzmax;
+            float ax = 1/X(dir);
+            float ay = 1/Y(dir);
+            float az = 1/Z(dir);
+            if (ax >= 0) {
+                txmin = (X(min) - X(pos))*ax;
+                txmax = (X(max) - X(pos))*ax;
+            } else {
+                txmin = (X(max) - X(pos))*ax;
+                txmax = (X(min) - X(pos))*ax;
+            }
+            
+            if (txmin > txmax) swap(txmin, txmax);
+            if (ay >= 0) {
+                tymin = (Y(min) - Y(pos))*ay;
+                tymax = (Y(max) - Y(pos))*ay;
+            } else {
+                tymin = (Y(max) - Y(pos))*ay;
+                tymax = (Y(min) - Y(pos))*ay;
+            }
+            if (tymin > tymax) swap(tymin, tymax);
+            
+            if ((txmin > tymax) || (tymin > txmax)) {
+                return false;
+            }
+            if (tymin > txmin)
+                txmin = tymin;
+            if (tymax < txmax)
+                txmax = tymax;
+            if (az >= 0) {
+                tzmin = (Z(min) - Z(pos))*az;
+                tzmax = (Z(max) - Z(pos))*az;
+            } else {
+                tzmin = (Z(max) - Z(pos))*az;
+                tzmax = (Z(min) - Z(pos))*az;
+            }
+            if (tzmin > tzmax) swap(tzmin, tzmax);
+            if ((txmin > tzmax) || (tzmin > txmax)) {
+                return false;
+            }
+            if (tzmin > txmin)
+                txmin = tzmin;
+            if (tzmax < txmax)
+                txmax = tzmax;
+            if ((txmin > ray.t_max) || (txmax < ray.t_min)) {
+                return false;
+            }
+            //if (ray.t_min < txmin) ray.t_min = txmin;
+            //if (ray.t_max > txmax) ray.t_max = txmax;
+            //Potentially unnecessary ray reassignment values.
+            return (left->intersectP(ray) || right->intersectP(ray));
         }
-        
-        if (txmin > txmax) swap(txmin, txmax);
-        if (ay >= 0) {
-            tymin = (Y(min) - Y(pos))*ay;
-            tymax = (Y(max) - Y(pos))*ay;
-        } else {
-            tymin = (Y(max) - Y(pos))*ay;
-            tymax = (Y(min) - Y(pos))*ay;
-        }
-        if (tymin > tymax) swap(tymin, tymax);
-        
-        if ((txmin > tymax) || (tymin > txmax))
-            return false;
-        if (tymin > txmin)
-            txmin = tymin;
-        if (tymax < txmax)
-            txmax = tymax;
-        if (az >= 0) {
-            tzmin = (Z(min) - Z(pos))*az;
-            tzmax = (Z(max) - Z(pos))*az;
-        } else {
-            tzmin = (Z(max) - Z(pos))*az;
-            tzmax = (Z(min) - Z(pos))*az;
-        }
-        if (tzmin > tzmax) swap(tzmin, tzmax);
-        if ((txmin > tzmax) || (tzmin > txmax))
-            return false;
-        if (tzmin > txmin)
-            txmin = tzmin;
-        if (tzmax < txmax)
-            txmax = tzmax;
-        if ((txmin > ray.t_max) || (txmax < ray.t_min)) return false;
-        //if (ray.t_min < txmin) ray.t_min = txmin;
-        //if (ray.t_max > txmax) ray.t_max = txmax;
-        //Potentially unnecessary ray reassignment values.
-        return true;
+        return false;
     }
 };
 

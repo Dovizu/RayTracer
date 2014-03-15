@@ -71,7 +71,8 @@ public:
     }
     
     bool isLeftOf(Point& average, int axis) {
-        return shape->isLeftOf(average, axis);
+        Point transformed = (*worldToObj)*average;
+        return shape->isLeftOf(transformed, axis);
     }
 
 };

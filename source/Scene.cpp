@@ -102,6 +102,9 @@ public:
         while (sampler->getSample(&sample)) {
             Color color = {0,0,0};
             camera->generateRay(sample, &ray);
+            if (sample(0) == 122.5 && sample(1) == 8.5) {
+                //break
+            }
             raytracer->trace(ray, 0, &color);
             if (verbose) {
                 cout << "Color at: x:" << sample(0) << " y:" << sample(1) << " ";
@@ -190,7 +193,6 @@ int main(int argc, char *argv[]) {
     }
     
     if (doesRender) {
-        println("Automatic Mode");
         vector<Point> plane;
         parseObjectFiles(*(scene.world), scene.lights, basePath, &(scene.eye), plane);
         if (plane.size() == 4) {
