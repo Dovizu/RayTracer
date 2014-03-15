@@ -80,7 +80,45 @@ public:
     }
     
     bool intersect(Ray& ray, float* thit, Intersection* in)  {
-        return true;
+        bool foundIntersection = false;
+        if (intersectP(ray)) {
+            *thit = FLT_MAX;
+            if (isLeaf) {
+                for (auto primPtr : *shape) {
+                    float newThit;
+                    Intersection newIn;
+                    if (primPtr->intersect(ray, &newThit, &newIn)) {
+                        foundIntersection = true;
+                        if (newThit < *thit) {
+                            *thit = newThit;
+                            *in = newIn;
+                        }
+                    }
+                }
+                return foundIntersection;
+            }else{
+                if (left->intersectP(ray) || right->intersectP(ray)) {
+                    float newThitLeft;
+                    Intersection newInLeft;
+                    if (left->intersect(ray, &newThitLeft, &newInLeft)) {
+                        foundIntersection = true;
+                    }
+                    float newThitRight;
+                    Intersection newInRight;
+                    if (right->intersect(ray, &newThitRight, &newInRight)) {
+                        foundIntersection = true;
+                    }
+                    if (newThitLeft < newThitRight) {
+                        *thit = newThitLeft;
+                        *in = newInLeft;
+                    }else{
+                        *thit = newThitRight;
+                        *in = newInRight;
+                    }
+                }
+            }
+        }
+        return foundIntersection;
     }
     
     bool intersectP(Ray& ray) {
