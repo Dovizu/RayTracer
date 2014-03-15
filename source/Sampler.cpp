@@ -75,7 +75,7 @@ bool Sampler::getSample(Sample* s)
                 (*s)(0)+=jitter(offset);
                 (*s)(0)+=jitter(offset);
             }
-            xIndex+=unit;
+            //xIndex+=unit;
             return true;
         }
         return false;
@@ -88,7 +88,7 @@ bool Sampler::getSample(Sample* s)
 
 float Sampler::jitter(float offset)
 {
-    return -offset + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX))*2*offset;
+    return -offset/2 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX))*offset;
 }
 
 #endif /* defined(SAMPLER_CPP) */

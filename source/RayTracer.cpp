@@ -54,7 +54,7 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         Ray lray = Ray();
         Color lcolor = {0,0,0};
         lights[i].generateLightRay(in.localGeo, &lray, &lcolor);
-        if (!tree->intersectP(lray)) {
+        if (!tree->intersectP2(lray)) {
             *color += shading(in.localGeo,brdf,lray,lcolor);
         }else{
             *color += shadeAmbient(brdf, lcolor);
