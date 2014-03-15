@@ -17,6 +17,10 @@ public:
     // Triangle and Sphere are probably best implemented here
     // The intersection with the ray at t outside the range [t_min, t_max]
     // should return false.
+    
+    virtual BoundingBox getBoundingBox() = 0;
+    virtual bool isLeftOf(Point& average, int axis) = 0;
+    virtual void getCenter(Point* pt) = 0;
 };
 
 #endif

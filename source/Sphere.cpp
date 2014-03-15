@@ -101,6 +101,21 @@ public:
             else return false;
         }
     }
+    
+    BoundingBox getBoundingBox() {
+        BoundingBox bb;
+        bb.min = center-radius;
+        bb.max = center+radius;
+        return bb;
+    }
+    
+    bool isLeftOf(Point& average, int axis) {
+        return center(axis) < average(axis);
+    }
+    
+    void getCenter(Point *pt) {
+        *pt = center;
+    }
 };
 
 #endif /* defined(__Assignment2__Sphere__) */

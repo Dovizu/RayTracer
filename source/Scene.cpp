@@ -95,6 +95,7 @@ public:
     void render() {
         raytracer = new Raytracer(*world, lights, maxDepth);
         raytracer->eye = eye;
+        raytracer->generateTree();
         Sample sample;
         Ray ray;
         int currentPercentage = 0;
