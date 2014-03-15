@@ -6,7 +6,7 @@ public:
     int xPixels, yPixels;
     float xIndex, yIndex, unit, offset;
     int sqrt_rpp; //The square root of rays per pixel
-    bool antialiase = false;
+    bool antialias = false;
     
 public:
     Sampler();
@@ -56,8 +56,12 @@ bool Sampler::getSample(Sample* s)
     }
     if (xIndex < xPixels)
     {
-        (*s)(0) = xIndex + offset + jitter(offset);
-        (*s)(1) = yIndex + offset + jitter(offset);
+        (*s)(0) = xIndex + offset;
+        (*s)(1) = yIndex + offset;
+        if(antialias){
+            jitter(offset);
+            jitter(offset);
+        }
         xIndex+=unit;
         return true;
     }
@@ -65,8 +69,12 @@ bool Sampler::getSample(Sample* s)
         xIndex = 0;
         yIndex+=unit;
         if (yIndex < yPixels) {
-            (*s)(0) = xIndex + offset + jitter(offset);
-            (*s)(1) = yIndex + offset + jitter(offset);
+            (*s)(0) = xIndex + offset;
+            (*s)(1) = yIndex + offset;
+            if (antialias) {
+                (*s)(0)+=jitter(offset);
+                (*s)(0)+=jitter(offset);
+            }
             xIndex+=unit;
             return true;
         }

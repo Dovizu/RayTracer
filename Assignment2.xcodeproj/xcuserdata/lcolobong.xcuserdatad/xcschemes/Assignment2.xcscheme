@@ -76,7 +76,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-render renderSample1/ -out testCube.png -resolution 120 -rpp 2"
+            argument = "-render renderSample1/ -out testCube.png -resolution 120 "
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

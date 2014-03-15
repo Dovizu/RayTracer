@@ -182,6 +182,7 @@ int main(int argc, char *argv[]) {
             (scene.sampler)->sqrt_rpp = sqrt_rpp;
             (scene.sampler)->unit = 1/sqrt_rpp;
             (scene.sampler)->offset = 1/sqrt_rpp/2;
+            (scene.sampler)->antialias = true;
             (scene.film)->rpp = pow(stoi(result.args->at(0)),2);
         }
     }
