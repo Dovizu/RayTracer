@@ -315,10 +315,6 @@ void parseObjectFiles(AggregatePrimitive& aggregate,
                     brdf->sp = atoi(it->second.c_str());
                 }
             }
-            //convertedShape is an aggregate of triangles
-            AggregatePrimitive *convertedShape = new AggregatePrimitive();
-            aggregate.primList.push_back(convertedShape);
-
             vector<float> normals = shape.mesh.normals;
             vector<unsigned int> indices = shape.mesh.indices;
             vector<float> positions = shape.mesh.positions;
@@ -356,7 +352,7 @@ void parseObjectFiles(AggregatePrimitive& aggregate,
                 geoPrim->objToWorld = transformation;
                 geoPrim->completeTransformationData();
                 //do transformation here
-                convertedShape->primList.push_back(geoPrim);
+                aggregate.primList.push_back(geoPrim);
                 if (verbose) {
                     println("Obtained Triangle");
                     printf("A: %f, %f, %f\n", tri->A(0), tri->A(1), tri->A(2));
