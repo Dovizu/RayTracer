@@ -23,6 +23,7 @@ public:
         Point max = {FLT_MIN, FLT_MIN, FLT_MIN};
         vector<Primitive*> leftList;
         vector<Primitive*> rightList;
+        shape = new vector<Primitive*>();
         
         for (auto primPtr : primList) {
             Point center;
@@ -45,6 +46,7 @@ public:
             if (primList.size() != 0) {
                 for (auto primPtr : primList) {
                     shape->push_back(primPtr);
+                    printf("Leaf node at: %d push primitive", depth);
                 }
             }
             isLeaf = true;
