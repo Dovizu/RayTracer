@@ -11,6 +11,7 @@ class Scene {
 public:
     float resolution;
     int maxDepth;
+    int sqrt_rpp = 1;
     Point UL;
     Point UR;
     Point LR;
@@ -55,6 +56,27 @@ public:
         this->maxDepth = maxDepth;
         world = new AggregatePrimitive();
         sampler = new Sampler(resolution, resolution);
+        camera = new Camera(UL, UR, LR, LL, eye, resolution, resolution);
+        film = new Film(resolution, resolution);
+    }
+    
+    Scene(Point UL,
+          Point UR,
+          Point LR,
+          Point LL,
+          Point eye,
+          float resolution,
+          int maxDepth,
+          int sqrt_rpp){
+        this->UL = UL;
+        this->UR = UR;
+        this->LR = LR;
+        this->LL = LL;
+        this->eye = eye;
+        this->resolution = resolution;
+        this->maxDepth = maxDepth;
+        world = new AggregatePrimitive();
+        sampler = new Sampler(resolution, resolution, sqrt_rpp);
         camera = new Camera(UL, UR, LR, LL, eye, resolution, resolution);
         film = new Film(resolution, resolution);
     }
@@ -115,7 +137,7 @@ int main(int argc, char *argv[]) {
      -render path/to/object/
      -resolution pixels
      */
-    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tintersect(0)-ttrans(0)-tparser(1)-render(1)-resolution(1)-out(1)-verbose(0)";
+    string options = "-t(0)-tobj(0)-tsampler(0)-tcam(0)-tintersect(0)-ttrans(0)-tparser(1)-render(1)-resolution(1)-out(1)-verbose(0)-rpp(1)";
     getCmdLineOptions(argc, argv, options, &results);
     for (auto & result : *results) {
         if (result.optName.compare("-verbose")==0) {
@@ -154,6 +176,13 @@ int main(int argc, char *argv[]) {
         }
         if (result.optName.compare("-out")==0) {
             scene.outputFileName = result.args->at(0);
+        }
+        if (result.optName.compare("-rpp")==0) {
+            float sqrt_rpp = stoi(result.args->at(0));
+            (scene.sampler)->sqrt_rpp = sqrt_rpp;
+            (scene.sampler)->unit = 1/sqrt_rpp;
+            (scene.sampler)->offset = 1/sqrt_rpp/2;
+            (scene.film)->rpp = pow(stoi(result.args->at(0)),2);
         }
     }
     

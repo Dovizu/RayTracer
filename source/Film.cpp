@@ -8,6 +8,7 @@ class Film
 public:
     int xPixels;
     int yPixels;
+    float rpp = 1.0f;
     Color* pixelColors;
     
 public:
@@ -23,13 +24,18 @@ Film::Film(int xResolution, int yResolution)
     xPixels = xResolution;
     yPixels = yResolution;
     pixelColors = new Color[xPixels*yPixels];
+    for (int i = 0; i < yPixels; i++) {
+        for (int j = 0; j<xPixels; j++) {
+            pixelColors[j + i*yPixels] = {0,0,0};
+        }
+    }
 }
 
 void Film::commit(Sample& sample, Color& color)
 {
     int xcoord = (int) sample(0);
     int ycoord = (int) sample(1);
-    pixelColors[xcoord + xPixels*ycoord] = color;
+    pixelColors[xcoord + xPixels*ycoord] += color/rpp;
 }
 
 void Film::writeImage(const char* filename)
