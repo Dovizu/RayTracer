@@ -58,18 +58,18 @@ public:
         
     }
     
-    void getBoudingBox(BoundingBox** bb) {
+    void getBoundingBox(BoundingBox* bb) {
         if (!bbSet && shape) {
             BoundingBox unconverted;
-            unconverted = shape->getBoudingBox();
+            unconverted = shape->getBoundingBox();
             this->bb = (*objToWorld)*unconverted;
             bbSet = true;
         }
-        *bb = &(this->bb);
+        *bb = (this->bb);
     }
     
-    void isLeftOf(Point& pt) {
-        
+    bool isLeftOf(Point& average, int axis) {
+        return shape->isLeftOf(average, axis);
     }
 
 };

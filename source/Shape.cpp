@@ -18,7 +18,8 @@ public:
     // The intersection with the ray at t outside the range [t_min, t_max]
     // should return false.
     
-    virtual BoundingBox getBoudingBox() = 0;
+    virtual BoundingBox getBoundingBox() = 0;
+    virtual bool isLeftOf(Point& average, int axis) = 0;
 };
 
 #endif

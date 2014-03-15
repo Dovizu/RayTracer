@@ -104,7 +104,7 @@ public:
     }
     
     
-    BoundingBox getBoudingBox() {
+    BoundingBox getBoundingBox() {
         float minX, maxX;
         float minY, maxY;
         float minZ, maxZ;
@@ -118,6 +118,11 @@ public:
         bb.min = Point(minX, minY, minZ);
         bb.max = Point(maxX, maxY, maxZ);
         return bb;
+    }
+    
+    bool isLeftOf(Point& average, int axis) {
+        Point centroid = (A+B+C)/3.0;
+        return centroid(axis) < average(axis);
     }
 };
 

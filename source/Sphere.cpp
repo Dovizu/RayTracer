@@ -102,11 +102,15 @@ public:
         }
     }
     
-    BoundingBox getBoudingBox() {
+    BoundingBox getBoundingBox() {
         BoundingBox bb;
         bb.min = center-radius;
         bb.max = center+radius;
         return bb;
+    }
+    
+    bool isLeftOf(Point& average, int axis) {
+        return center(axis) < average(axis);
     }
 };
 
