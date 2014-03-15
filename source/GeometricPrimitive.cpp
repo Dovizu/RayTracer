@@ -14,18 +14,22 @@ public:
     Transformation *worldToObj;
     Shape* shape;
     Material* mat;
+    BoundingBox bb;
+    bool bbSet;
     
     GeometricPrimitive(){
         shape = NULL;
         mat = NULL;
         objToWorld = NULL;
         worldToObj = NULL;
+        bbSet = false;
     }
     GeometricPrimitive(Transformation *objToWorldTrans, Shape *shape, Material *mat) {
         objToWorld = objToWorldTrans;
         worldToObj = new Transformation((*objToWorld).m.inverse());
         this->shape = shape;
         this->mat = mat;
+        bbSet = false;
     }
 
     void completeTransformationData(){
@@ -54,7 +58,17 @@ public:
         
     }
     
-    void getBoudingBox(BoundingBox& bb) {
+    void getBoudingBox(BoundingBox** bb) {
+        if (!bbSet && shape) {
+            BoundingBox unconverted;
+            unconverted = shape->getBoudingBox();
+            this->bb = (*objToWorld)*unconverted;
+            bbSet = true;
+        }
+        *bb = &(this->bb);
+    }
+    
+    void isLeftOf(Point& pt) {
         
     }
 

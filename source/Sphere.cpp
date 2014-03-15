@@ -101,6 +101,13 @@ public:
             else return false;
         }
     }
+    
+    BoundingBox getBoudingBox() {
+        BoundingBox bb;
+        bb.min = center-radius;
+        bb.max = center+radius;
+        return bb;
+    }
 };
 
 #endif /* defined(__Assignment2__Sphere__) */

@@ -7,7 +7,7 @@
 class AABBNode {
 public:
     GeometricPrimitive *shape;
-    AABBNode *left
+    AABBNode *left;
     AABBNode *right;
     BoundingBox bb;
     
@@ -23,7 +23,12 @@ public:
             Point center;
             primPtr->getCenter(&center);
             average += center;
-            
+        }
+        average /= (float)primList.size();
+        for (auto primPtr : primList) {
+            if (primPtr->isLeftOf(average)) {
+                
+            }
         }
     }
     

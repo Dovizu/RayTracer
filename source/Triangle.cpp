@@ -102,6 +102,23 @@ public:
         }
         return false;
     }
+    
+    
+    BoundingBox getBoudingBox() {
+        float minX, maxX;
+        float minY, maxY;
+        float minZ, maxZ;
+        minX = min<float>(A(0), min<float>(B(0), C(0)));
+        minY = min<float>(A(1), min<float>(B(1), C(1)));
+        minZ = min<float>(A(2), min<float>(B(2), C(2)));
+        maxX = max<float>(A(0), max<float>(B(0), C(0)));
+        maxY = max<float>(A(1), max<float>(B(1), C(1)));
+        maxZ = max<float>(A(2), max<float>(B(2), C(2)));
+        BoundingBox bb;
+        bb.min = Point(minX, minY, minZ);
+        bb.max = Point(maxX, maxY, maxZ);
+        return bb;
+    }
 };
 
 #endif /* defined(__Assignment2__Triangle__) */

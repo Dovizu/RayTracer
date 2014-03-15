@@ -17,6 +17,8 @@ public:
     // Triangle and Sphere are probably best implemented here
     // The intersection with the ray at t outside the range [t_min, t_max]
     // should return false.
+    
+    virtual BoundingBox getBoudingBox() = 0;
 };
 
 #endif
