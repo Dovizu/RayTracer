@@ -16,6 +16,7 @@
 #include "Triangle.cpp"
 #include "Parser.cpp"
 #include "Light.cpp"
+#include "AABBNode.cpp"
 
 void testCImg() {
     println("===Testing CImg===");

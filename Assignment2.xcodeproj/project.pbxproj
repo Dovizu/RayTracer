@@ -40,6 +40,7 @@
 		F1C8F44A18D3EBEC00969CA5 /* gourd.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gourd.obj; sourceTree = "<group>"; };
 		F1C8F44B18D3EBEC00969CA5 /* gourd.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gourd.param; sourceTree = "<group>"; };
 		F1C8F44C18D3EC1000969CA5 /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
+		F1C8F44D18D3F76400969CA5 /* AABBNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AABBNode.cpp; path = source/AABBNode.cpp; sourceTree = "<group>"; };
 		F1DABDEA18CDA7BB00563184 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = source/Scene.cpp; sourceTree = "<group>"; };
 		F1E39BC818C0384D005BC8FE /* CImg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CImg.h; sourceTree = "<group>"; };
 		F1E39BCA18C0384D005BC8FE /* captcha.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = captcha.cpp; sourceTree = "<group>"; };
@@ -860,6 +861,7 @@
 				F102F29618C1A7B0009A9505 /* Material.cpp */,
 				F102F29418C1A7B0009A9505 /* Light.cpp */,
 				F102F29518C1A7B0009A9505 /* LocalGeo.cpp */,
+				F1C8F44D18D3F76400969CA5 /* AABBNode.cpp */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";
