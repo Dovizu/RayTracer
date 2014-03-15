@@ -108,17 +108,23 @@ public:
                 }
                 return foundIntersection;
             }else{
-                if (left->intersectP(ray) || right->intersectP(ray)) {
-                    float newThitLeft;
-                    Intersection newInLeft;
+                float newThitLeft = FLT_MAX;
+                float newThitRight = FLT_MAX;
+                Intersection newInLeft;
+                Intersection newInRight;
+                bool left_intercept = left->intersectP(ray);
+                bool right_intercept = right->intersectP(ray);
+                if (left_intercept) {
                     if (left->intersect(ray, &newThitLeft, &newInLeft)) {
                         foundIntersection = true;
                     }
-                    float newThitRight;
-                    Intersection newInRight;
+                }
+                if (right_intercept){
                     if (right->intersect(ray, &newThitRight, &newInRight)) {
                         foundIntersection = true;
                     }
+                }
+                if (left_intercept || right_intercept){
                     if (newThitLeft < newThitRight) {
                         *thit = newThitLeft;
                         *in = newInLeft;
