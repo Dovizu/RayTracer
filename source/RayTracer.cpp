@@ -16,7 +16,6 @@ public:
     Raytracer (){};
     Raytracer(AggregatePrimitive &list, vector<Light> &lights, int maxDepth);
     void trace(Ray& ray, int depth, Color* color);
-    void setToBlack(Color* c);
     Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
     Color shadeAmbient(BRDF &brdf, Color &lcolor);
     Ray createReflectRay(LocalGeo &local, Ray &ray);
@@ -32,14 +31,14 @@ Raytracer::Raytracer(AggregatePrimitive& list, vector<Light> &lights, int maxDep
 void Raytracer::trace(Ray& ray, int depth, Color* color)
 {
     if (depth > maxDepth) {
-        setToBlack(color);
+        *color = {0,0,0};
         return;
     }
     float thit;
     Intersection in = Intersection();
     if(!primitives.intersect(ray, &thit, &in))
     {
-        setToBlack(color);
+        *color = {0,0,0};
         return;
     }
     
@@ -48,7 +47,7 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
     in.primitive->getBRDF(in.localGeo, &brdf);
     
     //There is an intersection; loop through all light sources
-    for (int i = 0; i < lights.size(); i++) {
+    for (size_t i = 0; i < lights.size(); i++) {
         Ray lray = Ray();
         Color lcolor = {0,0,0};
         lights[i].generateLightRay(in.localGeo, &lray, &lcolor);
@@ -66,13 +65,6 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         trace(reflectRay, depth+1, &tempColor);
         *color += brdf.kr*tempColor;
     }
-}
-
-void Raytracer::setToBlack(Color* c)
-{
-    (*c)(0) = 0;
-    (*c)(1) = 0;
-    (*c)(2) = 0;
 }
 
 Color Raytracer::shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor)

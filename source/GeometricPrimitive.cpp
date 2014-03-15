@@ -10,14 +10,16 @@
 
 class GeometricPrimitive : public Primitive {
 public:
-    Transformation *objToWorld = NULL;
-    Transformation *worldToObj = NULL;
+    Transformation *objToWorld;
+    Transformation *worldToObj;
     Shape* shape;
     Material* mat;
     
     GeometricPrimitive(){
         shape = NULL;
         mat = NULL;
+        objToWorld = NULL;
+        worldToObj = NULL;
     }
     GeometricPrimitive(Transformation *objToWorldTrans, Shape *shape, Material *mat) {
         objToWorld = objToWorldTrans;

@@ -7,16 +7,18 @@ class Triangle : public Shape {
 public:
     Point A, B, C;
     Vector Anorm, Bnorm, Cnorm;
-    bool predefinedNormal = false;
+    bool predefinedNormal;
     Triangle() {
         A=Point(0,0,0);
         B=Point(0,0,0);
         C=Point(0,0,0);
+        predefinedNormal = false;
     }
     Triangle(Point a, Point b, Point c) {
         A = a;
         B = b;
         C = c;
+        predefinedNormal = false;
     }
     
     /**

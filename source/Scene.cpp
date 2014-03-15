@@ -22,7 +22,7 @@ public:
     Camera *camera;
     Raytracer *raytracer;
     Film *film;
-    string outputFileName = "output.png";
+    string outputFileName;
     
     Scene() {
         float defaultResolution = 160;
@@ -37,6 +37,7 @@ public:
         sampler = new Sampler(defaultResolution, defaultResolution);
         camera = new Camera(UL, UR, LR, LL, eye, defaultResolution, defaultResolution);
         film = new Film(defaultResolution, defaultResolution);
+        outputFileName = "output.png";
     }
     
     Scene(Point UL,

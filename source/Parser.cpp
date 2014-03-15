@@ -101,7 +101,7 @@ void parseTransformFile(AggregatePrimitive& aggregate,
                     cerr << "syntax error for rotate" << endl;
                     continue;
                 }
-                Vector axis = {atof(token[1]), atof(token[2]), atof(token[3])};
+                Vector axis = {(float)atof(token[1]), (float)atof(token[2]), (float)atof(token[3])};
                 float angle = atof(token[4]);
                 composedTransform = AngleAxisf(angle, axis.normalized()) * composedTransform;
             }else if (strcmp(token[0], "translate")==0) {
