@@ -47,6 +47,10 @@ float BCh(Color c) {return c(2);}
 float X(Array3f c) {return c(0);}
 float Y(Array3f c) {return c(1);}
 float Z(Array3f c) {return c(2);}
+float X(Vector v) {return v(0);}
+float Y(Vector v) {return v(1);}
+float Z(Vector v) {return v(2);}
+
 
 #pragma mark - Utilities
 
