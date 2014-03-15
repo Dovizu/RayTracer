@@ -4,7 +4,8 @@
 #include "Intersection.cpp"
 #include "BRDF.cpp"
 #include "LocalGeo.cpp"
-
+#include "AABBNode.cpp"
+#include "Primitive.cpp"
 
 class Raytracer {
 public:
@@ -12,6 +13,7 @@ public:
     vector<Light> lights;
     int maxDepth;
     Point eye;
+    AABBNode *tree;
     
     Raytracer (){};
     Raytracer(AggregatePrimitive &list, vector<Light> &lights, int maxDepth);
@@ -19,6 +21,7 @@ public:
     Color shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor);
     Color shadeAmbient(BRDF &brdf, Color &lcolor);
     Ray createReflectRay(LocalGeo &local, Ray &ray);
+    void generateTree();
 };
 
 Raytracer::Raytracer(AggregatePrimitive& list, vector<Light> &lights, int maxDepth)
@@ -36,7 +39,7 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
     }
     float thit;
     Intersection in = Intersection();
-    if(!primitives.intersect(ray, &thit, &in))
+    if(!tree->intersect(ray, &thit, &in))
     {
         *color = {0,0,0};
         return;
@@ -51,7 +54,7 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         Ray lray = Ray();
         Color lcolor = {0,0,0};
         lights[i].generateLightRay(in.localGeo, &lray, &lcolor);
-        if (!primitives.intersectP(lray)) {
+        if (!tree->intersectP(lray)) {
             *color += shading(in.localGeo,brdf,lray,lcolor);
         }else{
             *color += shadeAmbient(brdf, lcolor);
@@ -65,6 +68,10 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         trace(reflectRay, depth+1, &tempColor);
         *color += brdf.kr*tempColor;
     }
+}
+
+void Raytracer::generateTree() {
+    tree = new AABBNode((primitives.primList), 0);
 }
 
 Color Raytracer::shading(LocalGeo &local, BRDF &brdf, Ray &lray, Color &lcolor)

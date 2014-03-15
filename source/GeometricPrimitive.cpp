@@ -55,7 +55,9 @@ public:
     }
     
     void getCenter(Point *pt) {
-        
+        Point p;
+        shape->getCenter(&p);
+        *pt = (*objToWorld)*p;
     }
     
     void getBoundingBox(BoundingBox* bb) {

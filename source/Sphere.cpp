@@ -112,6 +112,10 @@ public:
     bool isLeftOf(Point& average, int axis) {
         return center(axis) < average(axis);
     }
+    
+    void getCenter(Point *pt) {
+        *pt = center;
+    }
 };
 
 #endif /* defined(__Assignment2__Sphere__) */

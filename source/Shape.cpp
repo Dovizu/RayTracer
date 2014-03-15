@@ -20,6 +20,7 @@ public:
     
     virtual BoundingBox getBoundingBox() = 0;
     virtual bool isLeftOf(Point& average, int axis) = 0;
+    virtual void getCenter(Point* pt) = 0;
 };
 
 #endif

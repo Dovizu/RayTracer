@@ -124,6 +124,10 @@ public:
         Point centroid = (A+B+C)/3.0;
         return centroid(axis) < average(axis);
     }
+    
+    void getCenter(Point* pt) {
+        *pt = (A+B+C)/3.0;
+    }
 };
 
 #endif /* defined(__Assignment2__Triangle__) */

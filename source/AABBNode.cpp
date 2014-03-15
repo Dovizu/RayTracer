@@ -6,7 +6,7 @@
 
 class AABBNode {
 public:
-    vector<GeometricPrimitive*> *shape;
+    vector<Primitive*> *shape;
     AABBNode *left;
     AABBNode *right;
     BoundingBox bb;
@@ -17,12 +17,12 @@ public:
         shape = NULL;
     }
     
-    AABBNode(vector<GeometricPrimitive*>& primList, int depth) {
+    AABBNode(vector<Primitive*>& primList, int depth) {
         Point average = {0,0,0};
         Point min = {FLT_MAX, FLT_MAX, FLT_MAX};
         Point max = {FLT_MIN, FLT_MIN, FLT_MIN};
-        vector<GeometricPrimitive*> leftList;
-        vector<GeometricPrimitive*> rightList;
+        vector<Primitive*> leftList;
+        vector<Primitive*> rightList;
         
         for (auto primPtr : primList) {
             Point center;
@@ -41,15 +41,20 @@ public:
         bb.min = min;
         bb.max = max;
         
-        if (primList.size() <= 6) {
-            for (auto primPtr : primList) {
-                shape->push_back(primPtr);
+        if (primList.size() <= 6 || depth > 12) {
+            if (primList.size() != 0) {
+                for (auto primPtr : primList) {
+                    shape->push_back(primPtr);
+                }
             }
             isLeaf = true;
+            return;
         }
         
         findLongestAxisIndex();
         average /= (float)primList.size();
+        cout << "average: " << average << endl;
+        cout << "axis: " << longestAxisIndex << endl;
         for (auto primPtr : primList) {
             if (primPtr->isLeftOf(average, longestAxisIndex)) {
                 leftList.push_back(primPtr);
@@ -57,6 +62,8 @@ public:
                 rightList.push_back(primPtr);
             }
         }
+        printf("Depth: %d left: %d\n", depth, leftList.size());
+        printf("Depth: %d right: %d\n", depth, rightList.size());
         left = new AABBNode(leftList, depth+1);
         right = new AABBNode(rightList, depth+1);
     }
