@@ -102,6 +102,15 @@ public:
         }
         return false;
     }
+    
+    bool getBarycentric(Point p){
+        Vector v0, v1, v2;
+        float d00,d01,d11,d20,d21;
+        v0 = makeVec(A,B); //B-A        maybe add this to parser
+        v1 = makeVec(A,C); //C-A
+        v2 = makeVec(A,p); //p-A
+        d00 = v0
+    }
 };
 
 #endif /* defined(__Assignment2__Triangle__) */
