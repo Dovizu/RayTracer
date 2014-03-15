@@ -6,33 +6,128 @@
 
 class AABBNode {
 public:
-    GeometricPrimitive *shape;
+    vector<Primitive*> *shape;
     AABBNode *left;
     AABBNode *right;
     BoundingBox bb;
+    int longestAxisIndex;
+    bool isLeaf;
     
     AABBNode() {
         shape = NULL;
     }
     
-    AABBNode(vector<GeometricPrimitive*>& primList, int depth) {
+    AABBNode(vector<Primitive*>& primList, int depth) {
         Point average = {0,0,0};
-        Array3f min = {FLT_MAX, FLT_MAX, FLT_MAX};
-        Array3f max = {FLT_MIN, FLT_MIN, FLT_MIN};
+        Point min = {FLT_MAX, FLT_MAX, FLT_MAX};
+        Point max = {FLT_MIN, FLT_MIN, FLT_MIN};
+        vector<Primitive*> leftList;
+        vector<Primitive*> rightList;
+        shape = new vector<Primitive*>();
+        
         for (auto primPtr : primList) {
             Point center;
             primPtr->getCenter(&center);
             average += center;
-            
+            BoundingBox box;
+            primPtr->getBoundingBox(&box);
+            min(0) = minf(min(0), box.min(0));
+            min(1) = minf(min(1), box.min(1));
+            min(2) = minf(min(2), box.min(2));
+            max(0) = maxf(max(0), box.max(0));
+            max(1) = maxf(max(1), box.max(1));
+            max(2) = maxf(max(2), box.max(2));
+        }
+        //set bounding box
+        bb.min = min;
+        bb.max = max;
+        
+        if (primList.size() <= 6 || depth > 12) {
+            if (primList.size() != 0) {
+                for (auto primPtr : primList) {
+                    shape->push_back(primPtr);
+                    printf("Leaf node at: %d push primitive", depth);
+                }
+            }
+            isLeaf = true;
+            return;
+        }
+        
+        findLongestAxisIndex();
+        average /= (float)primList.size();
+        cout << "average: " << average << endl;
+        cout << "axis: " << longestAxisIndex << endl;
+        for (auto primPtr : primList) {
+            if (primPtr->isLeftOf(average, longestAxisIndex)) {
+                leftList.push_back(primPtr);
+            }else{
+                rightList.push_back(primPtr);
+            }
+        }
+        printf("Depth: %d left: %d\n", depth, leftList.size());
+        printf("Depth: %d right: %d\n", depth, rightList.size());
+        left = new AABBNode(leftList, depth+1);
+        right = new AABBNode(rightList, depth+1);
+    }
+    
+    void findLongestAxisIndex() {
+        float xDis = bb.max(0) - bb.min(0);
+        float yDis = bb.max(1) - bb.min(1);
+        float zDis = bb.max(2) - bb.max(2);
+        
+        float biggest = maxf(xDis, maxf(yDis, zDis));
+        
+        if (biggest == xDis) {
+            longestAxisIndex = 0;
+        }else if (biggest == yDis) {
+            longestAxisIndex = 1;
+        }else if (biggest == zDis) {
+            longestAxisIndex = 2;
+        }else {
+            longestAxisIndex = 0;
         }
     }
     
-    bool isLeaf() {
-        return shape == NULL;
-    }
-    
     bool intersect(Ray& ray, float* thit, Intersection* in)  {
-        return true;
+        bool foundIntersection = false;
+        if (intersectP(ray)) {
+            *thit = FLT_MAX;
+            if (isLeaf) {
+                for (auto primPtr : *shape) {
+                    float newThit;
+                    Intersection newIn;
+                    if (primPtr->intersect(ray, &newThit, &newIn)) {
+                        foundIntersection = true;
+                        if (newThit < *thit) {
+                            *thit = newThit;
+                            *in = newIn;
+                        }
+                    }
+                }
+                return foundIntersection;
+            }else{
+                if (left->intersectP(ray) || right->intersectP(ray)) {
+                    float newThitLeft;
+                    Intersection newInLeft;
+                    if (left->intersect(ray, &newThitLeft, &newInLeft)) {
+                        foundIntersection = true;
+                    }
+                    float newThitRight;
+                    Intersection newInRight;
+                    if (right->intersect(ray, &newThitRight, &newInRight)) {
+                        foundIntersection = true;
+                    }
+                    if (newThitLeft < newThitRight) {
+                        *thit = newThitLeft;
+                        *in = newInLeft;
+                    }else{
+                        *thit = newThitRight;
+                        *in = newInRight;
+                    }
+                }
+            }
+        }
+        return foundIntersection;
     }
     
     bool intersectP(Ray& ray) {

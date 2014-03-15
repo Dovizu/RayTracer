@@ -54,6 +54,9 @@ float Z(Vector v) {return v(2);}
 
 #pragma mark - Utilities
 
+float minf(float num1, float num2) {return min<float>(num1, num2);}
+float maxf(float num1, float num2) {return max<float>(num1, num2);}
+
 string fileNameWithoutExt(const string& fileName) {
     size_t position = fileName.find(".");
     return (string::npos == position)? fileName : fileName.substr(0, position);

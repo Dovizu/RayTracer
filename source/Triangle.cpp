@@ -40,8 +40,8 @@ public:
         Matrix3f A_mat;
         Vector b_vec;
         A_mat <<    X(a)-X(b),  X(a)-X(c),  X(d),
-                    Y(a)-Y(b),  Y(a)-Y(c),  Y(d),
-                    Z(a)-Z(b),  Z(a)-Z(c),  Z(d);
+        Y(a)-Y(b),  Y(a)-Y(c),  Y(d),
+        Z(a)-Z(b),  Z(a)-Z(c),  Z(d);
         b_vec << X(a)-X(e), Y(a)-Y(e), Z(a)-Z(e);
         Vector sol = A_mat.colPivHouseholderQr().solve(b_vec);
         float beta = sol(0);
@@ -90,8 +90,8 @@ public:
         Matrix3f A_mat;
         Vector b_vec;
         A_mat <<    X(a)-X(b),  X(a)-X(c),  X(d),
-                    Y(a)-Y(b),  Y(a)-Y(c),  Y(d),
-                    Z(a)-Z(b),  Z(a)-Z(c),  Z(d);
+        Y(a)-Y(b),  Y(a)-Y(c),  Y(d),
+        Z(a)-Z(b),  Z(a)-Z(c),  Z(d);
         b_vec << X(a)-X(e), Y(a)-Y(e), Z(a)-Z(e);
         Vector sol = A_mat.colPivHouseholderQr().solve(b_vec);
         float beta = sol(0);
@@ -125,6 +125,31 @@ public:
         b(0) = u;
         b(1) = v;
         b(2) = w;
+    }
+    
+    BoundingBox getBoundingBox() {
+        float minX, maxX;
+        float minY, maxY;
+        float minZ, maxZ;
+        minX = min<float>(A(0), min<float>(B(0), C(0)));
+        minY = min<float>(A(1), min<float>(B(1), C(1)));
+        minZ = min<float>(A(2), min<float>(B(2), C(2)));
+        maxX = max<float>(A(0), max<float>(B(0), C(0)));
+        maxY = max<float>(A(1), max<float>(B(1), C(1)));
+        maxZ = max<float>(A(2), max<float>(B(2), C(2)));
+        BoundingBox bb;
+        bb.min = Point(minX, minY, minZ);
+        bb.max = Point(maxX, maxY, maxZ);
+        return bb;
+    }
+    
+    bool isLeftOf(Point& average, int axis) {
+        Point centroid = (A+B+C)/3.0;
+        return centroid(axis) < average(axis);
+    }
+    
+    void getCenter(Point* pt) {
+        *pt = (A+B+C)/3.0;
     }
 };
 

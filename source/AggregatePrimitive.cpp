@@ -23,6 +23,18 @@ public:
         //This should never get called, because in->primitve
         //will never be an aggregate primitive
     }
+    
+    
+    void getCenter(Point *pt) {
+        exit(1);
+    }
+    void getBoundingBox(BoundingBox* bb) {
+        exit(1);
+    }
+    
+    bool isLeftOf(Point& average, int axis) {
+        exit(1);
+    }
 };
 
 AggregatePrimitive::AggregatePrimitive()
