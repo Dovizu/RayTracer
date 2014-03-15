@@ -49,6 +49,14 @@ public:
     void getBRDF(LocalGeo& local, BRDF* brdf) {
         mat->getBRDF(local, brdf);
     }
+    
+    void getCenter(Point *pt) {
+        
+    }
+    
+    void getBoudingBox(BoundingBox& bb) {
+        
+    }
 
 };
 

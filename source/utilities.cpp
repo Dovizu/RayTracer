@@ -27,6 +27,11 @@ typedef struct {
 } CmdLineOptResult;
 bool verbose = false;
 
+typedef struct {
+    Point min;
+    Point max;
+} BoundingBox;
+
 #pragma mark - Math
 float sqr(float x) { return x*x;}
 
