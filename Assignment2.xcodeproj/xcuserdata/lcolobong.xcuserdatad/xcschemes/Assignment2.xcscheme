@@ -45,7 +45,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-render manual"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-pl 1.0 1.0 1.0 3.0 3.0 0.0"
@@ -61,7 +61,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-sphere 6 0 0 -10 0.2 0.5 0.1 0.6 6"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-sphere 1 0 0 -7 0.2 0.5 0.1 0.6 6"
@@ -69,15 +69,15 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-dl 1.0 1.0 1.0 0 0 -1"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-pl 0.2 0.5 0.5 1 1 1"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = ""
-            isEnabled = "NO">
+            argument = "-render renderSample1/ -out testCube.png -resolution 120"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>
