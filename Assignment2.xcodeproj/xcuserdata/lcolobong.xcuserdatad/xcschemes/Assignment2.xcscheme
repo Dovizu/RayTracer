@@ -48,6 +48,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = ""
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-pl 1.0 1.0 1.0 3.0 3.0 0.0"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -76,7 +80,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-render renderSample1/ -out testCube.png -resolution 320"
+            argument = "-render renderSample2/ -out gourd.png -resolution 120"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

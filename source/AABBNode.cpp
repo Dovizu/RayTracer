@@ -45,7 +45,7 @@ public:
         bb.max = max;
         
         
-        if (primList.size() < 6 || depth > 10) {
+        if (primList.size() < 6) { //took out depth check
             if (primList.size() != 0) {
                 for (auto & primPtr : primList) {
                     shapes->push_back(primPtr);
@@ -75,7 +75,7 @@ public:
     void findLongestAxisIndex() {
         float xDis = bb.max(0) - bb.min(0);
         float yDis = bb.max(1) - bb.min(1);
-        float zDis = bb.max(2) - bb.max(2);
+        float zDis = bb.max(2) - bb.min(2);
         
         float biggest = maxf(xDis, maxf(yDis, zDis));
         
