@@ -20,6 +20,7 @@ public:
     }
     
     AABBNode(vector<Primitive*>& primList, int depth) {
+        isLeaf = false;
         Point average = {0,0,0};
         Point min = {FLT_MAX, FLT_MAX, FLT_MAX};
         Point max = {FLT_MIN, FLT_MIN, FLT_MIN};
@@ -53,14 +54,16 @@ public:
                 }
             }
             isLeaf = true;
+            left = NULL;
+            right = NULL;
             return;
         }
         
         findLongestAxisIndex();
-        cout << "avgb4cmp: " << average << endl;
+        //cout << "avgb4cmp: " << average << endl;
         average /= (float)primList.size();
-        cout << "average: " << average << endl;
-        cout << "axis: " << longestAxisIndex << endl;
+        //cout << "average: " << average << endl;
+        //cout << "axis: " << longestAxisIndex << endl;
         for (auto & primPtr : primList) {
             if (primPtr->isLeftOf(average, longestAxisIndex)) {
                 leftList.push_back(primPtr);
