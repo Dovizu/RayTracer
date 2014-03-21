@@ -6,6 +6,8 @@
 #include "LocalGeo.cpp"
 #include "AABBNode.cpp"
 #include "Primitive.cpp"
+#include "time.h"
+#include <sys/timeb.h>
 
 class Raytracer {
 public:
@@ -33,6 +35,8 @@ Raytracer::Raytracer(AggregatePrimitive& list, vector<Light> &lights, int maxDep
 
 void Raytracer::trace(Ray& ray, int depth, Color* color)
 {
+    //struct timeb start, end;
+    //ftime(&start);
     if (depth > maxDepth) {
         *color = {0,0,0};
         return;
@@ -42,6 +46,10 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
     if(!tree->intersect(ray, &thit, &in))
     {
         *color = {0,0,0};
+        ftime(&end);
+        double diff = 1000*(end.time - start.time)
+        + (end.millitm - start.millitm);
+        //printf ("Elasped MISS time is %.2lf milliseconds.\n", diff );
         return;
     }
     
@@ -68,6 +76,11 @@ void Raytracer::trace(Ray& ray, int depth, Color* color)
         trace(reflectRay, depth+1, &tempColor);
         *color += brdf.kr*tempColor;
     }
+    //ftime(&end);
+    //double diff = 1000*(end.time - start.time)
+                  + (end.millitm - start.millitm);
+    //printf ("Elasped time is %.2lf milliseconds.\n", diff );
+
 }
 
 void Raytracer::generateTree() {
